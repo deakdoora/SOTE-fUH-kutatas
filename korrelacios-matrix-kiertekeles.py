@@ -1,3 +1,11 @@
+# IMPORTS
+
+import csv
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import seaborn as sns
+
 # READ TIMESTAMPED DATA
 
 def load_data(file_name):
@@ -37,13 +45,17 @@ labels_4D_f_sbs, timestamp_4D_f_sbs, data_matrix_4D_f_sbs = load_data("0s_to_600
 
 # FORM CORRELATION MATRIX
 
-# Average CBV for each ROI
-def average_cbv(data_matrix: np.ndarray) -> np.ndarray:
-    return np.mean(data_matrix, axis=0)
+corr_matrix_2D = pd.DataFrame(data = data_matrix_2D, columns = labels_2D).corr()
+corr_matrix_2D_wbc = pd.DataFrame(data = data_matrix_2D_wbc, columns = labels_2D_wbc).corr()
+corr_matrix_2D_f = pd.DataFrame(data = data_matrix_2D_f, columns = labels_2D_f).corr()
+corr_matrix_2D_f_wbc = pd.DataFrame(data = data_matrix_2D_f_wbc, columns = labels_2D_f_wbc).corr()
+corr_matrix_4D_sbs = pd.DataFrame(data = data_matrix_4D_sbs, columns = labels_4D_sbs).corr()
+corr_matrix_4D_f_sbs = pd.DataFrame(data = data_matrix_4D_f_sbs, columns = labels_4D_f_sbs).corr()
 
-ave_cbv_2D = average_cbv(data_matrix_2D)
-ave_cbv_2D_wbc = average_cbv(data_matrix_2D_wbc)
-ave_cbv_2D_f = average_cbv(data_matrix_2D_f)
-ave_cbv_2D_f_wbc = average_cbv(data_matrix_2D_f_wbc)
-ave_cbv_4D_sbs = average_cbv(data_matrix_4D_sbs)
-ave_cbv_4D_f_sbs = average_cbv(data_matrix_4D_f_sbs)
+'''
+# Heatmap for visualizing correlation matrix
+plt.figure(figsize=(5,5))
+sns.heatmap(corr_matrix_2D, cmap="turbo", vmin=-1, vmax=1, linewidths=0.5)
+plt.title("Correlation matrix")
+plt.show()
+'''
