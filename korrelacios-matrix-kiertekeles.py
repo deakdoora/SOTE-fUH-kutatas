@@ -1,8 +1,5 @@
 # READ TIMESTAMPED DATA
 
-import numpy as np
-import csv
-
 def load_data(file_name):
     # List variable
     data_list = []
