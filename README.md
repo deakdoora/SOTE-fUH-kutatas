@@ -2,7 +2,12 @@
 
 **SOTE fUH kutatómunkához**
 
-Abbrevitations :
+Abbrevitations
+--
 - wbc = without baseline correction
 - f = filtered
 - sbs = slice-by-slice interpretation
+
+Notes
+--
+- K-means does not accept NaN data

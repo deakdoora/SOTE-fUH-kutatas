@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
+from sklearn.cluster import KMeans
 
 # READ TIMESTAMPED DATA
 
@@ -59,3 +60,21 @@ sns.heatmap(corr_matrix_2D, cmap="turbo", vmin=-1, vmax=1, linewidths=0.5)
 plt.title("Correlation matrix")
 plt.show()
 '''
+
+# K-MEANS CLUSTERING
+
+# K-means clustering is an unsupervised machine learning algorithm used in neuroimaging to categorize data into
+# distinct, non-overlapping sets based on similarity. In the context of functional ultrasound (fUS), it is primarily
+# applied to classify response patterns and perform automatic brain parcellation. This allows for a data-driven
+# definition of brain structures rather than relying solely on anatomical atlases.
+
+num_clusters = 21
+
+# Initialize K-means model
+kmeans = KMeans(n_clusters = num_clusters, random_state = 42)
+# Fit K-means model (to rows)
+clusters = kmeans.fit_predict(corr_matrix_2D)
+
+for i in range(len(clusters)):
+    if clusters[i] == 0:
+        print(labels_2D[i])
