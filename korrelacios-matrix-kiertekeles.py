@@ -54,8 +54,8 @@ corr_matrix_2D_f_wbc = pd.DataFrame(data = data_matrix_2D_f_wbc, columns = label
 corr_matrix_4D_sbs = pd.DataFrame(data = data_matrix_4D_sbs, columns = labels_4D_sbs).corr()
 corr_matrix_4D_f_sbs = pd.DataFrame(data = data_matrix_4D_f_sbs, columns = labels_4D_f_sbs).corr()
 
-'''
 # Heatmap for visualizing correlation matrix
+'''
 plt.figure(figsize=(5,5))
 sns.heatmap(corr_matrix_2D, cmap="jet", vmin=-1, vmax=1)
 plt.title("Correlation matrix")
@@ -76,6 +76,11 @@ kmeans = KMeans(n_clusters = num_clusters, random_state = 42)
 # Fit K-means model (to rows)
 clusters = kmeans.fit_predict(corr_matrix_2D)
 
+# Open file to save data in
+print('\nName file (K-means Clustering) :')
+filename = str(input()) + '.txt'
+file = open(filename, "w")
+
 # Create 2D array storing labels by clusters
 labels_by_clusters_2D = []
 for i in range(num_clusters):
@@ -85,8 +90,14 @@ for i in range(num_clusters):
             labels_i.append(labels_2D[j])
     labels_by_clusters_2D.append(labels_i)
 
-    '''print(labels_by_clusters_2D[i])
-print(labels_by_clusters_2D)'''
+    # Write to file
+    file.write(str(i+1))
+    for j in range(len(labels_by_clusters_2D[i])):
+        file.write('\t' + labels_by_clusters_2D[i][j])
+    file.write('\n')
+
+# Close file
+file.close()
 
 # SPECTRAL COHERENCE ANALYSIS
 
@@ -97,12 +108,13 @@ print(labels_by_clusters_2D)'''
 
 sampling_freq = 15000000 # sampling frequency [Hz]
 regionA = 0
-regionB = 7
+regionB = 6
 
 # Compute coherence
 f, Cxy = signal.coherence(data_matrix_2D[:,regionA], data_matrix_2D[:,regionB], fs = sampling_freq, nperseg = 256) # nperseg defines the frequency resolution
 
 # Visualize result
+'''
 plt.semilogy(f, Cxy) # logarithmic y axis
 
 title = 'Spectral Coherence between Brain Regions: ' + labels_2D[regionA] + ', ' + labels_2D[regionB]
@@ -111,3 +123,4 @@ plt.xlabel('Frequency [Hz]')
 plt.ylabel('Coherence')
 plt.grid()
 plt.show()
+'''
