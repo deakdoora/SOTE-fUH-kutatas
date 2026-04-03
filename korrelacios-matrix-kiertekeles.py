@@ -102,7 +102,10 @@ def k_means_clustering(corr_matrix, labels, num_clusters, filename):
 '''
 print('\nName file (K-means Clustering) :')
 filename = str(input()) + '.txt'
-k_means_clustering(corr_matrix_2D, labels_2D, 4, filename)
+print('\nNumber of clusters:')
+num_clusters = int(input())
+
+k_means_clustering(corr_matrix_2D, labels_2D, num_clusters, filename)
 '''
 
 # SPECTRAL COHERENCE ANALYSIS
@@ -128,6 +131,18 @@ def spectral_coherence_analysis_plot(regionA, regionB, f, Cxy, labels):
     plt.grid()
     plt.show()
 
+def spectral_coherence_analysis_file(filename, f, Cxy):
+    # Open file
+    file = open(filename, "w")
+
+    # Write to file
+    file.write('f\tCxy\n')
+    for j in range(len(f)):
+        file.write(str(f[j]) + '\t' + str(Cxy[j]) + '\n')
+
+    # Close file
+    file.close()
+
 '''
 regionA = 0
 regionB = 6
@@ -139,35 +154,101 @@ spectral_coherence_analysis_plot(regionA, regionB, f, Cxy, labels_2D)
 
 def runtime():
     
-    # Choice
-    print('\nPick one of the following options:')
-
-    print('\n1. Provide timestamped data file')
-    print('2. Quit\n')
-    
     userinput = 0
-    while (userinput == 0):
-        userinput = int(input())
+    while (userinput != 5):
 
-        if (userinput == 1):
-            continue
-        elif (userinput == 2):
-            return
-        else:
-            userinput = 0
+        # Choice
+        print('\nPick one of the following options:')
 
-    # Get fUS data file to work with
-    f = None
-    while (f == None):
-        print("\nEnter FILE NAME of .txt file with timestamped fUS data:")
-        filename = str(input()) + '.txt'
+        print('\n1. Provide timestamped data file')
+        print('2. Quit\n')
+        
+        userinput = 0
+        while (userinput == 0):
+            userinput = int(input())
+            match userinput:
+                case 1:
+                    pass
+                case 2:
+                    return
+                case _:
+                    print("Choose from above:")
+                    userinput = 0
 
-        try:
-            f = open(filename, "r")
-            f.close()
-        except FileNotFoundError:
-            print("File does not exist")
-        except IOError:
-            print("Error opening file")
+        # Get fUS data file to work with
+        f = None
+        while (f == None):
+            print("\nEnter FILE NAME of .txt file with timestamped fUS data:")
+            filename = str(input()) + '.txt'    # use 0s_to_600.024s_2D_Matrix for testing
 
-runtime()
+            try:
+                f = open(filename, "r")
+                f.close()
+            except FileNotFoundError:
+                print("File does not exist")
+            except IOError:
+                print("Error opening file")
+
+        # Load data & form correlation matrix
+        labels, timestamp, data_matrix = load_data(filename)
+        corr_matrix = pd.DataFrame(data = data_matrix, columns = labels).corr()
+
+        # Choice
+        userinput = 0
+        options = True
+        while (userinput != 4 and userinput != 5):
+
+            if (options == True):
+                print('\nPick one of the following options:')
+
+                print('\n1. Correlation Matrix Heatmap')
+                print('2. K-means Clustering')
+                print('3. Spectral Coherence Analysis')
+                print('4. Provide new data file')
+                print('5. Quit\n')
+
+                options = False
+
+            userinput = int(input())
+            match userinput:
+                case 1:    # Heatmap
+
+                    heatmap(corr_matrix)
+
+                    options = True
+
+                case 2:    # K-means Clustering
+
+                    print('\nName file to write in:')
+                    filename_kmeans = str(input()) + '.txt'
+                    print('\nNumber of clusters:')
+                    num_clusters = int(input())
+
+                    k_means_clustering(corr_matrix, labels, num_clusters, filename_kmeans)
+
+                    options = True
+
+                case 3:    # Spectral Coherence Analysis
+                    
+                    print('\nRegion A:')
+                    regionA = int(input())
+                    print('\nRegion B :')
+                    regionB = int(input())
+                    print('\nName file to write in:')
+                    filename_spectral = str(input()) + '.txt'
+
+                    f, Cxy = spectral_coherence_analysis(data_matrix, regionA, regionB)
+                    spectral_coherence_analysis_file(filename_spectral, f, Cxy)
+                    spectral_coherence_analysis_plot(regionA, regionB, f, Cxy, labels)
+
+                    options = True
+
+                case 4:    # New data file
+                    pass
+                case 5:    # Quit
+                    return
+                case _:
+                    print("Choose from above:")
+                    userinput = 0
+
+runtime()    # use 0s_to_600.024s_2D_Matrix for testing

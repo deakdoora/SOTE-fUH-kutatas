@@ -1,0 +1,7 @@
+1	Hippocampal formation (L)	Pallidum (L)	Thalamus (R)
+2	Primary somatosensory area, barrel field (L)	Primary somatosensory area, barrel field (R)	Primary somatosensory area, lower limb (L)	Primary somatosensory area, lower limb (R)	Supplemental somatosensory area (L)	Striatum (R)	Thalamus (L)	Hypothalamus (L)	Primary somatosensory area, upper limb (L)	Primary somatosensory area, upper limb (R)	Primary somatosensory area, unassigned (L)
+3	Olfactory areas (L)
+4	Pallidum (R)	Hypothalamus (R)
+5	Olfactory areas (R)	Striatum (L)	Primary somatosensory area, unassigned (R)
+6	Supplemental somatosensory area (R)	Cortical subplate (R)
+7	Hippocampal formation (R)	Cortical subplate (L)
