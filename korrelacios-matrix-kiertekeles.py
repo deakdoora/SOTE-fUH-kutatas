@@ -276,7 +276,7 @@ def runtime():
                     
                     print('\nThreshold:')
                     thr = 10
-                    while (thr < 0 or thr > 1): # absolute correlation
+                    while (thr < -1 or thr > 1): # absolute correlation
                         thr= float(input())
 
                     network_graph = graph(corr_matrix, thr)
