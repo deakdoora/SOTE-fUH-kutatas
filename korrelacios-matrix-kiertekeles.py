@@ -2,6 +2,7 @@
 
 import csv
 import matplotlib.pyplot as plt
+import networkx as nx
 from nilearn.connectome import ConnectivityMeasure
 import numpy as np
 import pandas as pd
@@ -120,17 +121,6 @@ def spectral_coherence_analysis(data_matrix, regionA, regionB, sampling_freq = 1
 
     return f, Cxy
 
-# Visualize result
-def spectral_coherence_analysis_plot(regionA, regionB, f, Cxy, labels):
-    plt.semilogy(f, Cxy) # logarithmic y axis
-
-    title = 'Spectral Coherence between Brain Regions: ' + labels[regionA] + ', ' + labels[regionB]
-    plt.title(title)
-    plt.xlabel('Frequency [Hz]')
-    plt.ylabel('Coherence')
-    plt.grid()
-    plt.show()
-
 def spectral_coherence_analysis_file(filename, f, Cxy):
     # Open file
     file = open(filename, "w")
@@ -143,6 +133,17 @@ def spectral_coherence_analysis_file(filename, f, Cxy):
     # Close file
     file.close()
 
+# Visualize result
+def spectral_coherence_analysis_plot(regionA, regionB, f, Cxy, labels):
+    plt.semilogy(f, Cxy) # logarithmic y axis
+
+    title = 'Spectral Coherence between Brain Regions: ' + labels[regionA] + ', ' + labels[regionB]
+    plt.title(title)
+    plt.xlabel('Frequency [Hz]')
+    plt.ylabel('Coherence')
+    plt.grid()
+    plt.show()
+
 '''
 regionA = 0
 regionB = 6
@@ -150,12 +151,35 @@ f, Cxy = spectral_coherence_analysis(data_matrix_2D, regionA, regionB)
 spectral_coherence_analysis_plot(regionA, regionB, f, Cxy, labels_2D)
 '''
 
+# GRAPH
+
+def graph(corr_matrix, thr):
+    # Base for graph
+    network_graph = nx.Graph()
+
+    # Nodes & edges
+    for i in corr_matrix.columns:
+        for j in corr_matrix.columns:
+            if (i != j and abs(corr_matrix.loc[i, j]) > thr):
+                network_graph.add_edge(i, j, weight=corr_matrix.loc[i, j])
+
+    return network_graph
+
+def graph_plot(graph, thr):
+    # Visualization
+    nodes = nx.spring_layout(graph, seed = 42)
+    edges = graph.edges(data = True)
+    edge_widths = [abs(data['weight'])*3 for _, _, data in edges]
+
+    nx.draw(graph, nodes, with_labels = True, node_color = 'skyblue', node_size = 2000, width = edge_widths)
+    plt.show()
+
 # USER INTERFACE
 
 def runtime():
     
     userinput = 0
-    while (userinput != 5):
+    while (userinput != 6):
 
         # Choice
         print('\nPick one of the following options:')
@@ -196,16 +220,17 @@ def runtime():
         # Choice
         userinput = 0
         options = True
-        while (userinput != 4 and userinput != 5):
+        while (userinput != 5 and userinput != 6):
 
             if (options == True):
                 print('\nPick one of the following options:')
 
-                print('\n1. Correlation Matrix Heatmap')
+                print('\n1. Correlation Matrix')
                 print('2. K-means Clustering')
                 print('3. Spectral Coherence Analysis')
-                print('4. Provide new data file')
-                print('5. Quit\n')
+                print('4. Graph')
+                print('5. Provide new data file')
+                print('6. Quit\n')
 
                 options = False
 
@@ -246,10 +271,22 @@ def runtime():
                     spectral_coherence_analysis_plot(regionA, regionB, f, Cxy, labels)
 
                     options = True
+                
+                case 4:    # Graph
+                    
+                    print('\nThreshold:')
+                    thr = 10
+                    while (thr < -1 or thr > 1):
+                        thr= float(input())
 
-                case 4:    # New data file
+                    network_graph = graph(corr_matrix, thr)
+                    graph_plot(network_graph, thr)
+
+                    options = True
+
+                case 5:    # New data file
                     pass
-                case 5:    # Quit
+                case 6:    # Quit
                     return
                 case _:
                     print("Choose from above:")
