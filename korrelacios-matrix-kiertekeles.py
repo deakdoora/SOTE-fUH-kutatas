@@ -231,9 +231,13 @@ def runtime():
                 case 3:    # Spectral Coherence Analysis
                     
                     print('\nRegion A:')
-                    regionA = int(input())
+                    regionA = -1
+                    while (regionA < 0 or regionA >= len(labels)):
+                        regionA = int(input())
                     print('\nRegion B :')
-                    regionB = int(input())
+                    regionB = -1
+                    while (regionB < 0 or regionB >= len(labels)):
+                        regionB = int(input())
                     print('\nName file to write in:')
                     filename_spectral = str(input()) + '.txt'
 
