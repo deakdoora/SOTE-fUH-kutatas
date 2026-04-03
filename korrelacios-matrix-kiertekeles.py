@@ -62,6 +62,7 @@ def heatmap(corr_matrix):
     sns.heatmap(corr_matrix, cmap="jet", vmin=-1, vmax=1)
     plt.title("Correlation matrix")
     plt.show()
+
 '''
 heatmap(corr_matrix_2D)
 '''
@@ -100,6 +101,7 @@ def k_means_clustering(corr_matrix, labels, num_clusters, filename):
 
     # Close file
     file.close()
+
 '''
 print('\nName file (K-means Clustering) :')
 filename = str(input()) + '.txt'
