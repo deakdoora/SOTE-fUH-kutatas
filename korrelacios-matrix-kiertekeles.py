@@ -112,8 +112,8 @@ k_means_clustering(corr_matrix_2D, labels_2D, 4, filename)
 # functional ultrasound (fUS), it is used to investigate resting-state functional connectivity by determining if
 # different brain regions share synchronized fluctuations in cerebral blood volume (CBV).
 
-def spectral_coherence_analysis(regionA, regionB, sampling_freq = 15000000):
-    f, Cxy = signal.coherence(data_matrix_2D[:,regionA], data_matrix_2D[:,regionB], fs = sampling_freq, nperseg = 256) # nperseg defines the frequency resolution
+def spectral_coherence_analysis(data_matrix, regionA, regionB, sampling_freq = 15000000):
+    f, Cxy = signal.coherence(data_matrix[:,regionA], data_matrix[:,regionB], fs = sampling_freq, nperseg = 256) # nperseg defines the frequency resolution
 
     return f, Cxy
 
@@ -127,3 +127,47 @@ def spectral_coherence_analysis_plot(regionA, regionB, f, Cxy, labels):
     plt.ylabel('Coherence')
     plt.grid()
     plt.show()
+
+'''
+regionA = 0
+regionB = 6
+f, Cxy = spectral_coherence_analysis(data_matrix_2D, regionA, regionB)
+spectral_coherence_analysis_plot(regionA, regionB, f, Cxy, labels_2D)
+'''
+
+# USER INTERFACE
+
+def runtime():
+    
+    # Choice
+    print('\nPick one of the following options:')
+
+    print('\n1. Provide timestamped data file')
+    print('2. Quit\n')
+    
+    userinput = 0
+    while (userinput == 0):
+        userinput = int(input())
+
+        if (userinput == 1):
+            continue
+        elif (userinput == 2):
+            return
+        else:
+            userinput = 0
+
+    # Get fUS data file to work with
+    f = None
+    while (f == None):
+        print("\nEnter FILE NAME of .txt file with timestamped fUS data:")
+        filename = str(input()) + '.txt'
+
+        try:
+            f = open(filename, "r")
+            f.close()
+        except FileNotFoundError:
+            print("File does not exist")
+        except IOError:
+            print("Error opening file")
+
+runtime()
