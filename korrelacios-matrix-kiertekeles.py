@@ -2,6 +2,7 @@
 
 import csv
 import matplotlib.pyplot as plt
+from nilearn.connectome import ConnectivityMeasure
 import numpy as np
 import pandas as pd
 from scipy import signal
@@ -55,11 +56,13 @@ corr_matrix_4D_sbs = pd.DataFrame(data = data_matrix_4D_sbs, columns = labels_4D
 corr_matrix_4D_f_sbs = pd.DataFrame(data = data_matrix_4D_f_sbs, columns = labels_4D_f_sbs).corr()
 
 # Heatmap for visualizing correlation matrix
+def heatmap(corr_matrix):
+    plt.figure(figsize=(5,5))
+    sns.heatmap(corr_matrix, cmap="jet", vmin=-1, vmax=1)
+    plt.title("Correlation matrix")
+    plt.show()
 '''
-plt.figure(figsize=(5,5))
-sns.heatmap(corr_matrix_2D, cmap="jet", vmin=-1, vmax=1)
-plt.title("Correlation matrix")
-plt.show()
+heatmap(corr_matrix_2D)
 '''
 
 # K-MEANS CLUSTERING
@@ -69,35 +72,38 @@ plt.show()
 # applied to classify response patterns and perform automatic brain parcellation. This allows for a data-driven
 # definition of brain structures rather than relying solely on anatomical atlases.
 
-num_clusters = 4
+def k_means_clustering(corr_matrix, labels, num_clusters, filename):
 
-# Initialize K-means model
-kmeans = KMeans(n_clusters = num_clusters, random_state = 42)
-# Fit K-means model (to rows)
-clusters = kmeans.fit_predict(corr_matrix_2D)
+    # Initialize K-means model
+    kmeans = KMeans(n_clusters = num_clusters, random_state = 42)
+    # Fit K-means model (to rows)
+    clusters = kmeans.fit_predict(corr_matrix)
 
-# Open file to save data in
+    # Open file to save data in
+    file = open(filename, "w")
+
+    # Create 2D array storing labels by clusters
+    labels_by_clusters = []
+    for i in range(num_clusters):
+        labels_i = []
+        for j in range(len(clusters)):
+            if clusters[j] == i:
+                labels_i.append(labels[j])
+        labels_by_clusters.append(labels_i)
+
+        # Write to file
+        file.write(str(i+1))
+        for j in range(len(labels_by_clusters[i])):
+            file.write('\t' + labels_by_clusters[i][j])
+        file.write('\n')
+
+    # Close file
+    file.close()
+'''
 print('\nName file (K-means Clustering) :')
 filename = str(input()) + '.txt'
-file = open(filename, "w")
-
-# Create 2D array storing labels by clusters
-labels_by_clusters_2D = []
-for i in range(num_clusters):
-    labels_i = []
-    for j in range(len(clusters)):
-        if clusters[j] == i:
-            labels_i.append(labels_2D[j])
-    labels_by_clusters_2D.append(labels_i)
-
-    # Write to file
-    file.write(str(i+1))
-    for j in range(len(labels_by_clusters_2D[i])):
-        file.write('\t' + labels_by_clusters_2D[i][j])
-    file.write('\n')
-
-# Close file
-file.close()
+k_means_clustering(corr_matrix_2D, labels_2D, 4, filename)
+'''
 
 # SPECTRAL COHERENCE ANALYSIS
 
@@ -106,21 +112,18 @@ file.close()
 # functional ultrasound (fUS), it is used to investigate resting-state functional connectivity by determining if
 # different brain regions share synchronized fluctuations in cerebral blood volume (CBV).
 
-sampling_freq = 15000000 # sampling frequency [Hz]
-regionA = 0
-regionB = 6
+def spectral_coherence_analysis(regionA, regionB, sampling_freq = 15000000):
+    f, Cxy = signal.coherence(data_matrix_2D[:,regionA], data_matrix_2D[:,regionB], fs = sampling_freq, nperseg = 256) # nperseg defines the frequency resolution
 
-# Compute coherence
-f, Cxy = signal.coherence(data_matrix_2D[:,regionA], data_matrix_2D[:,regionB], fs = sampling_freq, nperseg = 256) # nperseg defines the frequency resolution
+    return f, Cxy
 
 # Visualize result
-'''
-plt.semilogy(f, Cxy) # logarithmic y axis
+def spectral_coherence_analysis_plot(regionA, regionB, f, Cxy, labels):
+    plt.semilogy(f, Cxy) # logarithmic y axis
 
-title = 'Spectral Coherence between Brain Regions: ' + labels_2D[regionA] + ', ' + labels_2D[regionB]
-plt.title(title)
-plt.xlabel('Frequency [Hz]')
-plt.ylabel('Coherence')
-plt.grid()
-plt.show()
-'''
+    title = 'Spectral Coherence between Brain Regions: ' + labels[regionA] + ', ' + labels[regionB]
+    plt.title(title)
+    plt.xlabel('Frequency [Hz]')
+    plt.ylabel('Coherence')
+    plt.grid()
+    plt.show()
