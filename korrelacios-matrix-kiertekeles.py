@@ -1,5 +1,6 @@
 # IMPORTS
 
+from collections import Counter
 import csv
 import matplotlib.pyplot as plt
 import networkx as nx
@@ -162,12 +163,12 @@ def graph(corr_matrix, thr):
     # Nodes & edges
     for i in corr_matrix.columns:
         for j in corr_matrix.columns:
-            if (i != j and abs(corr_matrix.loc[i, j]) > thr):
+            if (i != j and corr_matrix.loc[i, j] > thr): #abs(corr_matrix.loc[i, j])
                 network_graph.add_edge(i, j, weight=corr_matrix.loc[i, j])
 
     return network_graph
 
-def graph_plot(graph, thr):
+def graph_plot(graph):
     # Visualization
     nodes = nx.spring_layout(graph, seed = 42)
     edges = graph.edges(data = True)
@@ -175,6 +176,75 @@ def graph_plot(graph, thr):
 
     nx.draw(graph, nodes, with_labels = True, node_color = 'skyblue', node_size = 2000, width = edge_widths)
     plt.show()
+
+# GRAPH PARAMETRES
+
+def graph_nodes(network_graph):
+    n = network_graph.number_of_nodes()
+    print('Number of nodes:', n)
+def graph_edges(network_graph):
+    n = network_graph.number_of_edges()
+    print('Number of edges:', n)
+def graph_density(network_graph):
+    N = network_graph.number_of_nodes()
+    E = network_graph.number_of_edges()
+    n = 2*E / (N * (N-1))
+    print('Graph density:', n)
+def node_degree(network_graph, node):
+    node_ID = list(network_graph.nodes)[int(node)]
+    node_name = network_graph.nodes[node_ID].get("name", str(node_ID))
+    k = network_graph.degree(node_name)
+    print('Degree of', node_name, ':', k)
+def degree_distribution(network_graph):
+    n = network_graph.number_of_nodes()
+    degree = np.linspace(0,n-1,n)
+    probability = []
+    for i in degree:
+        node_num_with_degree_i = 0
+        for j in range(n):
+            node_ID = list(network_graph.nodes)[j]
+            node_name = network_graph.nodes[node_ID].get("name", str(node_ID))
+            if (network_graph.degree(node_name) == i):
+                node_num_with_degree_i += 1
+        probability.append(node_num_with_degree_i / n)
+    
+    plt.plot(degree, probability, 'o')
+    plt.title('Degree distribution')
+    plt.xlabel('Degree')
+    plt.ylabel('Probability')
+    plt.show()
+            
+    #degrees = [i for n, i in network_graph.degree()]
+    #num_nodes_by_degree = Counter(degrees)
+    #dd = {k: v / n for k, v in num_nodes_by_degree.items()}
+    #print(dd)
+# define new method here
+
+# TEST RUNTIME
+
+network_graph_2D = graph(corr_matrix_2D, 0.7)
+graph_nodes(network_graph_2D)
+#graph_edges(network_graph_2D)
+#graph_density(network_graph_2D)
+#node_degree(network_graph_2D, 0)
+degree_distribution(network_graph_2D)
+# run new method here
+
+# Choice
+print('\nPick one of the following options:')
+print('\n1. Show graph')
+print('2. Quit\n')
+userinput = 0
+while (userinput == 0):
+    userinput = int(input())
+    match userinput:
+        case 1:
+            graph_plot(network_graph_2D)
+        case 2:
+            pass
+        case _:
+            print("Choose from above:")
+            userinput = 0
 
 # USER INTERFACE
 
@@ -278,7 +348,7 @@ def runtime():
                     
                     print('\nThreshold:')
                     thr = 10
-                    while (thr < -1 or thr > 1): # absolute correlation
+                    while (thr < 0 or thr > 1): # absolute correlation
                         thr= float(input())
 
                     network_graph = graph(corr_matrix, thr)
@@ -294,4 +364,4 @@ def runtime():
                     print("Choose from above:")
                     userinput = 0
 
-runtime()    # use 0s_to_600.024s_2D_Matrix for testing
+#runtime()    # use 0s_to_600.024s_2D_Matrix for testing
