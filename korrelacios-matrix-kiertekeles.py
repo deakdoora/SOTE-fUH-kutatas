@@ -208,10 +208,12 @@ def degree_distribution(network_graph):
                 node_num_with_degree_i += 1
         probability.append(node_num_with_degree_i / n)
     
-    plt.plot(degree, probability, 'o')
+    plt.scatter(degree, probability)
     plt.title('Degree distribution')
     plt.xlabel('Degree')
     plt.ylabel('Probability')
+    for i in range(len(degree)): # add y value to each point
+        plt.annotate(f"{probability[i]:.2f}", (degree[i], probability[i]), textcoords="offset points", xytext=(0,5), ha='center')
     plt.show()
             
     #degrees = [i for n, i in network_graph.degree()]
@@ -222,7 +224,7 @@ def degree_distribution(network_graph):
 
 # TEST RUNTIME
 
-network_graph_2D = graph(corr_matrix_2D, 0.7)
+network_graph_2D = graph(corr_matrix_2D, 0)
 graph_nodes(network_graph_2D)
 #graph_edges(network_graph_2D)
 #graph_density(network_graph_2D)
