@@ -179,23 +179,38 @@ def graph_plot(graph):
 
 # GRAPH PARAMETRES
 
+#node_ID = list(network_graph.nodes)[int(node)]
+#node_name = network_graph.nodes[node_ID].get("name", str(node_ID))
+
 def graph_nodes(network_graph):
     n = network_graph.number_of_nodes()
     print('Number of nodes:', n)
 def graph_edges(network_graph):
     n = network_graph.number_of_edges()
     print('Number of edges:', n)
-def graph_density(network_graph):
+def graph_density(network_graph): # present / possible edges
     N = network_graph.number_of_nodes()
     E = network_graph.number_of_edges()
     n = 2*E / (N * (N-1))
     print('Graph density:', n)
-def node_degree(network_graph, node):
-    node_ID = list(network_graph.nodes)[int(node)]
-    node_name = network_graph.nodes[node_ID].get("name", str(node_ID))
-    k = network_graph.degree(node_name)
-    print('Degree of', node_name, ':', k)
-def degree_distribution(network_graph):
+def node_degree(network_graph): # edges of a single node
+    node = list(network_graph.nodes())
+    degree = []
+    for i in range(network_graph.number_of_nodes()):
+        degree.append(network_graph.degree(node[i]))
+
+    #plt.figure(figsize=(12, 6))
+    plt.scatter(node, degree)
+    plt.title('Degree of nodes')
+    plt.xlabel('Node')
+    plt.ylabel('Degree')
+    plt.xticks(rotation = 90)
+    for i in range(len(node)): # add y value to each point
+        plt.annotate(f"{degree[i]:.2f}", (node[i], degree[i]), textcoords="offset points", xytext=(0,5), ha='center')
+    plt.tight_layout()
+    plt.subplots_adjust(bottom=0.5)
+    plt.show()
+def degree_distribution(network_graph): # probability of a node having given number of edges
     n = network_graph.number_of_nodes()
     degree = np.linspace(0,n-1,n)
     probability = []
@@ -220,25 +235,30 @@ def degree_distribution(network_graph):
     #num_nodes_by_degree = Counter(degrees)
     #dd = {k: v / n for k, v in num_nodes_by_degree.items()}
     #print(dd)
-def clustering_coeff(network_graph, node):
+def clustering_coeff(network_graph, node): # present / possible edges of neighbours of a single node
     node_ID = list(network_graph.nodes)[int(node)]
     node_name = network_graph.nodes[node_ID].get("name", str(node_ID))
     cc_dict = nx.clustering(network_graph, node_name)
     print('Clustering coefficient of', node_name, ':', cc_dict)
+#def degree_centrality(network_graph):
+#def betweenness_centrality(network_graph):
+#def closeness_centrality(network_graph):
+#def eigenvector_centrality(network_graph):
 # define new method here
 
 # TEST RUNTIME
 
-network_graph_2D = graph(corr_matrix_2D, 0.5)
-graph_nodes(network_graph_2D)
-graph_edges(network_graph_2D)
-graph_density(network_graph_2D)
-node_degree(network_graph_2D, 0)
-degree_distribution(network_graph_2D)
-clustering_coeff(network_graph_2D, 0)
+network_graph_2D = graph(corr_matrix_2D, 0.2)
+#graph_nodes(network_graph_2D)
+#graph_edges(network_graph_2D)
+#graph_density(network_graph_2D)
+node_degree(network_graph_2D)
+#degree_distribution(network_graph_2D)
+#clustering_coeff(network_graph_2D, 0)
 # run new method here
 
 # Choice
+'''
 print('\nPick one of the following options:')
 print('\n1. Show graph')
 print('2. Quit\n')
@@ -253,6 +273,7 @@ while (userinput == 0):
         case _:
             print("Choose from above:")
             userinput = 0
+'''
 
 # USER INTERFACE
 
@@ -371,5 +392,6 @@ def runtime():
                 case _:
                     print("Choose from above:")
                     userinput = 0
+#def analysis(filename): # complete analysis of a measurement
 
 #runtime()    # use 0s_to_600.024s_2D_Matrix for testing
