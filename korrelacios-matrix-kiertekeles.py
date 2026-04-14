@@ -401,6 +401,13 @@ def weighted_diameter(network_graph): # longest shortest weighted path length
 
             wl.append(nx.shortest_path_length(network_graph, source = s_name, target = t_name, weight='weight'))
     print('Weighted diameter :', np.max(wl))
+# Global network properties
+def connected_components(network_graph): # islands
+    n = nx.number_connected_components(network_graph)
+    print('Number of islands :', n)
+    
+    conn_comp = list(nx.connected_components(network_graph))
+    print(conn_comp)
 # define new method here
 
 # TEST RUNTIME
@@ -427,8 +434,11 @@ network_graph_2D = graph(corr_matrix_2D, 0.5)
 #shortest_path(network_graph_2D, 4, 11)
 #ave_path_length(network_graph_2D)
 #ave_weighted_path_length(network_graph_2D)
-diameter(network_graph_2D)
-weighted_diameter(network_graph_2D)
+#diameter(network_graph_2D)
+#weighted_diameter(network_graph_2D)
+
+# Global network properties
+connected_components(network_graph_2D)
 # run new method here
 
 # Choice
@@ -555,7 +565,7 @@ def runtime():
                         thr= float(input())
 
                     network_graph = graph(corr_matrix, thr)
-                    graph_plot(network_graph, thr)
+                    graph_plot(network_graph)
 
                     options = True
 
