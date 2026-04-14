@@ -250,7 +250,7 @@ def clustering_coeff(network_graph): # present / possible edges of neighbours of
     plt.ylim(top = np.max(cc) + (np.max(cc)-np.min(cc))*0.1) # for y values to fit on plot
     plt.subplots_adjust(bottom=0.5) # for x labels to fit on screen
     plt.show()
-def degree_centrality(network_graph): # normalized degree of given node
+def degree_centrality(network_graph): # popularity, normalized degree of given node
     dict = nx.degree_centrality(network_graph)
     node = list(dict.keys())
     dc = list(dict.values())
@@ -265,9 +265,23 @@ def degree_centrality(network_graph): # normalized degree of given node
     plt.ylim(top = np.max(dc) + (np.max(dc)-np.min(dc))*0.1) # for y values to fit on plot
     plt.subplots_adjust(bottom=0.5) # for x labels to fit on screen
     plt.show()
-#def betweenness_centrality(network_graph):
-#def closeness_centrality(network_graph):
-#def eigenvector_centrality(network_graph):
+def betweenness_centrality(network_graph): # control over information flow, how many shortest paths between nodes contain given node
+    dict = nx.betweenness_centrality(network_graph)
+    node = list(dict.keys())
+    bc = list(dict.values())
+
+    plt.scatter(node, bc)
+    plt.title('Betweenness centrality of nodes')
+    plt.xlabel('Node')
+    plt.ylabel('Betweenness centrality')
+    plt.xticks(rotation = 90)
+    for i in range(len(node)): # add y value to each point
+        plt.annotate(f"{bc[i]:.2f}", (node[i], bc[i]), textcoords="offset points", xytext=(0,5), ha='center')
+    plt.ylim(top = np.max(bc) + (np.max(bc)-np.min(bc))*0.1) # for y values to fit on plot
+    plt.subplots_adjust(bottom=0.5) # for x labels to fit on screen
+    plt.show()
+#def closeness_centrality(network_graph): # speed of communication
+#def eigenvector_centrality(network_graph): # well-connectedness
 # define new method here
 
 # TEST RUNTIME
@@ -279,7 +293,8 @@ network_graph_2D = graph(corr_matrix_2D, 0.2)
 #node_degree(network_graph_2D)
 #degree_distribution(network_graph_2D)
 #clustering_coeff(network_graph_2D)
-degree_centrality(network_graph_2D)
+#degree_centrality(network_graph_2D)
+betweenness_centrality(network_graph_2D)
 # run new method here
 
 # Choice
