@@ -332,24 +332,24 @@ def shortest_path_length(network_graph):
     #plt.subplots_adjust(bottom = 0.5)
     plt.show()
 def weighted_shortest_path_length(network_graph):
-    l = []
+    wl = []
     for i in range(network_graph.number_of_nodes()):
-        l_i = []
+        wl_i = []
         for j in range(network_graph.number_of_nodes()):
             s_ID = list(network_graph.nodes)[i]
             s_name = network_graph.nodes[s_ID].get("name", str(s_ID))
             t_ID = list(network_graph.nodes)[j]
             t_name = network_graph.nodes[t_ID].get("name", str(t_ID))
 
-            l_i.append(nx.shortest_path_length(network_graph, source = s_name, target = t_name, weight = 'weight'))
-        l.append(l_i)
-    l_matrix = pd.DataFrame(l, index = list(network_graph.nodes), columns = list(network_graph.nodes))
+            wl_i.append(nx.shortest_path_length(network_graph, source = s_name, target = t_name, weight = 'weight'))
+        wl.append(wl_i)
+    wl_matrix = pd.DataFrame(wl, index = list(network_graph.nodes), columns = list(network_graph.nodes))
 
-    sns.heatmap(l_matrix, square = True, annot = True, cmap = "Greys")
+    sns.heatmap(wl_matrix, square = True, annot = True, cmap = "Greys")
     plt.title("Shortest path lengths")
     #plt.subplots_adjust(bottom = 0.5)
     plt.show()
-def shortest_path(network_graph, s, t):
+def shortest_path(network_graph, s, t): # actual path
     s_ID = list(network_graph.nodes)[s]
     s_name = network_graph.nodes[s_ID].get("name", str(s_ID))
     t_ID = list(network_graph.nodes)[t]
@@ -357,6 +357,29 @@ def shortest_path(network_graph, s, t):
 
     path = nx.shortest_path(network_graph, source = s_name, target = t_name)
     print(path)
+def ave_path_length(network_graph): # average of shortest path lengths
+    l = []
+    for i in range(network_graph.number_of_nodes()):
+        for j in range(network_graph.number_of_nodes()-1-i):
+            s_ID = list(network_graph.nodes)[i]
+            s_name = network_graph.nodes[s_ID].get("name", str(s_ID))
+            t_ID = list(network_graph.nodes)[j+1+i]
+            t_name = network_graph.nodes[t_ID].get("name", str(t_ID))
+
+            l.append(nx.shortest_path_length(network_graph, source = s_name, target = t_name))
+    print('Average shortest path length :', np.average(l))
+def ave_weighted_path_length(network_graph): # average of weighted shortest path lengths
+    wl = []
+    for i in range(network_graph.number_of_nodes()):
+        for j in range(network_graph.number_of_nodes()-1-i):
+            s_ID = list(network_graph.nodes)[i]
+            s_name = network_graph.nodes[s_ID].get("name", str(s_ID))
+            t_ID = list(network_graph.nodes)[j+1+i]
+            t_name = network_graph.nodes[t_ID].get("name", str(t_ID))
+
+            wl.append(nx.shortest_path_length(network_graph, source = s_name, target = t_name, weight='weight'))
+    print('Average weighted shortest path length :', np.average(wl))
+
 # define new method here
 
 # TEST RUNTIME
@@ -381,6 +404,8 @@ network_graph_2D = graph(corr_matrix_2D, 0.5)
 #shortest_path_length(network_graph_2D)
 #weighted_shortest_path_length(network_graph_2D)
 #shortest_path(network_graph_2D, 4, 11)
+#ave_path_length(network_graph_2D)
+#ave_weighted_path_length(network_graph_2D)
 # run new method here
 
 # Choice
