@@ -4,6 +4,7 @@ from collections import Counter
 import csv
 import matplotlib.pyplot as plt
 import networkx as nx
+import networkx.algorithms.community as nxac
 from nilearn.connectome import ConnectivityMeasure
 import numpy as np
 import pandas as pd
@@ -411,6 +412,14 @@ def connected_components(network_graph): # islands
 def giant_component(network_graph): # largest island
     giant = max(nx.connected_components(network_graph), key = len)
     print(giant)
+def modularity(network_graph): # how well the graph separates into islands (0: random, 0.3: meaningful structure, 0.5: strong islands)
+    islands = nxac.greedy_modularity_communities(network_graph)
+    mod = nxac.modularity(network_graph, islands)
+    print(mod)
+def weighted_modularity(network_graph): # how well the weighted graph separates into islands
+    islands = nxac.greedy_modularity_communities(network_graph)
+    mod = nxac.modularity(network_graph, islands, weight = 'weight')
+    print(mod)
 # define new method here
 
 # TEST RUNTIME
@@ -442,7 +451,9 @@ network_graph_2D = graph(corr_matrix_2D, 0.5)
 
 # Global network properties
 #connected_components(network_graph_2D)
-giant_component(network_graph_2D)
+#giant_component(network_graph_2D)
+modularity(network_graph_2D)
+weighted_modularity(network_graph_2D)
 # run new method here
 
 # Choice
