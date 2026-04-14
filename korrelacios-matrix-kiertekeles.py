@@ -411,15 +411,18 @@ def connected_components(network_graph): # islands
     print(conn_comp)
 def giant_component(network_graph): # largest island
     giant = max(nx.connected_components(network_graph), key = len)
-    print(giant)
+    print('Largest island :\n', giant)
 def modularity(network_graph): # how well the graph separates into islands (0: random, 0.3: meaningful structure, 0.5: strong islands)
     islands = nxac.greedy_modularity_communities(network_graph)
     mod = nxac.modularity(network_graph, islands)
-    print(mod)
+    print('Modularity :', mod)
 def weighted_modularity(network_graph): # how well the weighted graph separates into islands
     islands = nxac.greedy_modularity_communities(network_graph)
-    mod = nxac.modularity(network_graph, islands, weight = 'weight')
-    print(mod)
+    wmod = nxac.modularity(network_graph, islands, weight = 'weight')
+    print('Weighted modularity :', wmod)
+def assortativity(network_graph): # network mixing pattern, connectivity of similar nodes (-1 to 1, 0: random)
+    a = nx.degree_assortativity_coefficient(network_graph)
+    print('Assortativity :', a)
 # define new method here
 
 # TEST RUNTIME
@@ -452,8 +455,9 @@ network_graph_2D = graph(corr_matrix_2D, 0.5)
 # Global network properties
 #connected_components(network_graph_2D)
 #giant_component(network_graph_2D)
-modularity(network_graph_2D)
-weighted_modularity(network_graph_2D)
+#modularity(network_graph_2D)
+#weighted_modularity(network_graph_2D)
+#assortativity(network_graph_2D)
 # run new method here
 
 # Choice
