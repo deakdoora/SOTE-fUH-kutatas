@@ -220,16 +220,22 @@ def degree_distribution(network_graph):
     #num_nodes_by_degree = Counter(degrees)
     #dd = {k: v / n for k, v in num_nodes_by_degree.items()}
     #print(dd)
+def clustering_coeff(network_graph, node):
+    node_ID = list(network_graph.nodes)[int(node)]
+    node_name = network_graph.nodes[node_ID].get("name", str(node_ID))
+    cc_dict = nx.clustering(network_graph, node_name)
+    print('Clustering coefficient of', node_name, ':', cc_dict)
 # define new method here
 
 # TEST RUNTIME
 
-network_graph_2D = graph(corr_matrix_2D, 0)
+network_graph_2D = graph(corr_matrix_2D, 0.5)
 graph_nodes(network_graph_2D)
-#graph_edges(network_graph_2D)
-#graph_density(network_graph_2D)
-#node_degree(network_graph_2D, 0)
+graph_edges(network_graph_2D)
+graph_density(network_graph_2D)
+node_degree(network_graph_2D, 0)
 degree_distribution(network_graph_2D)
+clustering_coeff(network_graph_2D, 0)
 # run new method here
 
 # Choice
