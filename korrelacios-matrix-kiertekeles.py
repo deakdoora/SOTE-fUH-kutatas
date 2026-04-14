@@ -199,7 +199,6 @@ def node_degree(network_graph): # edges of a single node
     for i in range(network_graph.number_of_nodes()):
         degree.append(network_graph.degree(node[i]))
 
-    #plt.figure(figsize=(12, 6))
     plt.scatter(node, degree)
     plt.title('Degree of nodes')
     plt.xlabel('Node')
@@ -207,8 +206,8 @@ def node_degree(network_graph): # edges of a single node
     plt.xticks(rotation = 90)
     for i in range(len(node)): # add y value to each point
         plt.annotate(f"{degree[i]:.2f}", (node[i], degree[i]), textcoords="offset points", xytext=(0,5), ha='center')
-    plt.tight_layout()
-    plt.subplots_adjust(bottom=0.5)
+    plt.ylim(top = np.max(degree) + (np.max(degree)-np.min(degree))*0.1) # for y values to fit on plot
+    plt.subplots_adjust(bottom=0.5) # for x labels to fit on screen
     plt.show()
 def degree_distribution(network_graph): # probability of a node having given number of edges
     n = network_graph.number_of_nodes()
@@ -235,11 +234,28 @@ def degree_distribution(network_graph): # probability of a node having given num
     #num_nodes_by_degree = Counter(degrees)
     #dd = {k: v / n for k, v in num_nodes_by_degree.items()}
     #print(dd)
-def clustering_coeff(network_graph, node): # present / possible edges of neighbours of a single node
-    node_ID = list(network_graph.nodes)[int(node)]
-    node_name = network_graph.nodes[node_ID].get("name", str(node_ID))
-    cc_dict = nx.clustering(network_graph, node_name)
-    print('Clustering coefficient of', node_name, ':', cc_dict)
+def clustering_coeff(network_graph): # present / possible edges of neighbours of a single node
+    #node_ID = list(network_graph.nodes)[int(node)]
+    #node_name = network_graph.nodes[node_ID].get("name", str(node_ID))
+    #cc_dict = nx.clustering(network_graph, node_name)
+    #print('Clustering coefficient of', node_name, ':', cc_dict)
+
+    node = list(network_graph.nodes())
+    cc = []
+    for i in range(network_graph.number_of_nodes()):
+        cc.append(nx.clustering(network_graph, node[i]))
+
+    plt.scatter(node, cc)
+    plt.title('Clustering coefficient of nodes')
+    plt.xlabel('Node')
+    plt.ylabel('Clustering coefficient')
+    plt.xticks(rotation = 90)
+    for i in range(len(node)): # add y value to each point
+        plt.annotate(f"{cc[i]:.2f}", (node[i], cc[i]), textcoords="offset points", xytext=(0,5), ha='center')
+    plt.ylim(top = np.max(cc) + (np.max(cc)-np.min(cc))*0.1) # for y values to fit on plot
+    plt.subplots_adjust(bottom=0.5) # for x labels to fit on screen
+    plt.show()
+
 #def degree_centrality(network_graph):
 #def betweenness_centrality(network_graph):
 #def closeness_centrality(network_graph):
@@ -252,9 +268,9 @@ network_graph_2D = graph(corr_matrix_2D, 0.2)
 #graph_nodes(network_graph_2D)
 #graph_edges(network_graph_2D)
 #graph_density(network_graph_2D)
-node_degree(network_graph_2D)
+#node_degree(network_graph_2D)
 #degree_distribution(network_graph_2D)
-#clustering_coeff(network_graph_2D, 0)
+#clustering_coeff(network_graph_2D)
 # run new method here
 
 # Choice
