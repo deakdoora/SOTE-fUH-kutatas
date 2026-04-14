@@ -59,9 +59,9 @@ corr_matrix_4D_f_sbs = pd.DataFrame(data = data_matrix_4D_f_sbs, columns = label
 
 # Heatmap for visualizing correlation matrix
 def heatmap(corr_matrix):
-    plt.figure(figsize=(5,5))
-    sns.heatmap(corr_matrix, cmap="jet", vmin=-1, vmax=1)
+    sns.heatmap(corr_matrix, square = True, cmap="jet", vmin=-1, vmax=1)
     plt.title("Correlation matrix")
+    #plt.subplots_adjust(bottom = 0.5)
     plt.show()
 
 '''
@@ -182,6 +182,7 @@ def graph_plot(graph):
 #node_ID = list(network_graph.nodes)[int(node)]
 #node_name = network_graph.nodes[node_ID].get("name", str(node_ID))
 
+# Basic structural parametres
 def graph_nodes(network_graph):
     n = network_graph.number_of_nodes()
     print('Number of nodes:', n)
@@ -193,6 +194,7 @@ def graph_density(network_graph): # present / possible edges
     E = network_graph.number_of_edges()
     n = 2*E / (N * (N-1))
     print('Graph density:', n)
+# Node level metrics
 def node_degree(network_graph): # edges of given node
     node = list(network_graph.nodes())
     degree = []
@@ -310,21 +312,75 @@ def eigenvector_centrality(network_graph): # well-connectedness, amount of inlue
     plt.ylim(top = np.max(ec) + (np.max(ec)-np.min(ec))*0.1) # for y values to fit on plot
     plt.subplots_adjust(bottom=0.5) # for x labels to fit on screen
     plt.show()
+# Path based metrics
+def shortest_path_length(network_graph):
+    l = []
+    for i in range(network_graph.number_of_nodes()):
+        l_i = []
+        for j in range(network_graph.number_of_nodes()):
+            s_ID = list(network_graph.nodes)[i]
+            s_name = network_graph.nodes[s_ID].get("name", str(s_ID))
+            t_ID = list(network_graph.nodes)[j]
+            t_name = network_graph.nodes[t_ID].get("name", str(t_ID))
+
+            l_i.append(nx.shortest_path_length(network_graph, source = s_name, target = t_name))
+        l.append(l_i)
+    l_matrix = pd.DataFrame(l, index = list(network_graph.nodes), columns = list(network_graph.nodes))
+
+    sns.heatmap(l_matrix, square = True, annot = True, cmap = "Greys", cbar = False)
+    plt.title("Shortest path lengths")
+    #plt.subplots_adjust(bottom = 0.5)
+    plt.show()
+def weighted_shortest_path_length(network_graph):
+    l = []
+    for i in range(network_graph.number_of_nodes()):
+        l_i = []
+        for j in range(network_graph.number_of_nodes()):
+            s_ID = list(network_graph.nodes)[i]
+            s_name = network_graph.nodes[s_ID].get("name", str(s_ID))
+            t_ID = list(network_graph.nodes)[j]
+            t_name = network_graph.nodes[t_ID].get("name", str(t_ID))
+
+            l_i.append(nx.shortest_path_length(network_graph, source = s_name, target = t_name, weight = 'weight'))
+        l.append(l_i)
+    l_matrix = pd.DataFrame(l, index = list(network_graph.nodes), columns = list(network_graph.nodes))
+
+    sns.heatmap(l_matrix, square = True, annot = True, cmap = "Greys")
+    plt.title("Shortest path lengths")
+    #plt.subplots_adjust(bottom = 0.5)
+    plt.show()
+def shortest_path(network_graph, s, t):
+    s_ID = list(network_graph.nodes)[s]
+    s_name = network_graph.nodes[s_ID].get("name", str(s_ID))
+    t_ID = list(network_graph.nodes)[t]
+    t_name = network_graph.nodes[t_ID].get("name", str(t_ID))
+
+    path = nx.shortest_path(network_graph, source = s_name, target = t_name)
+    print(path)
 # define new method here
 
 # TEST RUNTIME
 
-network_graph_2D = graph(corr_matrix_2D, 0.2)
+network_graph_2D = graph(corr_matrix_2D, 0.5)
+
+# Basic structural parametres
 #graph_nodes(network_graph_2D)
 #graph_edges(network_graph_2D)
 #graph_density(network_graph_2D)
+
+# Node level metrics
 #node_degree(network_graph_2D)
 #degree_distribution(network_graph_2D)
 #clustering_coeff(network_graph_2D)
-degree_centrality(network_graph_2D)
-betweenness_centrality(network_graph_2D)
-closeness_centrality(network_graph_2D)
-eigenvector_centrality(network_graph_2D)
+#degree_centrality(network_graph_2D)
+#betweenness_centrality(network_graph_2D)
+#closeness_centrality(network_graph_2D)
+#eigenvector_centrality(network_graph_2D)
+
+# Path based metrics
+#shortest_path_length(network_graph_2D)
+#weighted_shortest_path_length(network_graph_2D)
+#shortest_path(network_graph_2D, 4, 11)
 # run new method here
 
 # Choice
@@ -465,3 +521,12 @@ def runtime():
 #def analysis(filename): # complete analysis of a measurement
 
 #runtime()    # use 0s_to_600.024s_2D_Matrix for testing
+
+# TO DO LIST
+
+'''
+- save everything to file
+- integrate graph parametres into the runtime function
+- full analysis function
+- test for 4D data
+'''
