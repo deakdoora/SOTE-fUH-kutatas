@@ -280,7 +280,21 @@ def betweenness_centrality(network_graph): # control over information flow, how 
     plt.ylim(top = np.max(bc) + (np.max(bc)-np.min(bc))*0.1) # for y values to fit on plot
     plt.subplots_adjust(bottom=0.5) # for x labels to fit on screen
     plt.show()
-#def closeness_centrality(network_graph): # speed of communication
+def closeness_centrality(network_graph): # speed of communication, how quickly are other nodes reachable from given
+    dict = nx.closeness_centrality(network_graph)
+    node = list(dict.keys())
+    cc = list(dict.values())
+
+    plt.scatter(node, cc)
+    plt.title('Closeness centrality of nodes')
+    plt.xlabel('Node')
+    plt.ylabel('Closeness centrality')
+    plt.xticks(rotation = 90)
+    for i in range(len(node)): # add y value to each point
+        plt.annotate(f"{cc[i]:.2f}", (node[i], cc[i]), textcoords="offset points", xytext=(0,5), ha='center')
+    plt.ylim(top = np.max(cc) + (np.max(cc)-np.min(cc))*0.1) # for y values to fit on plot
+    plt.subplots_adjust(bottom=0.5) # for x labels to fit on screen
+    plt.show()
 #def eigenvector_centrality(network_graph): # well-connectedness
 # define new method here
 
@@ -293,8 +307,9 @@ network_graph_2D = graph(corr_matrix_2D, 0.2)
 #node_degree(network_graph_2D)
 #degree_distribution(network_graph_2D)
 #clustering_coeff(network_graph_2D)
-#degree_centrality(network_graph_2D)
+degree_centrality(network_graph_2D)
 betweenness_centrality(network_graph_2D)
+closeness_centrality(network_graph_2D)
 # run new method here
 
 # Choice
