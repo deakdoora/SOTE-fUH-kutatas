@@ -408,6 +408,9 @@ def connected_components(network_graph): # islands
     
     conn_comp = list(nx.connected_components(network_graph))
     print(conn_comp)
+def giant_component(network_graph): # largest island
+    giant = max(nx.connected_components(network_graph), key = len)
+    print(giant)
 # define new method here
 
 # TEST RUNTIME
@@ -438,7 +441,8 @@ network_graph_2D = graph(corr_matrix_2D, 0.5)
 #weighted_diameter(network_graph_2D)
 
 # Global network properties
-connected_components(network_graph_2D)
+#connected_components(network_graph_2D)
+giant_component(network_graph_2D)
 # run new method here
 
 # Choice
