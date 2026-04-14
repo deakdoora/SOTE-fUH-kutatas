@@ -295,7 +295,21 @@ def closeness_centrality(network_graph): # speed of communication, how quickly a
     plt.ylim(top = np.max(cc) + (np.max(cc)-np.min(cc))*0.1) # for y values to fit on plot
     plt.subplots_adjust(bottom=0.5) # for x labels to fit on screen
     plt.show()
-#def eigenvector_centrality(network_graph): # well-connectedness
+def eigenvector_centrality(network_graph): # well-connectedness, amount of inluential neighbouring nodes
+    dict = nx.eigenvector_centrality(network_graph)
+    node = list(dict.keys())
+    ec = list(dict.values())
+
+    plt.scatter(node, ec)
+    plt.title('Eigenvector centrality of nodes')
+    plt.xlabel('Node')
+    plt.ylabel('Eigenvector centrality')
+    plt.xticks(rotation = 90)
+    for i in range(len(node)): # add y value to each point
+        plt.annotate(f"{ec[i]:.2f}", (node[i], ec[i]), textcoords="offset points", xytext=(0,5), ha='center')
+    plt.ylim(top = np.max(ec) + (np.max(ec)-np.min(ec))*0.1) # for y values to fit on plot
+    plt.subplots_adjust(bottom=0.5) # for x labels to fit on screen
+    plt.show()
 # define new method here
 
 # TEST RUNTIME
@@ -310,6 +324,7 @@ network_graph_2D = graph(corr_matrix_2D, 0.2)
 degree_centrality(network_graph_2D)
 betweenness_centrality(network_graph_2D)
 closeness_centrality(network_graph_2D)
+eigenvector_centrality(network_graph_2D)
 # run new method here
 
 # Choice
