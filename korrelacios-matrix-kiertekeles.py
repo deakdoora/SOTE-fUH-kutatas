@@ -193,7 +193,7 @@ def graph_density(network_graph): # present / possible edges
     E = network_graph.number_of_edges()
     n = 2*E / (N * (N-1))
     print('Graph density:', n)
-def node_degree(network_graph): # edges of a single node
+def node_degree(network_graph): # edges of given node
     node = list(network_graph.nodes())
     degree = []
     for i in range(network_graph.number_of_nodes()):
@@ -234,12 +234,7 @@ def degree_distribution(network_graph): # probability of a node having given num
     #num_nodes_by_degree = Counter(degrees)
     #dd = {k: v / n for k, v in num_nodes_by_degree.items()}
     #print(dd)
-def clustering_coeff(network_graph): # present / possible edges of neighbours of a single node
-    #node_ID = list(network_graph.nodes)[int(node)]
-    #node_name = network_graph.nodes[node_ID].get("name", str(node_ID))
-    #cc_dict = nx.clustering(network_graph, node_name)
-    #print('Clustering coefficient of', node_name, ':', cc_dict)
-
+def clustering_coeff(network_graph): # present / possible edges of neighbours of given node
     node = list(network_graph.nodes())
     cc = []
     for i in range(network_graph.number_of_nodes()):
@@ -255,8 +250,21 @@ def clustering_coeff(network_graph): # present / possible edges of neighbours of
     plt.ylim(top = np.max(cc) + (np.max(cc)-np.min(cc))*0.1) # for y values to fit on plot
     plt.subplots_adjust(bottom=0.5) # for x labels to fit on screen
     plt.show()
+def degree_centrality(network_graph): # normalized degree of given node
+    dict = nx.degree_centrality(network_graph)
+    node = list(dict.keys())
+    dc = list(dict.values())
 
-#def degree_centrality(network_graph):
+    plt.scatter(node, dc)
+    plt.title('Degree centrality of nodes')
+    plt.xlabel('Node')
+    plt.ylabel('Degree centrality')
+    plt.xticks(rotation = 90)
+    for i in range(len(node)): # add y value to each point
+        plt.annotate(f"{dc[i]:.2f}", (node[i], dc[i]), textcoords="offset points", xytext=(0,5), ha='center')
+    plt.ylim(top = np.max(dc) + (np.max(dc)-np.min(dc))*0.1) # for y values to fit on plot
+    plt.subplots_adjust(bottom=0.5) # for x labels to fit on screen
+    plt.show()
 #def betweenness_centrality(network_graph):
 #def closeness_centrality(network_graph):
 #def eigenvector_centrality(network_graph):
@@ -271,6 +279,7 @@ network_graph_2D = graph(corr_matrix_2D, 0.2)
 #node_degree(network_graph_2D)
 #degree_distribution(network_graph_2D)
 #clustering_coeff(network_graph_2D)
+degree_centrality(network_graph_2D)
 # run new method here
 
 # Choice
