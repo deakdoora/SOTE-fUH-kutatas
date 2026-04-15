@@ -423,11 +423,46 @@ def weighted_modularity(network_graph): # how well the weighted graph separates 
 def assortativity(network_graph): # network mixing pattern, connectivity of similar nodes (-1 to 1, 0: random)
     a = nx.degree_assortativity_coefficient(network_graph)
     print('Assortativity :', a)
+# Flow and robustness
+def network_efficiency(network_graph): # how easily and quickly information spreads
+    n = network_graph.number_of_nodes()
+
+    ne = 1 / (n * (n-1))
+    inv_d = 0
+    for i in range(n):
+        for j in range(n):
+            if (i != j):
+                s_ID = list(network_graph.nodes)[i]
+                s_name = network_graph.nodes[s_ID].get("name", str(s_ID))
+                t_ID = list(network_graph.nodes)[j]
+                t_name = network_graph.nodes[t_ID].get("name", str(t_ID))
+
+                inv_d += 1 / nx.shortest_path_length(network_graph, source = s_name, target = t_name)
+    ne = ne * inv_d
+
+    print('Network efficiency :', ne)
+def weighted_network_efficiency(network_graph):
+    n = network_graph.number_of_nodes()
+
+    wne = 1 / (n * (n-1))
+    w_inv_d = 0
+    for i in range(n):
+        for j in range(n):
+            if (i != j):
+                s_ID = list(network_graph.nodes)[i]
+                s_name = network_graph.nodes[s_ID].get("name", str(s_ID))
+                t_ID = list(network_graph.nodes)[j]
+                t_name = network_graph.nodes[t_ID].get("name", str(t_ID))
+
+                w_inv_d += 1 / nx.shortest_path_length(network_graph, source = s_name, target = t_name, weight = 'weight')
+    wne = wne * w_inv_d
+
+    print('Weighted network efficiency :', wne)
 # define new method here
 
 # TEST RUNTIME
 
-network_graph_2D = graph(corr_matrix_2D, 0.5)
+network_graph_2D = graph(corr_matrix_2D, 0)
 
 # Basic structural parametres
 #graph_nodes(network_graph_2D)
@@ -458,6 +493,10 @@ network_graph_2D = graph(corr_matrix_2D, 0.5)
 #modularity(network_graph_2D)
 #weighted_modularity(network_graph_2D)
 #assortativity(network_graph_2D)
+
+# Flow and robustness
+#network_efficiency(network_graph_2D)
+#weighted_network_efficiency(network_graph_2D)
 # run new method here
 
 # Choice
