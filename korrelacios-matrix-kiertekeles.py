@@ -8,6 +8,7 @@ import networkx.algorithms.community as nxac
 from nilearn.connectome import ConnectivityMeasure
 import numpy as np
 import pandas as pd
+import random
 from scipy import signal
 import seaborn as sns
 from sklearn.cluster import KMeans
@@ -65,10 +66,6 @@ def heatmap(corr_matrix):
     #plt.subplots_adjust(bottom = 0.5)
     plt.show()
 
-'''
-heatmap(corr_matrix_2D)
-'''
-
 # K-MEANS CLUSTERING
 
 # K-means clustering is an unsupervised machine learning algorithm used in neuroimaging to categorize data into
@@ -104,15 +101,6 @@ def k_means_clustering(corr_matrix, labels, num_clusters, filename):
     # Close file
     file.close()
 
-'''
-print('\nName file (K-means Clustering) :')
-filename = str(input()) + '.txt'
-print('\nNumber of clusters:')
-num_clusters = int(input())
-
-k_means_clustering(corr_matrix_2D, labels_2D, num_clusters, filename)
-'''
-
 # SPECTRAL COHERENCE ANALYSIS
 
 # Spectral coherence analysis is a frequency-domain method used to evaluate the consistency of the relationship
@@ -124,7 +112,6 @@ def spectral_coherence_analysis(data_matrix, regionA, regionB, sampling_freq = 1
     f, Cxy = signal.coherence(data_matrix[:,regionA], data_matrix[:,regionB], fs = sampling_freq, nperseg = 256) # nperseg defines the frequency resolution
 
     return f, Cxy
-
 def spectral_coherence_analysis_file(filename, f, Cxy):
     # Open file
     file = open(filename, "w")
@@ -136,8 +123,6 @@ def spectral_coherence_analysis_file(filename, f, Cxy):
 
     # Close file
     file.close()
-
-# Visualize result
 def spectral_coherence_analysis_plot(regionA, regionB, f, Cxy, labels):
     plt.semilogy(f, Cxy) # logarithmic y axis
 
@@ -147,13 +132,6 @@ def spectral_coherence_analysis_plot(regionA, regionB, f, Cxy, labels):
     plt.ylabel('Coherence')
     plt.grid()
     plt.show()
-
-'''
-regionA = 0
-regionB = 6
-f, Cxy = spectral_coherence_analysis(data_matrix_2D, regionA, regionB)
-spectral_coherence_analysis_plot(regionA, regionB, f, Cxy, labels_2D)
-'''
 
 # GRAPH
 
@@ -168,7 +146,6 @@ def graph(corr_matrix, thr):
                 network_graph.add_edge(i, j, weight=corr_matrix.loc[i, j])
 
     return network_graph
-
 def graph_plot(graph):
     # Visualization
     nodes = nx.spring_layout(graph, seed = 42)
@@ -458,11 +435,119 @@ def weighted_network_efficiency(network_graph):
     wne = wne * w_inv_d
 
     print('Weighted network efficiency :', wne)
+def robustness_to_random_failure(network_graph): # resilience to failure (node / edge removal)
+    # Open file to write in
+    f = None
+    while (f == None):
+        print("\nEnter FILE NAME for data of robustness test to random failure :")
+        filename = str(input()) + '.txt'
+
+        try:
+            f = open(filename, "w")
+        except IOError:
+            print("Error opening file")
+    
+    # Robustness test
+    f.write('Robustness test to random failure')
+
+    f.write('\n\nNode removal\n\n')
+    f.write('network efficiency\tnumber of connected components\tsize of largest island\taverage of shortest path lengths\taverage of weighted shortest path lengths\n')
+
+    ng = network_graph.copy()
+    nodes = list(ng.nodes())
+    random.shuffle(nodes)
+    for node in nodes:
+        ng.remove_node(node) # random failure
+        if len(list(ng.nodes())) > 0:
+            network_efficiency = nx.global_efficiency(ng)
+            num_connected_components = nx.number_connected_components(ng)
+            largest_island_size = len(max(nx.connected_components(ng), key = len))
+            ng_sub = ng.subgraph(max(nx.connected_components(ng), key = len))
+            ave_shortest_path_length = nx.average_shortest_path_length(ng_sub)
+            ave_weighted_shortest_path_length = nx.average_shortest_path_length(ng_sub, weight = 'weight')
+
+            f.write(str(network_efficiency) + '\t' + str(num_connected_components) + '\t' + str(largest_island_size) + '\t' + str(ave_shortest_path_length) + '\t' + str(ave_weighted_shortest_path_length) + '\n')
+
+    f.write('\n\nEdge removal\n\n')
+    f.write('network efficiency\tnumber of connected components\tsize of largest island\taverage of shortest path lengths\taverage of weighted shortest path lengths\n')
+
+    ng = network_graph.copy()
+    edges = list(ng.edges())
+    random.shuffle(edges)
+    for edge in edges:
+        ng.remove_edge(edge[0], edge[1]) # random failure
+        if len(list(ng.edges())) > 0:
+            network_efficiency = nx.global_efficiency(ng)
+            num_connected_components = nx.number_connected_components(ng)
+            largest_island_size = len(max(nx.connected_components(ng), key = len))
+            ng_sub = ng.subgraph(max(nx.connected_components(ng), key = len))
+            ave_shortest_path_length = nx.average_shortest_path_length(ng_sub)
+            ave_weighted_shortest_path_length = nx.average_shortest_path_length(ng_sub, weight = 'weight')
+
+            f.write(str(network_efficiency) + '\t' + str(num_connected_components) + '\t' + str(largest_island_size) + '\t' + str(ave_shortest_path_length) + '\t' + str(ave_weighted_shortest_path_length) + '\n')
+    
+    # Close file
+    f.close()
+def robustness_to_targeted_attack(network_graph): # resilience to failure (node / edge removal)
+    # Open file to write in
+    f = None
+    while (f == None):
+        print("\nEnter FILE NAME for data of robustness test to targeted attack :")
+        filename = str(input()) + '.txt'
+
+        try:
+            f = open(filename, "w")
+        except IOError:
+            print("Error opening file")
+    
+    # Robustness test
+    f.write('Robustness test to targeted attack')
+
+    f.write('\n\nHighest ranking node removal\n\n')
+    f.write('network efficiency\tnumber of connected components\tsize of largest island\taverage of shortest path lengths\taverage of weighted shortest path lengths\n')
+
+    ng = network_graph.copy()
+    n = len(list(ng.nodes()))
+    for i in range(n):
+        node = max(ng.degree, key = lambda x: x[1])[0] # highest degree node
+        ng.remove_node(node) # targetted attack
+        if len(list(ng.nodes())) > 0:
+            network_efficiency = nx.global_efficiency(ng)
+            num_connected_components = nx.number_connected_components(ng)
+            largest_island_size = len(max(nx.connected_components(ng), key = len))
+            ng_sub = ng.subgraph(max(nx.connected_components(ng), key = len))
+            ave_shortest_path_length = nx.average_shortest_path_length(ng_sub)
+            ave_weighted_shortest_path_length = nx.average_shortest_path_length(ng_sub, weight = 'weight')
+
+            f.write(str(network_efficiency) + '\t' + str(num_connected_components) + '\t' + str(largest_island_size) + '\t' + str(ave_shortest_path_length) + '\t' + str(ave_weighted_shortest_path_length) + '\n')
+
+    f.write('\n\nMost important bridge removal\n\n')
+    f.write('network efficiency\tnumber of connected components\tsize of largest island\taverage of shortest path lengths\taverage of weighted shortest path lengths\n')
+
+    ng = network_graph.copy()
+    e = len(list(ng.edges()))
+    for j in range(e):
+        eb = nx.edge_betweenness_centrality(ng) # edge betweenness
+        edge = max(eb, key = eb.get)
+        ng.remove_edge(edge[0], edge[1]) # targetted attack
+        if len(list(ng.edges())) > 0:
+            network_efficiency = nx.global_efficiency(ng)
+            num_connected_components = nx.number_connected_components(ng)
+            largest_island_size = len(max(nx.connected_components(ng), key = len))
+            ng_sub = ng.subgraph(max(nx.connected_components(ng), key = len))
+            ave_shortest_path_length = nx.average_shortest_path_length(ng_sub)
+            ave_weighted_shortest_path_length = nx.average_shortest_path_length(ng_sub, weight = 'weight')
+
+            f.write(str(network_efficiency) + '\t' + str(num_connected_components) + '\t' + str(largest_island_size) + '\t' + str(ave_shortest_path_length) + '\t' + str(ave_weighted_shortest_path_length) + '\n')
+    
+    # Close file
+    f.close()
+
 # define new method here
 
 # TEST RUNTIME
 
-network_graph_2D = graph(corr_matrix_2D, 0)
+network_graph_2D = graph(corr_matrix_2D, 0.7)
 
 # Basic structural parametres
 #graph_nodes(network_graph_2D)
@@ -497,6 +582,8 @@ network_graph_2D = graph(corr_matrix_2D, 0)
 # Flow and robustness
 #network_efficiency(network_graph_2D)
 #weighted_network_efficiency(network_graph_2D)
+#robustness_to_random_failure(network_graph_2D)
+#robustness_to_targeted_attack(network_graph_2D)
 # run new method here
 
 # Choice
