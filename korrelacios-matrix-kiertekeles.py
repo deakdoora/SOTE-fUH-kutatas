@@ -547,7 +547,7 @@ def robustness_to_targeted_attack(network_graph): # resilience to failure (node 
 
 # TEST RUNTIME
 
-network_graph_2D = graph(corr_matrix_2D, 0.7)
+network_graph_2D = graph(corr_matrix_2D, 0.2)
 
 # Basic structural parametres
 #graph_nodes(network_graph_2D)
@@ -558,30 +558,30 @@ network_graph_2D = graph(corr_matrix_2D, 0.7)
 #node_degree(network_graph_2D)
 #degree_distribution(network_graph_2D)
 #clustering_coeff(network_graph_2D)
-#degree_centrality(network_graph_2D)
-#betweenness_centrality(network_graph_2D)
-#closeness_centrality(network_graph_2D)
-#eigenvector_centrality(network_graph_2D)
+degree_centrality(network_graph_2D)
+betweenness_centrality(network_graph_2D)
+closeness_centrality(network_graph_2D)
+eigenvector_centrality(network_graph_2D)
 
 # Path based metrics
-#shortest_path_length(network_graph_2D)
-#weighted_shortest_path_length(network_graph_2D)
-#shortest_path(network_graph_2D, 4, 11)
-#ave_path_length(network_graph_2D)
-#ave_weighted_path_length(network_graph_2D)
-#diameter(network_graph_2D)
-#weighted_diameter(network_graph_2D)
+shortest_path_length(network_graph_2D)
+weighted_shortest_path_length(network_graph_2D)
+shortest_path(network_graph_2D, 4, 11)
+ave_path_length(network_graph_2D)
+ave_weighted_path_length(network_graph_2D)
+diameter(network_graph_2D)
+weighted_diameter(network_graph_2D)
 
 # Global network properties
-#connected_components(network_graph_2D)
-#giant_component(network_graph_2D)
-#modularity(network_graph_2D)
-#weighted_modularity(network_graph_2D)
-#assortativity(network_graph_2D)
+connected_components(network_graph_2D)
+giant_component(network_graph_2D)
+modularity(network_graph_2D)
+weighted_modularity(network_graph_2D)
+assortativity(network_graph_2D)
 
 # Flow and robustness
-#network_efficiency(network_graph_2D)
-#weighted_network_efficiency(network_graph_2D)
+network_efficiency(network_graph_2D)
+weighted_network_efficiency(network_graph_2D)
 #robustness_to_random_failure(network_graph_2D)
 #robustness_to_targeted_attack(network_graph_2D)
 # run new method here
