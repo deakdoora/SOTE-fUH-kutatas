@@ -22,7 +22,10 @@ Notes
 TO DO LIST
 --
 - plot time signals
-- save everything to file
-- integrate graph parametres into the runtime function
-- full analysis function
+- add missing graph parametres
+- check correctness of computation of graph parametres
+- clean up functions
 - test for 4D data
+- compair data
+
+- (integrate graph parametres into the runtime function)

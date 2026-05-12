@@ -61,10 +61,16 @@ corr_matrix_4D_f_sbs = pd.DataFrame(data = data_matrix_4D_f_sbs, columns = label
 
 # Heatmap for visualizing correlation matrix
 def heatmap(corr_matrix):
+
     sns.heatmap(corr_matrix, square = True, cmap="jet", vmin=-1, vmax=1)
     plt.title("Correlation matrix")
     #plt.subplots_adjust(bottom = 0.5)
     plt.show()
+def analysis_corr_matrix_file(corr_matrix, file):
+    file.write('CORRELATION MATRIX\n\n')
+    file.write(corr_matrix.to_string())
+    file.write('\n\n')
+    
 
 # K-MEANS CLUSTERING
 
@@ -100,6 +106,31 @@ def k_means_clustering(corr_matrix, labels, num_clusters, filename):
 
     # Close file
     file.close()
+def analysis_k_means_clustering(corr_matrix, labels, num_clusters, file):
+    file.write('K-MEANS CLUSTERING\n\n')
+    file.write('Cluster #\tElements\n')
+
+    # Initialize K-means model
+    kmeans = KMeans(n_clusters = num_clusters, random_state = 42)
+    # Fit K-means model (to rows)
+    clusters = kmeans.fit_predict(corr_matrix)
+
+    # Create 2D array storing labels by clusters
+    labels_by_clusters = []
+    for i in range(num_clusters):
+        labels_i = []
+        for j in range(len(clusters)):
+            if clusters[j] == i:
+                labels_i.append(labels[j])
+        labels_by_clusters.append(labels_i)
+
+        # Write to file
+        file.write(str(i+1))
+        for j in range(len(labels_by_clusters[i])):
+            file.write('\t' + labels_by_clusters[i][j])
+        file.write('\n')
+
+    file.write('\n')
 
 # SPECTRAL COHERENCE ANALYSIS
 
@@ -123,6 +154,15 @@ def spectral_coherence_analysis_file(filename, f, Cxy):
 
     # Close file
     file.close()
+def analysis_spectral_coherence_analysis_file(file, f, Cxy):
+    # Write to file
+    file.write('SPECTRAL COHERENCE ANALYSIS\n\n')
+
+    file.write('f\tCxy\n')
+    for j in range(len(f)):
+        file.write(str(f[j]) + '\t' + str(Cxy[j]) + '\n')
+
+    file.write('\n')
 def spectral_coherence_analysis_plot(regionA, regionB, f, Cxy, labels):
     plt.semilogy(f, Cxy) # logarithmic y axis
 
@@ -154,6 +194,14 @@ def graph_plot(graph):
 
     nx.draw(graph, nodes, with_labels = True, node_color = 'skyblue', node_size = 2000, width = edge_widths)
     plt.show()
+def analysis_graph_file(graph, file):
+    file.write('GRAPH\n\n')
+
+    for node1, node2, data in sorted(graph.edges(data=True)):
+        weight = data.get("weight", 1)
+        file.write(f"{node1} -- {node2} (weight={weight})\n")
+    
+    file.write('\n')
 
 # GRAPH PARAMETRES
 
@@ -324,7 +372,7 @@ def weighted_shortest_path_length(network_graph):
     wl_matrix = pd.DataFrame(wl, index = list(network_graph.nodes), columns = list(network_graph.nodes))
 
     sns.heatmap(wl_matrix, square = True, annot = True, cmap = "Greys")
-    plt.title("Shortest path lengths")
+    plt.title("Weighted shortest path lengths")
     #plt.subplots_adjust(bottom = 0.5)
     plt.show()
 def shortest_path(network_graph, s, t): # actual path
@@ -543,66 +591,335 @@ def robustness_to_targeted_attack(network_graph): # resilience to failure (node 
     # Close file
     f.close()
 
-# define new method here
-
-# TEST RUNTIME
-
-network_graph_2D = graph(corr_matrix_2D, 0.2)
 
 # Basic structural parametres
-#graph_nodes(network_graph_2D)
-#graph_edges(network_graph_2D)
-#graph_density(network_graph_2D)
+def a_graph_nodes(network_graph, file):
+    n = network_graph.number_of_nodes()
 
+    file.write('Number of nodes:' + str(n) + '\n\n')
+def a_graph_edges(network_graph, file):
+    n = network_graph.number_of_edges()
+
+    file.write('Number of edges:' + str(n) + '\n\n')
+def a_graph_density(network_graph, file): # present / possible edges
+    N = network_graph.number_of_nodes()
+    E = network_graph.number_of_edges()
+    n = 2*E / (N * (N-1))
+
+    file.write('Graph density:' + str(n) + '\n\n')
 # Node level metrics
-#node_degree(network_graph_2D)
-#degree_distribution(network_graph_2D)
-#clustering_coeff(network_graph_2D)
-degree_centrality(network_graph_2D)
-betweenness_centrality(network_graph_2D)
-closeness_centrality(network_graph_2D)
-eigenvector_centrality(network_graph_2D)
+def a_node_degree(network_graph, file): # edges of given node
+    node = list(network_graph.nodes())
+    degree = []
+    for i in range(network_graph.number_of_nodes()):
+        degree.append(network_graph.degree(node[i]))
 
+    file.write('Node\tDegree\n')
+    for i in range(len(node)):
+        file.write(str(node[i]) + '\t' + str(degree[i]) + '\n')
+    file.write('\n')
+def a_degree_distribution(network_graph, file): # probability of a node having given number of edges
+    n = network_graph.number_of_nodes()
+    degree = np.linspace(0,n-1,n)
+    probability = []
+    for i in degree:
+        node_num_with_degree_i = 0
+        for j in range(n):
+            node_ID = list(network_graph.nodes)[j]
+            node_name = network_graph.nodes[node_ID].get("name", str(node_ID))
+            if (network_graph.degree(node_name) == i):
+                node_num_with_degree_i += 1
+        probability.append(node_num_with_degree_i / n)
+    
+    file.write('Degree\tProbability\n')
+    for i in range(len(degree)):
+        file.write(str(degree[i]) + '\t' + str(probability[i]) + '\n')
+    file.write('\n')
+def a_clustering_coeff(network_graph, file): # present / possible edges of neighbours of given node
+    node = list(network_graph.nodes())
+    cc = []
+    for i in range(network_graph.number_of_nodes()):
+        cc.append(nx.clustering(network_graph, node[i]))
+
+    file.write('Node\tClustering coefficient\n')
+    for i in range(len(node)):
+        file.write(str(node[i]) + '\t' + str(cc[i]) + '\n')
+    file.write('\n')
+def a_degree_centrality(network_graph, file): # popularity, normalized degree of given node
+    dict = nx.degree_centrality(network_graph)
+    node = list(dict.keys())
+    dc = list(dict.values())
+
+    file.write('Node\tDegree centrality\n')
+    for i in range(len(node)):
+        file.write(str(node[i]) + '\t' + str(dc[i]) + '\n')
+    file.write('\n')
+def a_betweenness_centrality(network_graph, file): # control over information flow, how many shortest paths between nodes contain given node
+    dict = nx.betweenness_centrality(network_graph)
+    node = list(dict.keys())
+    bc = list(dict.values())
+
+    file.write('Node\tBetweenness centrality\n')
+    for i in range(len(node)):
+        file.write(str(node[i]) + '\t' + str(bc[i]) + '\n')
+    file.write('\n')
+def a_closeness_centrality(network_graph, file): # speed of communication, how quickly are other nodes reachable from given
+    dict = nx.closeness_centrality(network_graph)
+    node = list(dict.keys())
+    cc = list(dict.values())
+
+    file.write('Node\tCloseness centrality\n')
+    for i in range(len(node)):
+        file.write(str(node[i]) + '\t' + str(cc[i]) + '\n')
+    file.write('\n')
+def a_eigenvector_centrality(network_graph, file): # well-connectedness, amount of inluential neighbouring nodes
+    dict = nx.eigenvector_centrality(network_graph)
+    node = list(dict.keys())
+    ec = list(dict.values())
+
+    file.write('Node\tEigenvector centrality\n')
+    for i in range(len(node)):
+        file.write(str(node[i]) + '\t' + str(ec[i]) + '\n')
+    file.write('\n')
 # Path based metrics
-shortest_path_length(network_graph_2D)
-weighted_shortest_path_length(network_graph_2D)
-shortest_path(network_graph_2D, 4, 11)
-ave_path_length(network_graph_2D)
-ave_weighted_path_length(network_graph_2D)
-diameter(network_graph_2D)
-weighted_diameter(network_graph_2D)
+def a_shortest_path_length(network_graph, file):
+    l = []
+    for i in range(network_graph.number_of_nodes()):
+        l_i = []
+        for j in range(network_graph.number_of_nodes()):
+            s_ID = list(network_graph.nodes)[i]
+            s_name = network_graph.nodes[s_ID].get("name", str(s_ID))
+            t_ID = list(network_graph.nodes)[j]
+            t_name = network_graph.nodes[t_ID].get("name", str(t_ID))
 
+            l_i.append(nx.shortest_path_length(network_graph, source = s_name, target = t_name))
+        l.append(l_i)
+    l_matrix = pd.DataFrame(l, index = list(network_graph.nodes), columns = list(network_graph.nodes))
+
+    file.write('Shortest path lengths:\n')
+    file.write(l_matrix.to_string())
+    file.write('\n\n')
+def a_weighted_shortest_path_length(network_graph, file):
+    wl = []
+    for i in range(network_graph.number_of_nodes()):
+        wl_i = []
+        for j in range(network_graph.number_of_nodes()):
+            s_ID = list(network_graph.nodes)[i]
+            s_name = network_graph.nodes[s_ID].get("name", str(s_ID))
+            t_ID = list(network_graph.nodes)[j]
+            t_name = network_graph.nodes[t_ID].get("name", str(t_ID))
+
+            wl_i.append(nx.shortest_path_length(network_graph, source = s_name, target = t_name, weight = 'weight'))
+        wl.append(wl_i)
+    wl_matrix = pd.DataFrame(wl, index = list(network_graph.nodes), columns = list(network_graph.nodes))
+
+    file.write('Weighted shortest path lengths:\n')
+    file.write(wl_matrix.to_string())
+    file.write('\n\n')
+def a_shortest_path(network_graph, nodeA, nodeB, file): # actual path
+    nodeA_ID = list(network_graph.nodes)[nodeA]
+    nodeA_name = network_graph.nodes[nodeA_ID].get("name", str(nodeA_ID))
+    nodeB_ID = list(network_graph.nodes)[nodeB]
+    nodeB_name = network_graph.nodes[nodeB_ID].get("name", str(nodeB_ID))
+
+    path = nx.shortest_path(network_graph, source = nodeA_name, target = nodeB_name)
+
+    file.write('Shortest path from ' + nodeA_name + ' to ' + nodeB_name + ':\n')
+    file.write(str(path))
+    file.write('\n\n')
+def a_ave_path_length(network_graph, file): # average of shortest path lengths
+    l = []
+    for i in range(network_graph.number_of_nodes()):
+        for j in range(network_graph.number_of_nodes()-1-i):
+            s_ID = list(network_graph.nodes)[i]
+            s_name = network_graph.nodes[s_ID].get("name", str(s_ID))
+            t_ID = list(network_graph.nodes)[j+1+i]
+            t_name = network_graph.nodes[t_ID].get("name", str(t_ID))
+
+            l.append(nx.shortest_path_length(network_graph, source = s_name, target = t_name))
+
+    file.write('Average shortest path length:' + str(np.average(l)) + '\n\n')
+def a_ave_weighted_path_length(network_graph, file): # average of weighted shortest path lengths
+    wl = []
+    for i in range(network_graph.number_of_nodes()):
+        for j in range(network_graph.number_of_nodes()-1-i):
+            s_ID = list(network_graph.nodes)[i]
+            s_name = network_graph.nodes[s_ID].get("name", str(s_ID))
+            t_ID = list(network_graph.nodes)[j+1+i]
+            t_name = network_graph.nodes[t_ID].get("name", str(t_ID))
+
+            wl.append(nx.shortest_path_length(network_graph, source = s_name, target = t_name, weight='weight'))
+    
+    file.write('Average weighted shortest path length:' + str(np.average(wl)) + '\n\n')
+def a_diameter(network_graph, file): # longest shortest path length
+    l = []
+    for i in range(network_graph.number_of_nodes()):
+        for j in range(network_graph.number_of_nodes()-1-i):
+            s_ID = list(network_graph.nodes)[i]
+            s_name = network_graph.nodes[s_ID].get("name", str(s_ID))
+            t_ID = list(network_graph.nodes)[j+1+i]
+            t_name = network_graph.nodes[t_ID].get("name", str(t_ID))
+
+            l.append(nx.shortest_path_length(network_graph, source = s_name, target = t_name))
+
+    file.write('Diameter:' + str(np.max(l)) + '\n\n')
+def a_weighted_diameter(network_graph, file): # longest shortest weighted path length
+    wl = []
+    for i in range(network_graph.number_of_nodes()):
+        for j in range(network_graph.number_of_nodes()-1-i):
+            s_ID = list(network_graph.nodes)[i]
+            s_name = network_graph.nodes[s_ID].get("name", str(s_ID))
+            t_ID = list(network_graph.nodes)[j+1+i]
+            t_name = network_graph.nodes[t_ID].get("name", str(t_ID))
+
+            wl.append(nx.shortest_path_length(network_graph, source = s_name, target = t_name, weight='weight'))
+    
+    file.write('Weighted diameter:' + str(np.max(wl)) + '\n\n')
 # Global network properties
-connected_components(network_graph_2D)
-giant_component(network_graph_2D)
-modularity(network_graph_2D)
-weighted_modularity(network_graph_2D)
-assortativity(network_graph_2D)
+def a_connected_components(network_graph, file): # islands
+    n = nx.number_connected_components(network_graph)
+    file.write('Number of islands:' + str(n) + '\n')
+    
+    conn_comp = list(nx.connected_components(network_graph))
+    file.write(str(conn_comp))
+    file.write('\n\n')
+def a_giant_component(network_graph, file): # largest island
+    giant = max(nx.connected_components(network_graph), key = len)
 
+    file.write('Largest island:\n')
+    file.write(str(giant))
+    file.write('\n\n')
+def a_modularity(network_graph, file): # how well the graph separates into islands (0: random, 0.3: meaningful structure, 0.5: strong islands)
+    islands = nxac.greedy_modularity_communities(network_graph)
+    mod = nxac.modularity(network_graph, islands)
+
+    file.write('Modularity:' + str(mod) + '\n\n')
+def a_weighted_modularity(network_graph, file): # how well the weighted graph separates into islands
+    islands = nxac.greedy_modularity_communities(network_graph)
+    wmod = nxac.modularity(network_graph, islands, weight = 'weight')
+
+    file.write('Weighted modularity:' + str(wmod) + '\n\n')
+def a_assortativity(network_graph, file): # network mixing pattern, connectivity of similar nodes (-1 to 1, 0: random)
+    a = nx.degree_assortativity_coefficient(network_graph)
+
+    file.write('Assortativity:' + str(a) + '\n\n')
 # Flow and robustness
-network_efficiency(network_graph_2D)
-weighted_network_efficiency(network_graph_2D)
-#robustness_to_random_failure(network_graph_2D)
-#robustness_to_targeted_attack(network_graph_2D)
-# run new method here
+def a_network_efficiency(network_graph, file): # how easily and quickly information spreads
+    n = network_graph.number_of_nodes()
 
-# Choice
-'''
-print('\nPick one of the following options:')
-print('\n1. Show graph')
-print('2. Quit\n')
-userinput = 0
-while (userinput == 0):
-    userinput = int(input())
-    match userinput:
-        case 1:
-            graph_plot(network_graph_2D)
-        case 2:
-            pass
-        case _:
-            print("Choose from above:")
-            userinput = 0
-'''
+    ne = 1 / (n * (n-1))
+    inv_d = 0
+    for i in range(n):
+        for j in range(n):
+            if (i != j):
+                s_ID = list(network_graph.nodes)[i]
+                s_name = network_graph.nodes[s_ID].get("name", str(s_ID))
+                t_ID = list(network_graph.nodes)[j]
+                t_name = network_graph.nodes[t_ID].get("name", str(t_ID))
+
+                inv_d += 1 / nx.shortest_path_length(network_graph, source = s_name, target = t_name)
+    ne = ne * inv_d
+
+    file.write('Network efficiency:' + str(ne) + '\n\n')
+def a_weighted_network_efficiency(network_graph, file):
+    n = network_graph.number_of_nodes()
+
+    wne = 1 / (n * (n-1))
+    w_inv_d = 0
+    for i in range(n):
+        for j in range(n):
+            if (i != j):
+                s_ID = list(network_graph.nodes)[i]
+                s_name = network_graph.nodes[s_ID].get("name", str(s_ID))
+                t_ID = list(network_graph.nodes)[j]
+                t_name = network_graph.nodes[t_ID].get("name", str(t_ID))
+
+                w_inv_d += 1 / nx.shortest_path_length(network_graph, source = s_name, target = t_name, weight = 'weight')
+    wne = wne * w_inv_d
+
+    file.write('Weighted network efficiency:' + str(wne) + '\n\n')
+def a_robustness_to_random_failure(network_graph, file): # resilience to failure (node / edge removal)
+    # Robustness test
+    file.write('Robustness test to random failure:')
+
+    file.write('\n\nNode removal\n\n')
+    file.write('network efficiency\tnumber of connected components\tsize of largest island\taverage of shortest path lengths\taverage of weighted shortest path lengths\n')
+
+    ng = network_graph.copy()
+    nodes = list(ng.nodes())
+    random.shuffle(nodes)
+    for node in nodes:
+        ng.remove_node(node) # random failure
+        if len(list(ng.nodes())) > 0:
+            network_efficiency = nx.global_efficiency(ng)
+            num_connected_components = nx.number_connected_components(ng)
+            largest_island_size = len(max(nx.connected_components(ng), key = len))
+            ng_sub = ng.subgraph(max(nx.connected_components(ng), key = len))
+            ave_shortest_path_length = nx.average_shortest_path_length(ng_sub)
+            ave_weighted_shortest_path_length = nx.average_shortest_path_length(ng_sub, weight = 'weight')
+
+            file.write(str(network_efficiency) + '\t' + str(num_connected_components) + '\t' + str(largest_island_size) + '\t' + str(ave_shortest_path_length) + '\t' + str(ave_weighted_shortest_path_length) + '\n')
+
+    file.write('\n\nEdge removal\n\n')
+    file.write('network efficiency\tnumber of connected components\tsize of largest island\taverage of shortest path lengths\taverage of weighted shortest path lengths\n')
+
+    ng = network_graph.copy()
+    edges = list(ng.edges())
+    random.shuffle(edges)
+    for edge in edges:
+        ng.remove_edge(edge[0], edge[1]) # random failure
+        if len(list(ng.edges())) > 0:
+            network_efficiency = nx.global_efficiency(ng)
+            num_connected_components = nx.number_connected_components(ng)
+            largest_island_size = len(max(nx.connected_components(ng), key = len))
+            ng_sub = ng.subgraph(max(nx.connected_components(ng), key = len))
+            ave_shortest_path_length = nx.average_shortest_path_length(ng_sub)
+            ave_weighted_shortest_path_length = nx.average_shortest_path_length(ng_sub, weight = 'weight')
+
+            file.write(str(network_efficiency) + '\t' + str(num_connected_components) + '\t' + str(largest_island_size) + '\t' + str(ave_shortest_path_length) + '\t' + str(ave_weighted_shortest_path_length) + '\n')
+    file.write('\n')
+def a_robustness_to_targeted_attack(network_graph, file): # resilience to failure (node / edge removal)
+    # Robustness test
+    file.write('Robustness test to targeted attack:')
+
+    file.write('\n\nHighest ranking node removal\n\n')
+    file.write('network efficiency\tnumber of connected components\tsize of largest island\taverage of shortest path lengths\taverage of weighted shortest path lengths\n')
+
+    ng = network_graph.copy()
+    n = len(list(ng.nodes()))
+    for i in range(n):
+        node = max(ng.degree, key = lambda x: x[1])[0] # highest degree node
+        ng.remove_node(node) # targetted attack
+        if len(list(ng.nodes())) > 0:
+            network_efficiency = nx.global_efficiency(ng)
+            num_connected_components = nx.number_connected_components(ng)
+            largest_island_size = len(max(nx.connected_components(ng), key = len))
+            ng_sub = ng.subgraph(max(nx.connected_components(ng), key = len))
+            ave_shortest_path_length = nx.average_shortest_path_length(ng_sub)
+            ave_weighted_shortest_path_length = nx.average_shortest_path_length(ng_sub, weight = 'weight')
+
+            file.write(str(network_efficiency) + '\t' + str(num_connected_components) + '\t' + str(largest_island_size) + '\t' + str(ave_shortest_path_length) + '\t' + str(ave_weighted_shortest_path_length) + '\n')
+
+    file.write('\n\nMost important bridge removal\n\n')
+    file.write('network efficiency\tnumber of connected components\tsize of largest island\taverage of shortest path lengths\taverage of weighted shortest path lengths\n')
+
+    ng = network_graph.copy()
+    e = len(list(ng.edges()))
+    for j in range(e):
+        eb = nx.edge_betweenness_centrality(ng) # edge betweenness
+        edge = max(eb, key = eb.get)
+        ng.remove_edge(edge[0], edge[1]) # targetted attack
+        if len(list(ng.edges())) > 0:
+            network_efficiency = nx.global_efficiency(ng)
+            num_connected_components = nx.number_connected_components(ng)
+            largest_island_size = len(max(nx.connected_components(ng), key = len))
+            ng_sub = ng.subgraph(max(nx.connected_components(ng), key = len))
+            ave_shortest_path_length = nx.average_shortest_path_length(ng_sub)
+            ave_weighted_shortest_path_length = nx.average_shortest_path_length(ng_sub, weight = 'weight')
+
+            file.write(str(network_efficiency) + '\t' + str(num_connected_components) + '\t' + str(largest_island_size) + '\t' + str(ave_shortest_path_length) + '\t' + str(ave_weighted_shortest_path_length) + '\n')
+    file.write('\n')
+# define new method here
 
 # USER INTERFACE
 
@@ -721,15 +1038,83 @@ def runtime():
                 case _:
                     print("Choose from above:")
                     userinput = 0
-#def analysis(filename): # complete analysis of a measurement
+def analysis(input_filename, output_filename): # complete analysis of a measurement
+    # ALL INPUT
+    n_clusters = 4
+    regionA = 0
+    regionB = 7
+    sampling_freq = 15000000
+    thr = 0.2
+    nodeA = 0
+    nodeB = 1
+    
+    # OPEN FILE
+    file = None
+    while (file == None):
+        try:
+            file = open(output_filename, "w")
+        except IOError:
+            print("Error opening file")
+
+    # CORRELATION MATRIX
+    labels, timestamp, data_matrix = load_data(input_filename)
+    corr_matrix = pd.DataFrame(data = data_matrix, columns = labels).corr()
+    analysis_corr_matrix_file(corr_matrix, file)
+    
+    # K-MEANS CLUSTERING
+    analysis_k_means_clustering(corr_matrix, labels, n_clusters, file) # all possible # of clusters (2 to N-1)
+    
+    # SPECTRAL COHERENCE ANALYSIS
+    f, Cxy = spectral_coherence_analysis(data_matrix, regionA, regionB, sampling_freq)
+    analysis_spectral_coherence_analysis_file(file, f, Cxy)
+    
+    # GRAPH
+    network_graph = graph(corr_matrix, thr)
+    analysis_graph_file(network_graph, file)
+
+    # Basic structural parametres
+    file.write('BASIC STRUCTURAL PARAMETRES\n\n')
+    a_graph_nodes(network_graph, file)
+    a_graph_edges(network_graph, file)
+    a_graph_density(network_graph, file)
+
+    # Node level metrics
+    file.write('NODE LEVEL METRICS\n\n')
+    a_node_degree(network_graph, file)
+    a_degree_distribution(network_graph, file)
+    a_clustering_coeff(network_graph, file)
+    a_degree_centrality(network_graph, file)
+    a_betweenness_centrality(network_graph, file)
+    a_closeness_centrality(network_graph, file)
+    a_eigenvector_centrality(network_graph, file)
+
+    # Path based metrics
+    file.write('PATH BASED METRICS\n\n')
+    a_shortest_path_length(network_graph, file)
+    a_weighted_shortest_path_length(network_graph, file)
+    a_shortest_path(network_graph, nodeA, nodeB, file) # all node pairs
+    a_ave_path_length(network_graph, file)
+    a_ave_weighted_path_length(network_graph, file)
+    a_diameter(network_graph, file)
+    a_weighted_diameter(network_graph, file)
+
+    # Global network properties
+    file.write('GLOBAL NETWORK PROPERTIES\n\n')
+    a_connected_components(network_graph, file)
+    a_giant_component(network_graph, file)
+    a_modularity(network_graph, file)
+    a_weighted_modularity(network_graph, file)
+    a_assortativity(network_graph, file)
+
+    # Flow and robustness
+    file.write('FLOW AND ROBUSTNESS\n\n')
+    a_network_efficiency(network_graph, file)
+    a_weighted_network_efficiency(network_graph, file)
+    a_robustness_to_random_failure(network_graph, file)
+    a_robustness_to_targeted_attack(network_graph, file)
+
+    # CLOSE FILE
+    file.close()
 
 #runtime()    # use 0s_to_600.024s_2D_Matrix for testing
-
-# TO DO LIST
-
-'''
-- save everything to file
-- integrate graph parametres into the runtime function
-- full analysis function
-- test for 4D data
-'''
+analysis('0s_to_600.024s_2D_Matrix.txt', 'analysis_test_1.txt')
