@@ -2,6 +2,21 @@
 
 **SOTE fUH kutatómunkához**
 
+TO DO LIST
+--
+- plot time signals
+- add missing graph parametres
+- check correctness of computation of graph parametres
+- clean up functions
+- test for 4D data
+- compair data
+
+- (integrate graph parametres into the runtime function)
+
+NOTES
+--
+- K-means does not accept NaN data
+
 Abbrevitations
 --
 
@@ -14,18 +29,3 @@ current
 - nblc = no base line correction
 - ngs = no global signal
 - sbsi = slice-by-slice interpolation
-
-Notes
---
-- K-means does not accept NaN data
-
-TO DO LIST
---
-- plot time signals
-- add missing graph parametres
-- check correctness of computation of graph parametres
-- clean up functions
-- test for 4D data
-- compair data
-
-- (integrate graph parametres into the runtime function)
