@@ -29,3 +29,7 @@ current
 - nblc = no base line correction
 - ngs = no global signal
 - sbsi = slice-by-slice interpolation
+
+functions
+- show_ = function creates a plot or heatmap for visualization
+- save_ = function saves to file

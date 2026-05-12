@@ -2,6 +2,7 @@
 
 from collections import Counter
 import csv
+import datetime
 import matplotlib.pyplot as plt
 import networkx as nx
 import networkx.algorithms.community as nxac
@@ -15,12 +16,19 @@ from sklearn.cluster import KMeans
 
 # READ TIMESTAMPED DATA
 
-def load_data(file_name):
+def load_data(filename):
+    '''
+    Recieves: filename (signals of ROIs in time)
+    Returns: labels (names of ROIs)
+             timestamp (time instances)
+             data_matrix (signal values of all ROIs in time)
+    '''
+    
     # List variable
     data_list = []
 
     # Read labels (first row, skip first column)
-    with open(file_name, "r") as f:
+    with open(filename, "r") as f:
         reader = csv.reader(f)
         labels = next(reader)[1:] # (handles quoted commas, reads only brain regions)
 
@@ -43,34 +51,34 @@ def load_data(file_name):
 
     return labels, timestamp, data_matrix
 
-labels_2D, timestamp_2D, data_matrix_2D = load_data("0s_to_600.024s_2D_Matrix.txt")
-labels_2D_wbc, timestamp_2D_wbc, data_matrix_2D_wbc = load_data("0s_to_600.024s_2D_Signals_baselinecorrect_nelkul.txt")
-labels_2D_f, timestamp_2D_f, data_matrix_2D_f = load_data("0s_to_600.024s_Filtered2D_Matrix.txt")
-labels_2D_f_wbc, timestamp_2D_f_wbc, data_matrix_2D_f_wbc = load_data("0s_to_600.024s_Filtered2D_Signals_baselinecorrect_nelkul.txt")
-labels_4D_sbs, timestamp_4D_sbs, data_matrix_4D_sbs = load_data("0s_to_600.416s_4D_Matrix_slicebysliceinterp_slice.txt")
-labels_4D_f_sbs, timestamp_4D_f_sbs, data_matrix_4D_f_sbs = load_data("0s_to_600.416s_Filtered4D_Matrix_slicebysliceinterp_slice.txt")
+# Template & for debugging
+labels, timestamp, data_matrix = load_data('0s_to_600.024s_2D_Matrix.txt')
 
 # FORM CORRELATION MATRIX
 
-corr_matrix_2D = pd.DataFrame(data = data_matrix_2D, columns = labels_2D).corr()
-corr_matrix_2D_wbc = pd.DataFrame(data = data_matrix_2D_wbc, columns = labels_2D_wbc).corr()
-corr_matrix_2D_f = pd.DataFrame(data = data_matrix_2D_f, columns = labels_2D_f).corr()
-corr_matrix_2D_f_wbc = pd.DataFrame(data = data_matrix_2D_f_wbc, columns = labels_2D_f_wbc).corr()
-corr_matrix_4D_sbs = pd.DataFrame(data = data_matrix_4D_sbs, columns = labels_4D_sbs).corr()
-corr_matrix_4D_f_sbs = pd.DataFrame(data = data_matrix_4D_f_sbs, columns = labels_4D_f_sbs).corr()
+# Template & for debugging
+corr_matrix = pd.DataFrame(data = data_matrix, columns = labels).corr()
 
-# Heatmap for visualizing correlation matrix
-def heatmap(corr_matrix):
-
-    sns.heatmap(corr_matrix, square = True, cmap="jet", vmin=-1, vmax=1)
-    plt.title("Correlation matrix")
-    #plt.subplots_adjust(bottom = 0.5)
-    plt.show()
-def analysis_corr_matrix_file(corr_matrix, file):
+# Heatmap for visualizion
+def save_corr_matrix(corr_matrix, file):
+    '''
+    Recieves: corr_matrix (correlation matrix)
+              file (output file variable)
+    Returns: (saves correlation matrix data to file)
+    '''
+    
     file.write('CORRELATION MATRIX\n\n')
     file.write(corr_matrix.to_string())
     file.write('\n\n')
-    
+def show_heatmap(corr_matrix):
+    '''
+    Recieves: corr_matrix (correlation matrix)
+    Returns: (heatmap of the correlation matrix)
+    '''
+
+    sns.heatmap(corr_matrix, square = True, cmap="jet", vmin=-1, vmax=1)
+    plt.title("Correlation matrix")
+    plt.show()
 
 # K-MEANS CLUSTERING
 
@@ -79,58 +87,50 @@ def analysis_corr_matrix_file(corr_matrix, file):
 # applied to classify response patterns and perform automatic brain parcellation. This allows for a data-driven
 # definition of brain structures rather than relying solely on anatomical atlases.
 
-def k_means_clustering(corr_matrix, labels, num_clusters, filename):
+def k_means_clustering(corr_matrix, labels):
+    '''
+    Recieves: corr_matrix (correlation matrix)
+              labels (names of ROIs)
+              num_clusters (# of clusters to distribute ROIs into)
+    Returns: k_means_clustering (names of ROIs serated into n # of clusters where 1 < n < # of ROIs)
+    '''
 
-    # Initialize K-means model
-    kmeans = KMeans(n_clusters = num_clusters, random_state = 42)
-    # Fit K-means model (to rows)
-    clusters = kmeans.fit_predict(corr_matrix)
+    k_means_clusters = []
+    for num_clusters in range(2, len(labels)-1):
+        # Initialize K-means model
+        kmeans = KMeans(n_clusters = num_clusters, random_state = 42)
+        # Fit K-means model (to rows)
+        clusters = kmeans.fit_predict(corr_matrix)
 
-    # Open file to save data in
-    file = open(filename, "w")
+        # Create 2D array storing labels by clusters
+        labels_by_clusters = []
+        for i in range(num_clusters):
+            labels_i = []
+            for j in range(len(clusters)):
+                if clusters[j] == i:
+                    labels_i.append(labels[j])
+            labels_by_clusters.append(labels_i)
+        k_means_clusters.append(labels_by_clusters)
 
-    # Create 2D array storing labels by clusters
-    labels_by_clusters = []
-    for i in range(num_clusters):
-        labels_i = []
-        for j in range(len(clusters)):
-            if clusters[j] == i:
-                labels_i.append(labels[j])
-        labels_by_clusters.append(labels_i)
+    return k_means_clusters
+def save_k_means_clustering(k_means_clusters, filename):
+    '''
+    Recieves: corr_matrix (correlation matrix)
+              labels (names of ROIs)
+              num_clusters (# of clusters to distribute ROIs into)
+    Returns: (saves k means clustering into file)
+    '''
 
-        # Write to file
-        file.write(str(i+1))
-        for j in range(len(labels_by_clusters[i])):
-            file.write('\t' + labels_by_clusters[i][j])
-        file.write('\n')
-
-    # Close file
-    file.close()
-def analysis_k_means_clustering(corr_matrix, labels, num_clusters, file):
-    file.write('K-MEANS CLUSTERING\n\n')
-    file.write('Cluster #\tElements\n')
-
-    # Initialize K-means model
-    kmeans = KMeans(n_clusters = num_clusters, random_state = 42)
-    # Fit K-means model (to rows)
-    clusters = kmeans.fit_predict(corr_matrix)
-
-    # Create 2D array storing labels by clusters
-    labels_by_clusters = []
-    for i in range(num_clusters):
-        labels_i = []
-        for j in range(len(clusters)):
-            if clusters[j] == i:
-                labels_i.append(labels[j])
-        labels_by_clusters.append(labels_i)
-
-        # Write to file
-        file.write(str(i+1))
-        for j in range(len(labels_by_clusters[i])):
-            file.write('\t' + labels_by_clusters[i][j])
-        file.write('\n')
-
-    file.write('\n')
+    filename.write('K-MEANS CLUSTERING\n\n')
+    for k in range(len(k_means_clusters)):
+        filename.write(k + ' clusters:\n')
+        filename.write('Cluster #\tElements\n')
+        for i in range(len(k_means_clusters[k])):
+            filename.write(str(i+1))
+            for j in range(len(k_means_clusters[k][i])):
+                filename.write('\t' + k_means_clusters[k][i][j])
+            filename.write('\n')
+        filename.write('\n')
 
 # SPECTRAL COHERENCE ANALYSIS
 
@@ -139,34 +139,60 @@ def analysis_k_means_clustering(corr_matrix, labels, num_clusters, file):
 # functional ultrasound (fUS), it is used to investigate resting-state functional connectivity by determining if
 # different brain regions share synchronized fluctuations in cerebral blood volume (CBV).
 
-def spectral_coherence_analysis(data_matrix, regionA, regionB, sampling_freq = 15000000):
-    f, Cxy = signal.coherence(data_matrix[:,regionA], data_matrix[:,regionB], fs = sampling_freq, nperseg = 256) # nperseg defines the frequency resolution
+def spectral_coherence_analysis(data_matrix, labels, sampling_freq = 15000000):
+    '''
+    Recieves: data_matrix (signal values of all ROIs in time)
+              labels (names of ROIs)
+              sampling_freq (sampling frequency of fUS device)
+    Returns: ROI_pair_s (names of ROI pairs)
+             f_s (frequencies)
+             Cxy_s (coherence)
+    '''
+    
+    ROI_pair_s = []
+    f_s = []
+    Cxy_s = []
+    for i in range(len(data_matrix[0])-1):
+        for j in range(i+1, len(data_matrix[0])):
+            ROI_pair_s.append(str(labels[i] + ', ' + labels[j]))
 
-    return f, Cxy
-def spectral_coherence_analysis_file(filename, f, Cxy):
-    # Open file
-    file = open(filename, "w")
+            f, Cxy = signal.coherence(data_matrix[:,i], data_matrix[:,j], fs = sampling_freq, nperseg = 256) # nperseg defines the frequency resolution
+            f_s.append(f)
+            Cxy_s.append(Cxy)
 
-    # Write to file
-    file.write('f\tCxy\n')
-    for j in range(len(f)):
-        file.write(str(f[j]) + '\t' + str(Cxy[j]) + '\n')
+    return ROI_pair_s, f_s, Cxy_s
+def save_spectral_coherence_analysis(ROI_pair_s, f_s, Cxy_s, file):
+    '''
+    Recieves: ROI_pair_s (names of ROI pairs)
+              f_s (frequencies)
+              Cxy_s (coherence)
+              file (output file variable)
+    Returns: (saves spectral coherence analysis data for all ROI pairs to file)
+    '''
 
-    # Close file
-    file.close()
-def analysis_spectral_coherence_analysis_file(file, f, Cxy):
-    # Write to file
     file.write('SPECTRAL COHERENCE ANALYSIS\n\n')
 
-    file.write('f\tCxy\n')
-    for j in range(len(f)):
-        file.write(str(f[j]) + '\t' + str(Cxy[j]) + '\n')
-
-    file.write('\n')
-def spectral_coherence_analysis_plot(regionA, regionB, f, Cxy, labels):
-    plt.semilogy(f, Cxy) # logarithmic y axis
-
-    title = 'Spectral Coherence between Brain Regions: ' + labels[regionA] + ', ' + labels[regionB]
+    for k in range(len(ROI_pair_s)):
+        file.write(ROI_pair_s[k] + ':\n')
+        file.write('f\tCxy\n')
+        for j in range(len(f_s[k])):
+            file.write(str(f_s[k][j]) + '\t' + str(Cxy_s[k][j]) + '\n')
+        file.write('\n')
+def show_spectral_coherence_analysis(regionA, regionB, labels, ROI_pair_s, f_s, Cxy_s):
+    '''
+    Recieves: regionA (index of first region)
+              regionB (index of second region)
+              labels (names of ROIs)
+              ROI_pair_s (names of ROI pairs)
+              f_s (frequencies)
+              Cxy_s (coherence)
+    Returns: (creates a plot of coherence with respect to frequency)
+    '''
+    
+    n = ROI_pair_s.index(str(labels[regionA] + ', ' + labels[regionB]))
+    
+    plt.semilogy(f_s[n], Cxy_s[n]) # logarithmic y axis
+    title = 'Spectral Coherence between Brain Regions: ' + ROI_pair_s[n]
     plt.title(title)
     plt.xlabel('Frequency [Hz]')
     plt.ylabel('Coherence')
@@ -176,6 +202,12 @@ def spectral_coherence_analysis_plot(regionA, regionB, f, Cxy, labels):
 # GRAPH
 
 def graph(corr_matrix, thr):
+    '''
+    Recieves: corr_matrix (correlation matrix)
+              thr (minimum threshold for edge weights)
+    Returns: network_graph (network graph)
+    '''
+
     # Base for graph
     network_graph = nx.Graph()
 
@@ -186,15 +218,13 @@ def graph(corr_matrix, thr):
                 network_graph.add_edge(i, j, weight=corr_matrix.loc[i, j])
 
     return network_graph
-def graph_plot(graph):
-    # Visualization
-    nodes = nx.spring_layout(graph, seed = 42)
-    edges = graph.edges(data = True)
-    edge_widths = [abs(data['weight'])*3 for _, _, data in edges]
-
-    nx.draw(graph, nodes, with_labels = True, node_color = 'skyblue', node_size = 2000, width = edge_widths)
-    plt.show()
-def analysis_graph_file(graph, file):
+def save_graph(graph, file):
+    '''
+    Recieves: graph (network graph)
+              file (output file variable)
+    Returns: (saves the network graph to file edge by edge)
+    '''
+    
     file.write('GRAPH\n\n')
 
     for node1, node2, data in sorted(graph.edges(data=True)):
@@ -202,24 +232,52 @@ def analysis_graph_file(graph, file):
         file.write(f"{node1} -- {node2} (weight={weight})\n")
     
     file.write('\n')
+def show_graph(graph):
+    '''
+    Recieves: graph (network graph)
+    Returns: (visualizes the network graph)
+    '''
+
+    nodes = nx.spring_layout(graph, seed = 42)
+    edges = graph.edges(data = True)
+    edge_widths = [abs(data['weight'])*3 for _, _, data in edges]
+
+    nx.draw(graph, nodes, with_labels = True, node_color = 'skyblue', node_size = 2000, width = edge_widths)
+    plt.show()
 
 # GRAPH PARAMETRES
 
+# Template
 #node_ID = list(network_graph.nodes)[int(node)]
 #node_name = network_graph.nodes[node_ID].get("name", str(node_ID))
 
 # Basic structural parametres
 def graph_nodes(network_graph):
+    '''
+    Recieves: network_graph (network graph)
+    Returns: n (# of nodes)
+    '''
+
     n = network_graph.number_of_nodes()
-    print('Number of nodes:', n)
+    return n
 def graph_edges(network_graph):
-    n = network_graph.number_of_edges()
-    print('Number of edges:', n)
+    '''
+    Recieves: network_graph (network graph)
+    Returns: e (# of edges)
+    '''
+
+    e = network_graph.number_of_edges()
+    return e
 def graph_density(network_graph): # present / possible edges
+    '''
+    Recieves: network_graph (network graph)
+    Returns: d (graph density)
+    '''
+    
     N = network_graph.number_of_nodes()
     E = network_graph.number_of_edges()
-    n = 2*E / (N * (N-1))
-    print('Graph density:', n)
+    d = 2*E / (N * (N-1))
+    return d
 # Node level metrics
 def node_degree(network_graph): # edges of given node
     node = list(network_graph.nodes())
@@ -591,22 +649,6 @@ def robustness_to_targeted_attack(network_graph): # resilience to failure (node 
     # Close file
     f.close()
 
-
-# Basic structural parametres
-def a_graph_nodes(network_graph, file):
-    n = network_graph.number_of_nodes()
-
-    file.write('Number of nodes:' + str(n) + '\n\n')
-def a_graph_edges(network_graph, file):
-    n = network_graph.number_of_edges()
-
-    file.write('Number of edges:' + str(n) + '\n\n')
-def a_graph_density(network_graph, file): # present / possible edges
-    N = network_graph.number_of_nodes()
-    E = network_graph.number_of_edges()
-    n = 2*E / (N * (N-1))
-
-    file.write('Graph density:' + str(n) + '\n\n')
 # Node level metrics
 def a_node_degree(network_graph, file): # edges of given node
     node = list(network_graph.nodes())
@@ -921,6 +963,17 @@ def a_robustness_to_targeted_attack(network_graph, file): # resilience to failur
     file.write('\n')
 # define new method here
 
+# SAVE TO FILE
+def save_one_liner(text, value, file):
+    '''
+    Recieves: text (definition of the value)
+              value (computed quantity)
+              file (output file variable)
+    Returns: (saves one line of concatenaited string to file)
+    '''
+    
+    file.write(text + ': ' + str(value) + '\n\n')
+
 # USER INTERFACE
 
 def runtime():
@@ -1040,9 +1093,6 @@ def runtime():
                     userinput = 0
 def analysis(input_filename, output_filename): # complete analysis of a measurement
     # ALL INPUT
-    n_clusters = 4
-    regionA = 0
-    regionB = 7
     sampling_freq = 15000000
     thr = 0.2
     nodeA = 0
@@ -1056,27 +1106,35 @@ def analysis(input_filename, output_filename): # complete analysis of a measurem
         except IOError:
             print("Error opening file")
 
+    # ADMINISTRATION
+    file.write('Date: ' + str(datetime.datetime.now()) + '\n')
+    file.write('Data file: ' + input_filename + '\n\n')
+
     # CORRELATION MATRIX
-    labels, timestamp, data_matrix = load_data(input_filename)
-    corr_matrix = pd.DataFrame(data = data_matrix, columns = labels).corr()
-    analysis_corr_matrix_file(corr_matrix, file)
+    labels, timestamp, data_matrix = load_data(input_filename) # splits data
+    corr_matrix = pd.DataFrame(data = data_matrix, columns = labels).corr() # creates correlation matrix
+    save_corr_matrix(corr_matrix, file)
     
     # K-MEANS CLUSTERING
-    analysis_k_means_clustering(corr_matrix, labels, n_clusters, file) # all possible # of clusters (2 to N-1)
-    
+    k_means_clusters = k_means_clustering(corr_matrix, labels)
+    save_k_means_clustering(k_means_clusters, file)
+
     # SPECTRAL COHERENCE ANALYSIS
-    f, Cxy = spectral_coherence_analysis(data_matrix, regionA, regionB, sampling_freq)
-    analysis_spectral_coherence_analysis_file(file, f, Cxy)
+    ROI_pair_s, f_s, Cxy_s = spectral_coherence_analysis(data_matrix, labels, sampling_freq)
+    save_spectral_coherence_analysis(ROI_pair_s, f_s, Cxy_s, file)
     
     # GRAPH
     network_graph = graph(corr_matrix, thr)
-    analysis_graph_file(network_graph, file)
+    save_graph(network_graph, file)
 
     # Basic structural parametres
     file.write('BASIC STRUCTURAL PARAMETRES\n\n')
-    a_graph_nodes(network_graph, file)
-    a_graph_edges(network_graph, file)
-    a_graph_density(network_graph, file)
+    n = graph_nodes(network_graph)
+    save_one_liner('Number of nodes', n, file)
+    e = graph_edges(network_graph)
+    save_one_liner('Number of edges', e, file)
+    d = graph_density(network_graph)
+    save_one_liner('Graph density', d, file)
 
     # Node level metrics
     file.write('NODE LEVEL METRICS\n\n')
@@ -1117,4 +1175,4 @@ def analysis(input_filename, output_filename): # complete analysis of a measurem
     file.close()
 
 #runtime()    # use 0s_to_600.024s_2D_Matrix for testing
-analysis('0s_to_600.024s_2D_Matrix.txt', 'analysis_test_1.txt')
+analysis('0s_to_600.024s_2D_Matrix.txt', 'analysis_test_2.txt')
