@@ -5,6 +5,7 @@
 TO DO LIST
 --
 - plot time signals
+- find k for k means clustering
 - add missing graph parametres
 - check correctness of computation of graph parametres
 - clean up functions
