@@ -113,7 +113,7 @@ def k_means_clustering(corr_matrix, labels):
         k_means_clusters.append(labels_by_clusters)
 
     return k_means_clusters
-def save_k_means_clustering(k_means_clusters, filename):
+def save_k_means_clustering(k_means_clusters, file):
     '''
     Recieves: corr_matrix (correlation matrix)
               labels (names of ROIs)
@@ -121,16 +121,16 @@ def save_k_means_clustering(k_means_clusters, filename):
     Returns: (saves k means clustering into file)
     '''
 
-    filename.write('K-MEANS CLUSTERING\n\n')
+    file.write('K-MEANS CLUSTERING\n\n')
     for k in range(len(k_means_clusters)):
-        filename.write(str(k+2) + ' clusters:\n')
-        filename.write('Cluster #\tElements\n')
+        file.write(str(k+2) + ' clusters:\n')
+        file.write('Cluster #\tElements\n')
         for i in range(len(k_means_clusters[k])):
-            filename.write(str(i+1))
+            file.write(str(i+1))
             for j in range(len(k_means_clusters[k][i])):
-                filename.write('\t' + str(k_means_clusters[k][i][j]))
-            filename.write('\n')
-        filename.write('\n')
+                file.write('\t' + str(k_means_clusters[k][i][j]))
+            file.write('\n')
+        file.write('\n')
 
 # SPECTRAL COHERENCE ANALYSIS
 
@@ -154,7 +154,7 @@ def spectral_coherence_analysis(data_matrix, labels, sampling_freq = 15000000):
     Cxy_s = []
     for i in range(len(data_matrix[0])-1):
         for j in range(i+1, len(data_matrix[0])):
-            ROI_pair_s.append(str(labels[i] + ', ' + labels[j]))
+            ROI_pair_s.append(str(labels[i]) + ', ' + str(labels[j]))
 
             f, Cxy = signal.coherence(data_matrix[:,i], data_matrix[:,j], fs = sampling_freq, nperseg = 256) # nperseg defines the frequency resolution
             f_s.append(f)
@@ -212,6 +212,23 @@ def show_spectral_coherence_analysis(regionA, regionB, labels, ROI_pair_s, f_s, 
     plt.title(title)
     plt.xlabel('Frequency [Hz]')
     plt.ylabel('Coherence')
+    plt.grid()
+    plt.show()
+def show_all_spectral_coherence_analysis(f_s, Cxy_s):
+    '''
+    Recieves: ROI_pair_s (names of ROI pairs)
+              f_s (frequencies)
+              Cxy_s (coherence)
+    Returns: (creates a plot of coherence with respect to frequency)
+    '''
+    
+    for n in range(len(Cxy_s)):
+        plt.plot(f_s[n], Cxy_s[n], '.k', markeredgecolor = 'none', alpha = 0.5)
+
+    plt.title('Spectral Coherence between Brain Regions with respect to Frequency')
+    plt.xlabel('Frequency [Hz]')
+    plt.ylabel('Coherence')
+    plt.ylim(0, 1)
     plt.grid()
     plt.show()
 
@@ -441,13 +458,16 @@ def show_centrality(node, c, prefix):
     '''
     Recieves: node (names of nodes)
               c (some kind of centralities)
+              prefix (distinguishable part of centrality name)
     Returns: (plots some kind of centrality for each node)
     '''
     
     plt.scatter(node, c)
-    plt.title(prefix, ' centrality of nodes')
+    title_parts = [str(prefix), 'centrality of nodes']
+    plt.title(' '.join(title_parts))
     plt.xlabel('Node')
-    plt.ylabel(prefix, ' centrality')
+    ylabel_parts = [str(prefix), 'centrality']
+    plt.ylabel(' '.join(ylabel_parts))
     plt.xticks(rotation = 90)
     for i in range(len(node)): # add y value to each point
         plt.annotate(f"{c[i]:.2f}", (node[i], c[i]), textcoords="offset points", xytext=(0,5), ha='center')
@@ -856,6 +876,8 @@ def save_array(text, array, file):
     file.write(str(array))
     file.write('\n\n')
 
+# TEST INTERFACE
+
 # USER INTERFACE
 
 def runtime():
@@ -910,7 +932,7 @@ def runtime():
                 print('\n1. Correlation Matrix')
                 print('2. K-means Clustering')
                 print('3. Spectral Coherence Analysis')
-                print('4. Graph')
+                print('4. Network graph')
                 print('5. Provide new data file')
                 print('6. Quit\n')
 
@@ -920,41 +942,100 @@ def runtime():
             match userinput:
                 case 1:    # Heatmap
 
-                    heatmap(corr_matrix)
+                    show_corr_matrix(corr_matrix)
 
                     options = True
 
                 case 2:    # K-means Clustering
 
-                    print('\nName file to write in:')
+                    fk = None
+                    print("\nName file to write in:")
                     filename_kmeans = str(input()) + '.txt'
-                    print('\nNumber of clusters:')
-                    num_clusters = int(input())
+                    fk = open(filename_kmeans, "w")
+                    #print('\nNumber of clusters:')
+                    #num_clusters = int(input())
 
-                    k_means_clustering(corr_matrix, labels, num_clusters, filename_kmeans)
+                    k_means_clusters = k_means_clustering(corr_matrix, labels)
+                    save_k_means_clustering(k_means_clusters, fk)
+
+                    fk.close()
 
                     options = True
 
                 case 3:    # Spectral Coherence Analysis
                     
-                    print('\nRegion A:')
-                    regionA = -1
-                    while (regionA < 0 or regionA >= len(labels)):
-                        regionA = int(input())
-                    print('\nRegion B :')
-                    regionB = -1
-                    while (regionB < 0 or regionB >= len(labels)):
-                        regionB = int(input())
-                    print('\nName file to write in:')
-                    filename_spectral = str(input()) + '.txt'
+                    userinput_sca = 0
+                    while (userinput_sca != 3 and userinput_sca != 4 and userinput_sca != 5):
+                    
+                        sca = True
+                        if (sca == True):
+                            print('\nPick one of the following options:')
 
-                    f, Cxy = spectral_coherence_analysis(data_matrix, regionA, regionB)
-                    spectral_coherence_analysis_file(filename_spectral, f, Cxy)
-                    spectral_coherence_analysis_plot(regionA, regionB, f, Cxy, labels)
+                            print('\n1. Spectral Coherence Analysis of two ROIs')
+                            print('2. Spectral Coherence Analysis of all ROIs')
+                            print('3. Quit Spectral Coherence Analysis')
+                            print('4. Provide new data file')
+                            print('5. Quit\n')
 
-                    options = True
+                            sca = False
+
+                        userinput_sca = int(input())
+                        match userinput_sca:
+                            case 1:    # 2 ROIs
+
+                                ROI_pair_s, f_s, Cxy_s = spectral_coherence_analysis(data_matrix, labels)
+                                
+                                print('\nRegion A:')
+                                regionA = -1
+                                while (regionA < 0 or regionA >= len(labels)):
+                                    regionA = int(input())
+                                print('\nRegion B :')
+                                regionB = -1
+                                while (regionB < 0 or regionB >= len(labels)):
+                                    regionB = int(input())
+                                
+                                show_spectral_coherence_analysis(regionA, regionB, labels, ROI_pair_s, f_s, Cxy_s)
+
+                                sca = True
+
+                            case 2:    # all ROIs
+                                
+                                ROI_pair_s, f_s, Cxy_s = spectral_coherence_analysis(data_matrix, labels)
+                                
+                                fsca = None
+                                print('\nName file to write in:')
+                                filename_spectral = str(input()) + '.txt'
+                                fsca = open(filename_spectral, "w")
+
+                                save_spectral_coherence_analysis(ROI_pair_s, f_s, Cxy_s, fsca)
+                                show_all_spectral_coherence_analysis(f_s, Cxy_s)
+
+                                fsca.close()
+
+                                sca = True
+
+                            case 3:    # Quit SPA
+                                options = True
+                                break
+                            
+                            case 4:    # New data file
+                                userinput = 5
+                                options = False
+                                break
+                            
+                            case 5:    # Quit
+                                return
+                            
+                            case _:
+                                print("Choose from above:")
+                                userinput_sca = 0
                 
-                case 4:    # Graph
+                case 4:    # Network graph
+                    
+                    fng = None
+                    print('\nName file to write in:')
+                    filename_graph = str(input()) + '.txt'
+                    fng = open(filename_graph, "w")
                     
                     print('\nThreshold:')
                     thr = 10
@@ -962,14 +1043,215 @@ def runtime():
                         thr= float(input())
 
                     network_graph = graph(corr_matrix, thr)
-                    graph_plot(network_graph)
+                    save_graph(network_graph, fng)
+
+                    userinput_ng = 0
+                    while (userinput_ng != 20 and userinput_ng != 21 and userinput_ng != 22):
+                    
+                        ng = True
+                        if (ng == True):
+                            print('\nPick one of the following options:')
+
+                            print('\n1. Show network graph')
+                            print('2. Number of nodes')
+                            print('3. Number of edges')
+                            print('4. Density')
+                            print('5. Node degree')
+                            print('6. Degree distribution')
+                            print('7. Clustering coefficient')
+                            print('8. Centralities')
+                            print('9. Shortest path lengths')
+                            print('10. Shortest paths')
+                            print('11. Average path length')
+                            print('12. Diameter')
+                            print('13. Connected components')
+                            print('14. Largest connected component')
+                            print('15. Modularity')
+                            print('16. Assortativity')
+                            print('17. Network efficiency')
+                            print('18. Robustness to random failure')
+                            print('19. Robustness to targetted attack')
+                            print('20. Quit Network Graph')
+                            print('21. Provide new data file')
+                            print('22. Quit\n')
+
+                            ng = False
+
+                        userinput_ng = int(input())
+                        match userinput_ng:
+                            case 1:    # show network graph
+
+                                show_graph(network_graph)
+
+                                ng = True
+
+                            case 2:    # nodes
+
+                                n = graph_nodes(network_graph)
+                                print('\nNumber of nodes:', n)
+                                save_one_liner('Number of nodes', n, fng)
+
+                                ng = True
+
+                            case 3:    # edges
+
+                                e = graph_edges(network_graph)
+                                print('\nNumber of edges:', e)
+                                save_one_liner('Number of edges', e, fng)
+
+                                ng = True
+
+                            case 4:    # density
+
+                                d = graph_density(network_graph)
+                                print('\nGraph density:', d)
+                                save_one_liner('Graph density', d, fng)
+
+                                ng = True
+
+                            case 5:    # node degree
+
+                                nodes, degrees = node_degree(network_graph)
+                                save_two_dim('Node', 'Degree', nodes, degrees, fng)
+                                show_node_degree(nodes, degrees)
+
+                                ng = True
+
+                            case 6:    # degree distribution
+
+                                degrees, probabilities = degree_distribution(network_graph)
+                                save_two_dim('Degree', 'Probability', degrees, probabilities, fng)
+                                show_degree_distribution(degrees, probabilities)
+
+                                ng = True
+
+                            case 7:    # clustering coeff
+
+                                node, cc = clustering_coeff(network_graph)
+                                save_two_dim('Node', 'Clustering coefficient', node, cc, fng)
+                                show_clustering_coeff(node, cc)
+
+                                ng = True
+
+                            case 8:    # centralities
+
+                                node, dc = degree_centrality(network_graph)
+                                node, bc = betweenness_centrality(network_graph)
+                                node, cc = closeness_centrality(network_graph)
+                                node, ec = eigenvector_centrality(network_graph)
+
+                                save_five_dim('Node', 'Degree centrality', 'Betweenness centrality', 'Closeness centrality', 'Eigenvector centrality', node, dc, bc, cc, ec, fng)
+
+                                show_centrality(node, dc, 'Degree')
+                                show_centrality(node, bc, 'Betweenness')
+                                show_centrality(node, cc, 'Closeness')
+                                show_centrality(node, ec, 'Eigenvector')
+
+                                ng = True
+
+                            case 9:    # shortest path lengths
+
+                                l_matrix = shortest_path_length(network_graph)
+                                save_heatmap('Shortest path lengths', l_matrix, fng)
+                                show_heatmap(l_matrix, 'Shortest path lengths')
+
+                                wl_matrix = weighted_shortest_path_length(network_graph)
+                                save_heatmap('Weighted shortest path lengths', wl_matrix, fng)
+                                show_heatmap(wl_matrix, 'Weighted shortest path lengths')
+
+                                ng = True
+
+                            case 10:    # shortest paths
+
+                                path = shortest_path(network_graph)
+                                save_path(path, fng)
+                                print('Shortest paths:\n', path)
+
+                                ng = True
+
+                            case 11:    # average path length
+
+                                ave_l = ave_path_length(network_graph)
+                                save_one_liner('Average shortest path length', ave_l, fng)
+                                print('Average shortest path length:', ave_l)
+
+                                ave_wl = ave_weighted_path_length(network_graph)
+                                save_one_liner('Average weighted shortest path length', ave_wl, fng)
+                                print('Average weighted shortest path length:', ave_wl)
+
+                                ng = True
+
+                            case 12:    # 
+
+
+
+                                ng = True
+
+                            case 13:    # 
+
+
+
+                                ng = True
+
+                            case 14:    # 
+
+
+
+                                ng = True
+
+                            case 15:    # 
+
+
+
+                                ng = True
+
+                            case 16:    # 
+
+
+
+                                ng = True
+
+                            case 17:    # 
+
+
+
+                                ng = True
+
+                            case 18:    # 
+
+
+
+                                ng = True
+
+                            case 19:    # 
+
+
+
+                                ng = True
+
+                            case 20:    # Quit network graph
+                                options = True
+                                break
+                            case 21:    # New data file
+                                userinput = 5
+                                options = False
+                                break
+                            case 22:    # Quit
+                                return
+                            case _:
+                                print("Choose from above:")
+                                userinput_ng = 0
+
+                    fng.close()
 
                     options = True
 
                 case 5:    # New data file
                     pass
+
                 case 6:    # Quit
                     return
+                
                 case _:
                     print("Choose from above:")
                     userinput = 0
@@ -1072,5 +1354,5 @@ def analysis(input_filename, output_filename): # complete analysis of a measurem
     # CLOSE FILE
     file.close()
 
-#runtime()    # use 0s_to_600.024s_2D_Matrix for testing
-analysis('0s_to_600.024s_2D_Matrix.txt', 'analysis_test_6.txt')
+runtime()    # use 0s_to_600.024s_2D_Matrix for testing
+#analysis('0s_to_600.024s_2D_Matrix.txt', 'analysis_test_7.txt')

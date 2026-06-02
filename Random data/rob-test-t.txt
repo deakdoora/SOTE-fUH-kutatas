@@ -1,0 +1,22 @@
+Robustness test to targeted attack
+
+Highest ranking node removal
+
+network efficiency	number of connected components	size of largest island	average of shortest path lengths	average of weighted shortest path lengths
+0.45	2	4	1.5	1.1083529790852162
+0.0	4	1	0	0
+0.0	3	1	0	0
+0.0	2	1	0	0
+0	1	1	0	0
+
+
+Most important bridge removal
+
+network efficiency	number of connected components	size of largest island	average of shortest path lengths	average of weighted shortest path lengths
+0.5666666666666667	2	5	1.3	0.9602563910295142
+0.5333333333333333	2	5	1.4	1.041888485371302
+0.36666666666666664	3	4	1.1666666666666667	0.8788153830403854
+0.3333333333333333	3	4	1.3333333333333333	1.017875626836556
+0.2	4	3	1.0	0.7575754222912608
+0.16666666666666666	4	3	1.3333333333333333	0.9834344841348003
+0.06666666666666667	5	2	1.0	0.7407264322043151

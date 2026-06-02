@@ -1,0 +1,997 @@
+CORRELATION MATRIX
+
+                                              Primary somatosensory area, barrel field (L)  Primary somatosensory area, barrel field (R)  Primary somatosensory area, lower limb (L)  Primary somatosensory area, lower limb (R)  Supplemental somatosensory area (L)  Supplemental somatosensory area (R)  Olfactory areas (L)  Olfactory areas (R)  Hippocampal formation (L)  Hippocampal formation (R)  Cortical subplate (L)  Cortical subplate (R)  Striatum (L)  Striatum (R)  Pallidum (L)  Pallidum (R)  Thalamus (L)  Thalamus (R)  Hypothalamus (L)  Hypothalamus (R)  Primary somatosensory area, upper limb (L)  Primary somatosensory area, upper limb (R)  Primary somatosensory area, unassigned (L)  Primary somatosensory area, unassigned (R)
+Primary somatosensory area, barrel field (L)                                      1.000000                                      0.666076                                    0.711503                                    0.710571                             0.523134                             0.320779             0.190686             0.439095                   0.307545                   0.161409               0.132965               0.220110      0.363207      0.653091      0.245122      0.258611      0.600998      0.314766          0.594445          0.245159                                    0.690054                                    0.552286                                    0.589315                                    0.443824
+Primary somatosensory area, barrel field (R)                                      0.666076                                      1.000000                                    0.703410                                    0.680833                             0.467549                             0.353628             0.179615             0.478132                   0.312194                   0.130681               0.139784               0.229813      0.390262      0.677627      0.270109      0.241663      0.624542      0.352027          0.582693          0.258500                                    0.598509                                    0.581460                                    0.558865                                    0.507700
+Primary somatosensory area, lower limb (L)                                        0.711503                                      0.703410                                    1.000000                                    0.797575                             0.544839                             0.370041             0.209312             0.451984                   0.328453                   0.155582               0.188002               0.280653      0.357331      0.750166      0.260748      0.253077      0.617716      0.355867          0.649973          0.274859                                    0.734425                                    0.595555                                    0.647590                                    0.461503
+Primary somatosensory area, lower limb (R)                                        0.710571                                      0.680833                                    0.797575                                    1.000000                             0.514917                             0.344402             0.184928             0.440960                   0.344304                   0.154615               0.173332               0.269617      0.331897      0.765409      0.249932      0.245172      0.609105      0.354294          0.661041          0.252889                                    0.740726                                    0.623914                                    0.641851                                    0.469587
+Supplemental somatosensory area (L)                                               0.523134                                      0.467549                                    0.544839                                    0.514917                             1.000000                             0.265049             0.140902             0.307401                   0.224748                   0.117348               0.136619               0.161979      0.228771      0.522470      0.178177      0.184163      0.423932      0.239369          0.451463          0.157159                                    0.494877                                    0.405750                                    0.439607                                    0.277375
+Supplemental somatosensory area (R)                                               0.320779                                      0.353628                                    0.370041                                    0.344402                             0.265049                             1.000000             0.099294             0.228598                   0.140059                   0.084748               0.081899               0.185050      0.198304      0.377288      0.096800      0.087153      0.266105      0.172019          0.286835          0.110046                                    0.340624                                    0.271152                                    0.301135                                    0.223179
+Olfactory areas (L)                                                               0.190686                                      0.179615                                    0.209312                                    0.184928                             0.140902                             0.099294             1.000000             0.153875                   0.099855                   0.023786               0.069471               0.045351      0.102395      0.213919      0.059757      0.046517      0.143983      0.157125          0.183008          0.107374                                    0.185861                                    0.142207                                    0.169896                                    0.107633
+Olfactory areas (R)                                                               0.439095                                      0.478132                                    0.451984                                    0.440960                             0.307401                             0.228598             0.153875             1.000000                   0.232295                   0.084929               0.079899               0.222437      0.298008      0.436825      0.141018      0.195790      0.445866      0.216825          0.366436          0.158109                                    0.371355                                    0.412388                                    0.372668                                    0.360816
+Hippocampal formation (L)                                                         0.307545                                      0.312194                                    0.328453                                    0.344304                             0.224748                             0.140059             0.099855             0.232295                   1.000000                   0.040749               0.111467               0.102389      0.188271      0.323506      0.157285      0.125508      0.304398      0.196476          0.274179          0.155883                                    0.297748                                    0.266058                                    0.249914                                    0.191923
+Hippocampal formation (R)                                                         0.161409                                      0.130681                                    0.155582                                    0.154615                             0.117348                             0.084748             0.023786             0.084929                   0.040749                   1.000000               0.030485               0.040671      0.053607      0.143177      0.038872      0.090731      0.124516      0.073347          0.137971          0.014518                                    0.116912                                    0.107769                                    0.150794                                    0.073955
+Cortical subplate (L)                                                             0.132965                                      0.139784                                    0.188002                                    0.173332                             0.136619                             0.081899             0.069471             0.079899                   0.111467                   0.030485               1.000000               0.071790      0.115441      0.153960      0.072236      0.082092      0.131287      0.074272          0.144466          0.036189                                    0.153371                                    0.160697                                    0.123843                                    0.088227
+Cortical subplate (R)                                                             0.220110                                      0.229813                                    0.280653                                    0.269617                             0.161979                             0.185050             0.045351             0.222437                   0.102389                   0.040671               0.071790               1.000000      0.119695      0.265982      0.118103      0.119147      0.215076      0.092291          0.214377          0.126394                                    0.245535                                    0.190422                                    0.179067                                    0.174619
+Striatum (L)                                                                      0.363207                                      0.390262                                    0.357331                                    0.331897                             0.228771                             0.198304             0.102395             0.298008                   0.188271                   0.053607               0.115441               0.119695      1.000000      0.352850      0.173863      0.126989      0.394853      0.210518          0.292001          0.186941                                    0.350497                                    0.276748                                    0.281853                                    0.267728
+Striatum (R)                                                                      0.653091                                      0.677627                                    0.750166                                    0.765409                             0.522470                             0.377288             0.213919             0.436825                   0.323506                   0.143177               0.153960               0.265982      0.352850      1.000000      0.266294      0.248301      0.622969      0.329034          0.645566          0.250118                                    0.681541                                    0.574399                                    0.594037                                    0.415175
+Pallidum (L)                                                                      0.245122                                      0.270109                                    0.260748                                    0.249932                             0.178177                             0.096800             0.059757             0.141018                   0.157285                   0.038872               0.072236               0.118103      0.173863      0.266294      1.000000      0.107285      0.226446      0.187165          0.226513          0.109704                                    0.238470                                    0.225765                                    0.199842                                    0.163562
+Pallidum (R)                                                                      0.258611                                      0.241663                                    0.253077                                    0.245172                             0.184163                             0.087153             0.046517             0.195790                   0.125508                   0.090731               0.082092               0.119147      0.126989      0.248301      0.107285      1.000000      0.216498      0.146971          0.234982          0.153460                                    0.244150                                    0.213972                                    0.195976                                    0.179233
+Thalamus (L)                                                                      0.600998                                      0.624542                                    0.617716                                    0.609105                             0.423932                             0.266105             0.143983             0.445866                   0.304398                   0.124516               0.131287               0.215076      0.394853      0.622969      0.226446      0.216498      1.000000      0.292645          0.514676          0.203810                                    0.543921                                    0.468821                                    0.462667                                    0.422714
+Thalamus (R)                                                                      0.314766                                      0.352027                                    0.355867                                    0.354294                             0.239369                             0.172019             0.157125             0.216825                   0.196476                   0.073347               0.074272               0.092291      0.210518      0.329034      0.187165      0.146971      0.292645      1.000000          0.257913          0.151074                                    0.309060                                    0.292223                                    0.255655                                    0.204832
+Hypothalamus (L)                                                                  0.594445                                      0.582693                                    0.649973                                    0.661041                             0.451463                             0.286835             0.183008             0.366436                   0.274179                   0.137971               0.144466               0.214377      0.292001      0.645566      0.226513      0.234982      0.514676      0.257913          1.000000          0.249952                                    0.577756                                    0.508719                                    0.512963                                    0.366343
+Hypothalamus (R)                                                                  0.245159                                      0.258500                                    0.274859                                    0.252889                             0.157159                             0.110046             0.107374             0.158109                   0.155883                   0.014518               0.036189               0.126394      0.186941      0.250118      0.109704      0.153460      0.203810      0.151074          0.249952          1.000000                                    0.241795                                    0.195663                                    0.223974                                    0.143440
+Primary somatosensory area, upper limb (L)                                        0.690054                                      0.598509                                    0.734425                                    0.740726                             0.494877                             0.340624             0.185861             0.371355                   0.297748                   0.116912               0.153371               0.245535      0.350497      0.681541      0.238470      0.244150      0.543921      0.309060          0.577756          0.241795                                    1.000000                                    0.532976                                    0.680543                                    0.394373
+Primary somatosensory area, upper limb (R)                                        0.552286                                      0.581460                                    0.595555                                    0.623914                             0.405750                             0.271152             0.142207             0.412388                   0.266058                   0.107769               0.160697               0.190422      0.276748      0.574399      0.225765      0.213972      0.468821      0.292223          0.508719          0.195663                                    0.532976                                    1.000000                                    0.472311                                    0.440713
+Primary somatosensory area, unassigned (L)                                        0.589315                                      0.558865                                    0.647590                                    0.641851                             0.439607                             0.301135             0.169896             0.372668                   0.249914                   0.150794               0.123843               0.179067      0.281853      0.594037      0.199842      0.195976      0.462667      0.255655          0.512963          0.223974                                    0.680543                                    0.472311                                    1.000000                                    0.374469
+Primary somatosensory area, unassigned (R)                                        0.443824                                      0.507700                                    0.461503                                    0.469587                             0.277375                             0.223179             0.107633             0.360816                   0.191923                   0.073955               0.088227               0.174619      0.267728      0.415175      0.163562      0.179233      0.422714      0.204832          0.366343          0.143440                                    0.394373                                    0.440713                                    0.374469                                    1.000000
+
+K-MEANS CLUSTERING
+
+Cluster #	Elements
+1	Supplemental somatosensory area (R)	Hippocampal formation (L)	Striatum (L)	Pallidum (L)	Thalamus (R)
+2	Primary somatosensory area, barrel field (L)	Primary somatosensory area, barrel field (R)	Primary somatosensory area, lower limb (L)	Primary somatosensory area, lower limb (R)	Supplemental somatosensory area (L)	Olfactory areas (R)	Striatum (R)	Thalamus (L)	Hypothalamus (L)	Primary somatosensory area, upper limb (L)	Primary somatosensory area, upper limb (R)	Primary somatosensory area, unassigned (L)	Primary somatosensory area, unassigned (R)
+3	Olfactory areas (L)	Hippocampal formation (R)	Cortical subplate (L)
+4	Cortical subplate (R)	Pallidum (R)	Hypothalamus (R)
+
+SPECTRAL COHERENCE ANALYSIS
+
+f	Cxy
+0.0	0.4863657204976641
+58593.75	0.2951333111626993
+117187.5	0.18414695688431493
+175781.25	0.1812138233795008
+234375.0	0.18519388721531294
+292968.75	0.33198508099938967
+351562.5	0.4791875910280561
+410156.25	0.4118014910505453
+468750.0	0.5881455106332092
+527343.75	0.475185639150549
+585937.5	0.4194924003489228
+644531.25	0.2524455748617923
+703125.0	0.47082954355724727
+761718.75	0.5209596786424034
+820312.5	0.27455712236829805
+878906.25	0.3094094247260213
+937500.0	0.22108756812104488
+996093.75	0.11072577121828593
+1054687.5	0.06781244836111082
+1113281.25	0.20908740452630112
+1171875.0	0.07413011535079805
+1230468.75	0.06919173598750328
+1289062.5	0.08653840473899928
+1347656.25	0.08020612475068249
+1406250.0	0.00033610948986842454
+1464843.75	0.07064745078486337
+1523437.5	0.21229070592378396
+1582031.25	0.45287666910416136
+1640625.0	0.14856329928508694
+1699218.75	0.07680073354403831
+1757812.5	0.3532664743727265
+1816406.25	0.15140195896372133
+1875000.0	0.11408481168939014
+1933593.75	0.0005249044108644337
+1992187.5	0.08763572873829865
+2050781.25	0.34534074956390104
+2109375.0	0.5055306221306729
+2167968.75	0.5000687983083598
+2226562.5	0.5783833241810368
+2285156.25	0.3908336922406877
+2343750.0	0.6072582597182173
+2402343.75	0.7206584521278729
+2460937.5	0.7803506477834016
+2519531.25	0.7365406295178841
+2578125.0	0.7953790738248021
+2636718.75	0.8170166100319376
+2695312.5	0.2937143157141364
+2753906.25	0.3638243989881958
+2812500.0	0.5266035751409182
+2871093.75	0.6988183846145612
+2929687.5	0.36844084348856954
+2988281.25	0.3800775860123252
+3046875.0	0.4914665595115756
+3105468.75	0.4055527931456659
+3164062.5	0.5228105717614292
+3222656.25	0.3406188545274051
+3281250.0	0.18886547019761046
+3339843.75	0.2358339448219449
+3398437.5	0.2220431618195331
+3457031.25	0.3479601525444618
+3515625.0	0.1819777791224138
+3574218.75	0.16715507199549426
+3632812.5	0.06641375839374501
+3691406.25	0.023752642643017803
+3750000.0	0.06780809505186629
+3808593.75	0.07517900766814027
+3867187.5	0.032333215237990355
+3925781.25	0.056968422308275826
+3984375.0	0.1698359450750265
+4042968.75	0.260614996786429
+4101562.5	0.09089907917893075
+4160156.25	0.13612801056601706
+4218750.0	0.18689859089349872
+4277343.75	0.19397244724837812
+4335937.5	0.054507351168020135
+4394531.25	0.07223495024191794
+4453125.0	0.02320929534434948
+4511718.75	0.10158203556418736
+4570312.5	0.30839764419113136
+4628906.25	0.2731829554660224
+4687500.0	0.20953791095813296
+4746093.75	0.01447227864725573
+4804687.5	0.5233186616616621
+4863281.25	0.045444453032668655
+4921875.0	0.006080004604047653
+4980468.75	0.001526783985991654
+5039062.5	0.02915591110124392
+5097656.25	0.10731568275987238
+5156250.0	0.5570681644512988
+5214843.75	0.6306960424073067
+5273437.5	0.2146701788894522
+5332031.25	0.2502343174850507
+5390625.0	0.4642988310437855
+5449218.75	0.5778868307626296
+5507812.5	0.24137795765594053
+5566406.25	0.37077257630289645
+5625000.0	0.3361777704631635
+5683593.75	0.16108210549573634
+5742187.5	0.13694461346551462
+5800781.25	0.3739607821963486
+5859375.0	0.5743823595822704
+5917968.75	0.299512783583555
+5976562.5	0.014741900183783083
+6035156.25	0.17469090474886786
+6093750.0	0.025835732797396836
+6152343.75	0.1782273563394988
+6210937.5	0.02807537252489387
+6269531.25	0.1368509472599611
+6328125.0	0.19030220335358883
+6386718.75	0.21499854717177888
+6445312.5	0.14943614707658967
+6503906.25	0.15677426424061175
+6562500.0	0.1423715446944523
+6621093.75	0.24694333398570176
+6679687.5	0.06055203754518526
+6738281.25	0.009581963642912686
+6796875.0	0.10100694452540056
+6855468.75	0.03239695980192262
+6914062.5	0.09715131794252606
+6972656.25	0.09052817015667378
+7031250.0	0.12823116473257104
+7089843.75	0.029234041371651774
+7148437.5	0.3140793346135149
+7207031.25	0.49289794285738947
+7265625.0	0.4528841330296576
+7324218.75	0.07036427448065864
+7382812.5	0.017900730783685856
+7441406.25	0.07824700337609035
+7500000.0	0.02063702749340647
+
+GRAPH
+
+Cortical subplate (R) -- Hypothalamus (L) (weight=0.21437744695060126)
+Cortical subplate (R) -- Primary somatosensory area, upper limb (L) (weight=0.24553542199705916)
+Cortical subplate (R) -- Striatum (R) (weight=0.26598222565221413)
+Cortical subplate (R) -- Thalamus (L) (weight=0.21507610179659264)
+Hippocampal formation (L) -- Hypothalamus (L) (weight=0.2741785983141859)
+Hippocampal formation (L) -- Primary somatosensory area, unassigned (L) (weight=0.24991389451285195)
+Hippocampal formation (L) -- Primary somatosensory area, upper limb (L) (weight=0.29774803846814407)
+Hippocampal formation (L) -- Primary somatosensory area, upper limb (R) (weight=0.2660579193026253)
+Hippocampal formation (L) -- Striatum (R) (weight=0.3235058885759383)
+Hippocampal formation (L) -- Thalamus (L) (weight=0.30439844849193487)
+Hypothalamus (L) -- Hypothalamus (R) (weight=0.2499516594872609)
+Hypothalamus (L) -- Primary somatosensory area, unassigned (L) (weight=0.5129625165745594)
+Hypothalamus (L) -- Primary somatosensory area, unassigned (R) (weight=0.36634312422244314)
+Hypothalamus (L) -- Primary somatosensory area, upper limb (L) (weight=0.5777564590153714)
+Hypothalamus (L) -- Primary somatosensory area, upper limb (R) (weight=0.5087186211900135)
+Hypothalamus (R) -- Primary somatosensory area, unassigned (L) (weight=0.22397432209636492)
+Hypothalamus (R) -- Primary somatosensory area, upper limb (L) (weight=0.24179544174191464)
+Olfactory areas (R) -- Cortical subplate (R) (weight=0.22243715219451832)
+Olfactory areas (R) -- Hippocampal formation (L) (weight=0.2322951888055889)
+Olfactory areas (R) -- Hypothalamus (L) (weight=0.3664361612470185)
+Olfactory areas (R) -- Primary somatosensory area, unassigned (L) (weight=0.3726683849097284)
+Olfactory areas (R) -- Primary somatosensory area, unassigned (R) (weight=0.36081562736561756)
+Olfactory areas (R) -- Primary somatosensory area, upper limb (L) (weight=0.37135503220052896)
+Olfactory areas (R) -- Primary somatosensory area, upper limb (R) (weight=0.4123876582109041)
+Olfactory areas (R) -- Striatum (L) (weight=0.298008026543005)
+Olfactory areas (R) -- Striatum (R) (weight=0.4368246313984207)
+Olfactory areas (R) -- Thalamus (L) (weight=0.4458660287981137)
+Olfactory areas (R) -- Thalamus (R) (weight=0.21682492828892627)
+Pallidum (L) -- Hypothalamus (L) (weight=0.22651336799528593)
+Pallidum (L) -- Primary somatosensory area, upper limb (L) (weight=0.23847037681197228)
+Pallidum (L) -- Primary somatosensory area, upper limb (R) (weight=0.22576458530332494)
+Pallidum (L) -- Thalamus (L) (weight=0.22644633808163564)
+Pallidum (R) -- Hypothalamus (L) (weight=0.23498219976502582)
+Pallidum (R) -- Primary somatosensory area, upper limb (L) (weight=0.24414953838374745)
+Pallidum (R) -- Primary somatosensory area, upper limb (R) (weight=0.2139724014967075)
+Pallidum (R) -- Thalamus (L) (weight=0.21649809034103046)
+Primary somatosensory area, barrel field (L) -- Cortical subplate (R) (weight=0.2201099348561777)
+Primary somatosensory area, barrel field (L) -- Hippocampal formation (L) (weight=0.3075451076044688)
+Primary somatosensory area, barrel field (L) -- Hypothalamus (L) (weight=0.5944451912907673)
+Primary somatosensory area, barrel field (L) -- Hypothalamus (R) (weight=0.24515928924913666)
+Primary somatosensory area, barrel field (L) -- Olfactory areas (R) (weight=0.4390951400161207)
+Primary somatosensory area, barrel field (L) -- Pallidum (L) (weight=0.2451223676192965)
+Primary somatosensory area, barrel field (L) -- Pallidum (R) (weight=0.258611259250163)
+Primary somatosensory area, barrel field (L) -- Primary somatosensory area, barrel field (R) (weight=0.6660759800658116)
+Primary somatosensory area, barrel field (L) -- Primary somatosensory area, lower limb (L) (weight=0.7115032280127783)
+Primary somatosensory area, barrel field (L) -- Primary somatosensory area, lower limb (R) (weight=0.7105706855428985)
+Primary somatosensory area, barrel field (L) -- Primary somatosensory area, unassigned (L) (weight=0.5893145863141216)
+Primary somatosensory area, barrel field (L) -- Primary somatosensory area, unassigned (R) (weight=0.44382415730876323)
+Primary somatosensory area, barrel field (L) -- Primary somatosensory area, upper limb (L) (weight=0.6900540840350666)
+Primary somatosensory area, barrel field (L) -- Primary somatosensory area, upper limb (R) (weight=0.5522863189729665)
+Primary somatosensory area, barrel field (L) -- Striatum (L) (weight=0.3632071207361505)
+Primary somatosensory area, barrel field (L) -- Striatum (R) (weight=0.6530908996656983)
+Primary somatosensory area, barrel field (L) -- Supplemental somatosensory area (L) (weight=0.5231341751680644)
+Primary somatosensory area, barrel field (L) -- Supplemental somatosensory area (R) (weight=0.3207788938547273)
+Primary somatosensory area, barrel field (L) -- Thalamus (L) (weight=0.6009982793159993)
+Primary somatosensory area, barrel field (L) -- Thalamus (R) (weight=0.31476579466910093)
+Primary somatosensory area, barrel field (R) -- Cortical subplate (R) (weight=0.22981274052286996)
+Primary somatosensory area, barrel field (R) -- Hippocampal formation (L) (weight=0.3121944127229737)
+Primary somatosensory area, barrel field (R) -- Hypothalamus (L) (weight=0.5826932960668543)
+Primary somatosensory area, barrel field (R) -- Hypothalamus (R) (weight=0.25850017693781907)
+Primary somatosensory area, barrel field (R) -- Olfactory areas (R) (weight=0.4781323851485299)
+Primary somatosensory area, barrel field (R) -- Pallidum (L) (weight=0.27010914176252726)
+Primary somatosensory area, barrel field (R) -- Pallidum (R) (weight=0.24166344036967888)
+Primary somatosensory area, barrel field (R) -- Primary somatosensory area, lower limb (L) (weight=0.7034102143344919)
+Primary somatosensory area, barrel field (R) -- Primary somatosensory area, lower limb (R) (weight=0.6808328587070164)
+Primary somatosensory area, barrel field (R) -- Primary somatosensory area, unassigned (L) (weight=0.5588646620742427)
+Primary somatosensory area, barrel field (R) -- Primary somatosensory area, unassigned (R) (weight=0.5076996161189526)
+Primary somatosensory area, barrel field (R) -- Primary somatosensory area, upper limb (L) (weight=0.5985086417815886)
+Primary somatosensory area, barrel field (R) -- Primary somatosensory area, upper limb (R) (weight=0.5814599222259041)
+Primary somatosensory area, barrel field (R) -- Striatum (L) (weight=0.3902615320833763)
+Primary somatosensory area, barrel field (R) -- Striatum (R) (weight=0.6776268194646076)
+Primary somatosensory area, barrel field (R) -- Supplemental somatosensory area (L) (weight=0.46754934103065166)
+Primary somatosensory area, barrel field (R) -- Supplemental somatosensory area (R) (weight=0.35362840183649114)
+Primary somatosensory area, barrel field (R) -- Thalamus (L) (weight=0.6245421126247777)
+Primary somatosensory area, barrel field (R) -- Thalamus (R) (weight=0.3520265509914464)
+Primary somatosensory area, lower limb (L) -- Cortical subplate (R) (weight=0.2806527024652866)
+Primary somatosensory area, lower limb (L) -- Hippocampal formation (L) (weight=0.3284527223003402)
+Primary somatosensory area, lower limb (L) -- Hypothalamus (L) (weight=0.6499729101211241)
+Primary somatosensory area, lower limb (L) -- Hypothalamus (R) (weight=0.27485880457812006)
+Primary somatosensory area, lower limb (L) -- Olfactory areas (L) (weight=0.20931192009892113)
+Primary somatosensory area, lower limb (L) -- Olfactory areas (R) (weight=0.4519840830446217)
+Primary somatosensory area, lower limb (L) -- Pallidum (L) (weight=0.2607480738839682)
+Primary somatosensory area, lower limb (L) -- Pallidum (R) (weight=0.2530772158119427)
+Primary somatosensory area, lower limb (L) -- Primary somatosensory area, lower limb (R) (weight=0.7975745406715823)
+Primary somatosensory area, lower limb (L) -- Primary somatosensory area, unassigned (L) (weight=0.647590497905968)
+Primary somatosensory area, lower limb (L) -- Primary somatosensory area, unassigned (R) (weight=0.4615033401722301)
+Primary somatosensory area, lower limb (L) -- Primary somatosensory area, upper limb (L) (weight=0.7344252939978853)
+Primary somatosensory area, lower limb (L) -- Primary somatosensory area, upper limb (R) (weight=0.5955550423929867)
+Primary somatosensory area, lower limb (L) -- Striatum (L) (weight=0.3573313026115335)
+Primary somatosensory area, lower limb (L) -- Striatum (R) (weight=0.7501659484737124)
+Primary somatosensory area, lower limb (L) -- Supplemental somatosensory area (L) (weight=0.5448390431905804)
+Primary somatosensory area, lower limb (L) -- Supplemental somatosensory area (R) (weight=0.37004112315432325)
+Primary somatosensory area, lower limb (L) -- Thalamus (L) (weight=0.6177163813695096)
+Primary somatosensory area, lower limb (L) -- Thalamus (R) (weight=0.35586670333393083)
+Primary somatosensory area, lower limb (R) -- Cortical subplate (R) (weight=0.2696174479008438)
+Primary somatosensory area, lower limb (R) -- Hippocampal formation (L) (weight=0.34430442631607167)
+Primary somatosensory area, lower limb (R) -- Hypothalamus (L) (weight=0.6610413575249375)
+Primary somatosensory area, lower limb (R) -- Hypothalamus (R) (weight=0.25288882739678314)
+Primary somatosensory area, lower limb (R) -- Olfactory areas (R) (weight=0.4409597951085983)
+Primary somatosensory area, lower limb (R) -- Pallidum (L) (weight=0.24993221521177933)
+Primary somatosensory area, lower limb (R) -- Pallidum (R) (weight=0.24517179829068486)
+Primary somatosensory area, lower limb (R) -- Primary somatosensory area, unassigned (L) (weight=0.6418510504679166)
+Primary somatosensory area, lower limb (R) -- Primary somatosensory area, unassigned (R) (weight=0.46958739599321053)
+Primary somatosensory area, lower limb (R) -- Primary somatosensory area, upper limb (L) (weight=0.7407264322043151)
+Primary somatosensory area, lower limb (R) -- Primary somatosensory area, upper limb (R) (weight=0.6239139756588956)
+Primary somatosensory area, lower limb (R) -- Striatum (L) (weight=0.33189736703420075)
+Primary somatosensory area, lower limb (R) -- Striatum (R) (weight=0.7654088404232187)
+Primary somatosensory area, lower limb (R) -- Supplemental somatosensory area (L) (weight=0.5149166990731345)
+Primary somatosensory area, lower limb (R) -- Supplemental somatosensory area (R) (weight=0.3444017498416716)
+Primary somatosensory area, lower limb (R) -- Thalamus (L) (weight=0.6091054322868891)
+Primary somatosensory area, lower limb (R) -- Thalamus (R) (weight=0.3542944113313907)
+Primary somatosensory area, unassigned (L) -- Primary somatosensory area, unassigned (R) (weight=0.3744689519821161)
+Primary somatosensory area, upper limb (L) -- Primary somatosensory area, unassigned (L) (weight=0.6805431034103216)
+Primary somatosensory area, upper limb (L) -- Primary somatosensory area, unassigned (R) (weight=0.39437261956234326)
+Primary somatosensory area, upper limb (L) -- Primary somatosensory area, upper limb (R) (weight=0.5329760407688672)
+Primary somatosensory area, upper limb (R) -- Primary somatosensory area, unassigned (L) (weight=0.47231096851519716)
+Primary somatosensory area, upper limb (R) -- Primary somatosensory area, unassigned (R) (weight=0.4407127470189025)
+Striatum (L) -- Hypothalamus (L) (weight=0.29200149658555374)
+Striatum (L) -- Primary somatosensory area, unassigned (L) (weight=0.2818527702047115)
+Striatum (L) -- Primary somatosensory area, unassigned (R) (weight=0.26772844377972826)
+Striatum (L) -- Primary somatosensory area, upper limb (L) (weight=0.35049690664057975)
+Striatum (L) -- Primary somatosensory area, upper limb (R) (weight=0.27674835572261014)
+Striatum (L) -- Striatum (R) (weight=0.3528496652645788)
+Striatum (L) -- Thalamus (L) (weight=0.39485286426736904)
+Striatum (L) -- Thalamus (R) (weight=0.2105179592002105)
+Striatum (R) -- Hypothalamus (L) (weight=0.6455661211354388)
+Striatum (R) -- Hypothalamus (R) (weight=0.250117800508713)
+Striatum (R) -- Olfactory areas (L) (weight=0.21391873866830705)
+Striatum (R) -- Pallidum (L) (weight=0.26629437467802053)
+Striatum (R) -- Pallidum (R) (weight=0.24830147895441967)
+Striatum (R) -- Primary somatosensory area, unassigned (L) (weight=0.5940366724752735)
+Striatum (R) -- Primary somatosensory area, unassigned (R) (weight=0.4151749664273508)
+Striatum (R) -- Primary somatosensory area, upper limb (L) (weight=0.6815413341003916)
+Striatum (R) -- Primary somatosensory area, upper limb (R) (weight=0.5743988332232038)
+Striatum (R) -- Thalamus (L) (weight=0.6229693008064557)
+Striatum (R) -- Thalamus (R) (weight=0.32903366593810773)
+Supplemental somatosensory area (L) -- Hippocampal formation (L) (weight=0.2247479409119489)
+Supplemental somatosensory area (L) -- Hypothalamus (L) (weight=0.4514632892612438)
+Supplemental somatosensory area (L) -- Olfactory areas (R) (weight=0.3074007336826395)
+Supplemental somatosensory area (L) -- Primary somatosensory area, unassigned (L) (weight=0.43960690543033903)
+Supplemental somatosensory area (L) -- Primary somatosensory area, unassigned (R) (weight=0.2773748749353248)
+Supplemental somatosensory area (L) -- Primary somatosensory area, upper limb (L) (weight=0.4948769403710688)
+Supplemental somatosensory area (L) -- Primary somatosensory area, upper limb (R) (weight=0.4057499803027733)
+Supplemental somatosensory area (L) -- Striatum (L) (weight=0.2287711541201465)
+Supplemental somatosensory area (L) -- Striatum (R) (weight=0.5224700297665821)
+Supplemental somatosensory area (L) -- Supplemental somatosensory area (R) (weight=0.2650490197457385)
+Supplemental somatosensory area (L) -- Thalamus (L) (weight=0.42393167429473677)
+Supplemental somatosensory area (L) -- Thalamus (R) (weight=0.23936880710289074)
+Supplemental somatosensory area (R) -- Hypothalamus (L) (weight=0.2868348107735856)
+Supplemental somatosensory area (R) -- Olfactory areas (R) (weight=0.2285975150618926)
+Supplemental somatosensory area (R) -- Primary somatosensory area, unassigned (L) (weight=0.30113467255530885)
+Supplemental somatosensory area (R) -- Primary somatosensory area, unassigned (R) (weight=0.2231787655072219)
+Supplemental somatosensory area (R) -- Primary somatosensory area, upper limb (L) (weight=0.34062445226103777)
+Supplemental somatosensory area (R) -- Primary somatosensory area, upper limb (R) (weight=0.27115191315915377)
+Supplemental somatosensory area (R) -- Striatum (R) (weight=0.3772879324106757)
+Supplemental somatosensory area (R) -- Thalamus (L) (weight=0.2661053164917444)
+Thalamus (L) -- Hypothalamus (L) (weight=0.5146760281764653)
+Thalamus (L) -- Hypothalamus (R) (weight=0.20381045911934195)
+Thalamus (L) -- Primary somatosensory area, unassigned (L) (weight=0.46266666530442024)
+Thalamus (L) -- Primary somatosensory area, unassigned (R) (weight=0.42271437787492894)
+Thalamus (L) -- Primary somatosensory area, upper limb (L) (weight=0.5439205055730038)
+Thalamus (L) -- Primary somatosensory area, upper limb (R) (weight=0.4688209751800015)
+Thalamus (L) -- Thalamus (R) (weight=0.29264454678987967)
+Thalamus (R) -- Hypothalamus (L) (weight=0.25791331098445247)
+Thalamus (R) -- Primary somatosensory area, unassigned (L) (weight=0.25565504116250526)
+Thalamus (R) -- Primary somatosensory area, unassigned (R) (weight=0.20483217100101034)
+Thalamus (R) -- Primary somatosensory area, upper limb (L) (weight=0.30906012880431905)
+Thalamus (R) -- Primary somatosensory area, upper limb (R) (weight=0.29222260991495175)
+
+BASIC STRUCTURAL PARAMETRES
+
+Number of nodes:22
+
+Number of edges:168
+
+Graph density:0.7272727272727273
+
+NODE LEVEL METRICS
+
+Node	Degree
+Primary somatosensory area, barrel field (L)	20
+Primary somatosensory area, barrel field (R)	20
+Primary somatosensory area, lower limb (L)	21
+Primary somatosensory area, lower limb (R)	20
+Supplemental somatosensory area (L)	16
+Supplemental somatosensory area (R)	13
+Olfactory areas (R)	17
+Hippocampal formation (L)	12
+Cortical subplate (R)	9
+Striatum (L)	14
+Striatum (R)	21
+Pallidum (L)	9
+Pallidum (R)	9
+Thalamus (L)	20
+Thalamus (R)	14
+Hypothalamus (L)	20
+Hypothalamus (R)	9
+Primary somatosensory area, upper limb (L)	20
+Primary somatosensory area, upper limb (R)	18
+Primary somatosensory area, unassigned (L)	17
+Primary somatosensory area, unassigned (R)	15
+Olfactory areas (L)	2
+
+Degree	Probability
+0.0	0.0
+1.0	0.0
+2.0	0.045454545454545456
+3.0	0.0
+4.0	0.0
+5.0	0.0
+6.0	0.0
+7.0	0.0
+8.0	0.0
+9.0	0.18181818181818182
+10.0	0.0
+11.0	0.0
+12.0	0.045454545454545456
+13.0	0.045454545454545456
+14.0	0.09090909090909091
+15.0	0.045454545454545456
+16.0	0.045454545454545456
+17.0	0.09090909090909091
+18.0	0.045454545454545456
+19.0	0.0
+20.0	0.2727272727272727
+21.0	0.09090909090909091
+
+Node	Clustering coefficient
+Primary somatosensory area, barrel field (L)	0.7684210526315789
+Primary somatosensory area, barrel field (R)	0.7684210526315789
+Primary somatosensory area, lower limb (L)	0.7
+Primary somatosensory area, lower limb (R)	0.7684210526315789
+Supplemental somatosensory area (L)	0.95
+Supplemental somatosensory area (R)	1.0
+Olfactory areas (R)	0.8970588235294118
+Hippocampal formation (L)	1.0
+Cortical subplate (R)	1.0
+Striatum (L)	1.0
+Striatum (R)	0.7
+Pallidum (L)	1.0
+Pallidum (R)	1.0
+Thalamus (L)	0.7684210526315789
+Thalamus (R)	1.0
+Hypothalamus (L)	0.7684210526315789
+Hypothalamus (R)	1.0
+Primary somatosensory area, upper limb (L)	0.7684210526315789
+Primary somatosensory area, upper limb (R)	0.8496732026143791
+Primary somatosensory area, unassigned (L)	0.8970588235294118
+Primary somatosensory area, unassigned (R)	0.9809523809523809
+Olfactory areas (L)	1.0
+
+Node	Degree centrality
+Primary somatosensory area, barrel field (L)	0.9523809523809523
+Primary somatosensory area, barrel field (R)	0.9523809523809523
+Primary somatosensory area, lower limb (L)	1.0
+Primary somatosensory area, lower limb (R)	0.9523809523809523
+Supplemental somatosensory area (L)	0.7619047619047619
+Supplemental somatosensory area (R)	0.6190476190476191
+Olfactory areas (R)	0.8095238095238095
+Hippocampal formation (L)	0.5714285714285714
+Cortical subplate (R)	0.42857142857142855
+Striatum (L)	0.6666666666666666
+Striatum (R)	1.0
+Pallidum (L)	0.42857142857142855
+Pallidum (R)	0.42857142857142855
+Thalamus (L)	0.9523809523809523
+Thalamus (R)	0.6666666666666666
+Hypothalamus (L)	0.9523809523809523
+Hypothalamus (R)	0.42857142857142855
+Primary somatosensory area, upper limb (L)	0.9523809523809523
+Primary somatosensory area, upper limb (R)	0.8571428571428571
+Primary somatosensory area, unassigned (L)	0.8095238095238095
+Primary somatosensory area, unassigned (R)	0.7142857142857142
+Olfactory areas (L)	0.09523809523809523
+
+Node	Betweenness centrality
+Primary somatosensory area, barrel field (L)	0.022756410256410266
+Primary somatosensory area, barrel field (R)	0.022756410256410266
+Primary somatosensory area, lower limb (L)	0.0679945054945055
+Primary somatosensory area, lower limb (R)	0.022756410256410266
+Supplemental somatosensory area (L)	0.00231990231990232
+Supplemental somatosensory area (R)	0.0
+Olfactory areas (R)	0.006552706552706553
+Hippocampal formation (L)	0.0
+Cortical subplate (R)	0.0
+Striatum (L)	0.0
+Striatum (R)	0.0679945054945055
+Pallidum (L)	0.0
+Pallidum (R)	0.0
+Thalamus (L)	0.022756410256410266
+Thalamus (R)	0.0
+Hypothalamus (L)	0.022756410256410266
+Hypothalamus (R)	0.0
+Primary somatosensory area, upper limb (L)	0.022756410256410266
+Primary somatosensory area, upper limb (R)	0.011314611314611315
+Primary somatosensory area, unassigned (L)	0.006552706552706553
+Primary somatosensory area, unassigned (R)	0.0007326007326007327
+Olfactory areas (L)	0.0
+
+Node	Closeness centrality
+Primary somatosensory area, barrel field (L)	0.9545454545454546
+Primary somatosensory area, barrel field (R)	0.9545454545454546
+Primary somatosensory area, lower limb (L)	1.0
+Primary somatosensory area, lower limb (R)	0.9545454545454546
+Supplemental somatosensory area (L)	0.8076923076923077
+Supplemental somatosensory area (R)	0.7241379310344828
+Olfactory areas (R)	0.84
+Hippocampal formation (L)	0.7
+Cortical subplate (R)	0.6363636363636364
+Striatum (L)	0.75
+Striatum (R)	1.0
+Pallidum (L)	0.6363636363636364
+Pallidum (R)	0.6363636363636364
+Thalamus (L)	0.9545454545454546
+Thalamus (R)	0.75
+Hypothalamus (L)	0.9545454545454546
+Hypothalamus (R)	0.6363636363636364
+Primary somatosensory area, upper limb (L)	0.9545454545454546
+Primary somatosensory area, upper limb (R)	0.875
+Primary somatosensory area, unassigned (L)	0.84
+Primary somatosensory area, unassigned (R)	0.7777777777777778
+Olfactory areas (L)	0.525
+
+Node	Eigenvector centrality
+Primary somatosensory area, barrel field (L)	0.25382501224841736
+Primary somatosensory area, barrel field (R)	0.25382501224841736
+Primary somatosensory area, lower limb (L)	0.2555593711118703
+Primary somatosensory area, lower limb (R)	0.2538250122484174
+Supplemental somatosensory area (L)	0.22303249922785398
+Supplemental somatosensory area (R)	0.1901130595679506
+Olfactory areas (R)	0.23071749877327677
+Hippocampal formation (L)	0.17733890444037356
+Cortical subplate (R)	0.13582540822656236
+Striatum (L)	0.20224212253837548
+Striatum (R)	0.2555593711118703
+Pallidum (L)	0.13628943826530032
+Pallidum (R)	0.13628943826530032
+Thalamus (L)	0.2538250122484174
+Thalamus (R)	0.20224212253837545
+Hypothalamus (L)	0.2538250122484174
+Hypothalamus (R)	0.13582540822656236
+Primary somatosensory area, upper limb (L)	0.2538250122484174
+Primary somatosensory area, upper limb (R)	0.2384550131575719
+Primary somatosensory area, unassigned (L)	0.23071749877327677
+Primary somatosensory area, unassigned (R)	0.21299868618751683
+Olfactory areas (L)	0.030653174343486824
+
+PATH BASED METRICS
+
+Shortest path lengths:
+                                              Primary somatosensory area, barrel field (L)  Primary somatosensory area, barrel field (R)  Primary somatosensory area, lower limb (L)  Primary somatosensory area, lower limb (R)  Supplemental somatosensory area (L)  Supplemental somatosensory area (R)  Olfactory areas (R)  Hippocampal formation (L)  Cortical subplate (R)  Striatum (L)  Striatum (R)  Pallidum (L)  Pallidum (R)  Thalamus (L)  Thalamus (R)  Hypothalamus (L)  Hypothalamus (R)  Primary somatosensory area, upper limb (L)  Primary somatosensory area, upper limb (R)  Primary somatosensory area, unassigned (L)  Primary somatosensory area, unassigned (R)  Olfactory areas (L)
+Primary somatosensory area, barrel field (L)                                             0                                             1                                           1                                           1                                    1                                    1                    1                          1                      1             1             1             1             1             1             1                 1                 1                                           1                                           1                                           1                                           1                    2
+Primary somatosensory area, barrel field (R)                                             1                                             0                                           1                                           1                                    1                                    1                    1                          1                      1             1             1             1             1             1             1                 1                 1                                           1                                           1                                           1                                           1                    2
+Primary somatosensory area, lower limb (L)                                               1                                             1                                           0                                           1                                    1                                    1                    1                          1                      1             1             1             1             1             1             1                 1                 1                                           1                                           1                                           1                                           1                    1
+Primary somatosensory area, lower limb (R)                                               1                                             1                                           1                                           0                                    1                                    1                    1                          1                      1             1             1             1             1             1             1                 1                 1                                           1                                           1                                           1                                           1                    2
+Supplemental somatosensory area (L)                                                      1                                             1                                           1                                           1                                    0                                    1                    1                          1                      2             1             1             2             2             1             1                 1                 2                                           1                                           1                                           1                                           1                    2
+Supplemental somatosensory area (R)                                                      1                                             1                                           1                                           1                                    1                                    0                    1                          2                      2             2             1             2             2             1             2                 1                 2                                           1                                           1                                           1                                           1                    2
+Olfactory areas (R)                                                                      1                                             1                                           1                                           1                                    1                                    1                    0                          1                      1             1             1             2             2             1             1                 1                 2                                           1                                           1                                           1                                           1                    2
+Hippocampal formation (L)                                                                1                                             1                                           1                                           1                                    1                                    2                    1                          0                      2             2             1             2             2             1             2                 1                 2                                           1                                           1                                           1                                           2                    2
+Cortical subplate (R)                                                                    1                                             1                                           1                                           1                                    2                                    2                    1                          2                      0             2             1             2             2             1             2                 1                 2                                           1                                           2                                           2                                           2                    2
+Striatum (L)                                                                             1                                             1                                           1                                           1                                    1                                    2                    1                          2                      2             0             1             2             2             1             1                 1                 2                                           1                                           1                                           1                                           1                    2
+Striatum (R)                                                                             1                                             1                                           1                                           1                                    1                                    1                    1                          1                      1             1             0             1             1             1             1                 1                 1                                           1                                           1                                           1                                           1                    1
+Pallidum (L)                                                                             1                                             1                                           1                                           1                                    2                                    2                    2                          2                      2             2             1             0             2             1             2                 1                 2                                           1                                           1                                           2                                           2                    2
+Pallidum (R)                                                                             1                                             1                                           1                                           1                                    2                                    2                    2                          2                      2             2             1             2             0             1             2                 1                 2                                           1                                           1                                           2                                           2                    2
+Thalamus (L)                                                                             1                                             1                                           1                                           1                                    1                                    1                    1                          1                      1             1             1             1             1             0             1                 1                 1                                           1                                           1                                           1                                           1                    2
+Thalamus (R)                                                                             1                                             1                                           1                                           1                                    1                                    2                    1                          2                      2             1             1             2             2             1             0                 1                 2                                           1                                           1                                           1                                           1                    2
+Hypothalamus (L)                                                                         1                                             1                                           1                                           1                                    1                                    1                    1                          1                      1             1             1             1             1             1             1                 0                 1                                           1                                           1                                           1                                           1                    2
+Hypothalamus (R)                                                                         1                                             1                                           1                                           1                                    2                                    2                    2                          2                      2             2             1             2             2             1             2                 1                 0                                           1                                           2                                           1                                           2                    2
+Primary somatosensory area, upper limb (L)                                               1                                             1                                           1                                           1                                    1                                    1                    1                          1                      1             1             1             1             1             1             1                 1                 1                                           0                                           1                                           1                                           1                    2
+Primary somatosensory area, upper limb (R)                                               1                                             1                                           1                                           1                                    1                                    1                    1                          1                      2             1             1             1             1             1             1                 1                 2                                           1                                           0                                           1                                           1                    2
+Primary somatosensory area, unassigned (L)                                               1                                             1                                           1                                           1                                    1                                    1                    1                          1                      2             1             1             2             2             1             1                 1                 1                                           1                                           1                                           0                                           1                    2
+Primary somatosensory area, unassigned (R)                                               1                                             1                                           1                                           1                                    1                                    1                    1                          2                      2             1             1             2             2             1             1                 1                 2                                           1                                           1                                           1                                           0                    2
+Olfactory areas (L)                                                                      2                                             2                                           1                                           2                                    2                                    2                    2                          2                      2             2             1             2             2             2             2                 2                 2                                           2                                           2                                           2                                           2                    0
+
+Weighted shortest path lengths:
+                                              Primary somatosensory area, barrel field (L)  Primary somatosensory area, barrel field (R)  Primary somatosensory area, lower limb (L)  Primary somatosensory area, lower limb (R)  Supplemental somatosensory area (L)  Supplemental somatosensory area (R)  Olfactory areas (R)  Hippocampal formation (L)  Cortical subplate (R)  Striatum (L)  Striatum (R)  Pallidum (L)  Pallidum (R)  Thalamus (L)  Thalamus (R)  Hypothalamus (L)  Hypothalamus (R)  Primary somatosensory area, upper limb (L)  Primary somatosensory area, upper limb (R)  Primary somatosensory area, unassigned (L)  Primary somatosensory area, unassigned (R)  Olfactory areas (L)
+Primary somatosensory area, barrel field (L)                                      0.000000                                      0.449923                                    0.500763                                    0.489727                             0.523134                             0.320779             0.439095                   0.307545               0.220110      0.363207      0.486092      0.245122      0.258611      0.435186      0.314766          0.434487          0.245159                                    0.465645                                    0.470887                                    0.469134                                    0.443824             0.700011
+Primary somatosensory area, barrel field (R)                                      0.449923                                      0.000000                                    0.494741                                    0.486835                             0.467549                             0.353628             0.452250                   0.312194               0.229813      0.390262      0.489965      0.270109      0.241663      0.444889      0.352027          0.444190          0.258500                                    0.475348                                    0.455636                                    0.482474                                    0.507700             0.703884
+Primary somatosensory area, lower limb (L)                                        0.500763                                      0.494741                                    0.000000                                    0.498249                             0.544839                             0.370041             0.451984                   0.328453               0.280653      0.357331      0.423231      0.260748      0.253077      0.469575      0.355867          0.487261          0.274859                                    0.497227                                    0.467050                                    0.498833                                    0.461503             0.209312
+Primary somatosensory area, lower limb (R)                                        0.489727                                      0.486835                                    0.498249                                    0.000000                             0.514917                             0.344402             0.440960                   0.344304               0.269617      0.331897      0.493473      0.249932      0.245172      0.456699      0.354294          0.476446          0.252889                                    0.488403                                    0.459144                                    0.476863                                    0.469587             0.707392
+Supplemental somatosensory area (L)                                               0.523134                                      0.467549                                    0.544839                                    0.514917                             0.000000                             0.265049             0.307401                   0.224748               0.529838      0.228771      0.522470      0.631515      0.619722      0.423932      0.239369          0.451463          0.627742                                    0.494877                                    0.405750                                    0.439607                                    0.277375             0.736389
+Supplemental somatosensory area (R)                                               0.320779                                      0.353628                                    0.370041                                    0.344402                             0.265049                             0.000000             0.228598                   0.460893               0.451035      0.490907      0.377288      0.492552      0.482603      0.266105      0.428011          0.286835          0.469916                                    0.340624                                    0.271152                                    0.301135                                    0.223179             0.579353
+Olfactory areas (R)                                                               0.439095                                      0.452250                                    0.451984                                    0.440960                             0.307401                             0.228598             0.000000                   0.232295               0.222437      0.298008      0.436825      0.592950      0.601418      0.437513      0.216825          0.366436          0.596643                                    0.371355                                    0.412388                                    0.372668                                    0.360816             0.650743
+Hippocampal formation (L)                                                         0.307545                                      0.312194                                    0.328453                                    0.344304                             0.224748                             0.460893             0.232295                   0.000000               0.454732      0.453519      0.323506      0.491823      0.480030      0.304398      0.449120          0.274179          0.473888                                    0.297748                                    0.266058                                    0.249914                                    0.502123             0.537425
+Cortical subplate (R)                                                             0.220110                                      0.229813                                    0.280653                                    0.269617                             0.529838                             0.451035             0.222437                   0.454732               0.000000      0.506379      0.265982      0.440891      0.431574      0.215076      0.439262          0.214377          0.418887                                    0.245535                                    0.634825                                    0.595106                                    0.580721             0.479901
+Striatum (L)                                                                      0.363207                                      0.390262                                    0.357331                                    0.331897                             0.228771                             0.490907             0.298008                   0.453519               0.506379      0.000000      0.352850      0.502513      0.490721      0.394853      0.210518          0.292001          0.505827                                    0.350497                                    0.276748                                    0.281853                                    0.267728             0.566643
+Striatum (R)                                                                      0.486092                                      0.489965                                    0.423231                                    0.493473                             0.522470                             0.377288             0.436825                   0.323506               0.265982      0.352850      0.000000      0.266294      0.248301      0.453928      0.329034          0.480360          0.250118                                    0.491913                                    0.462274                                    0.474092                                    0.415175             0.213919
+Pallidum (L)                                                                      0.245122                                      0.270109                                    0.260748                                    0.249932                             0.631515                             0.492552             0.592950                   0.491823               0.440891      0.502513      0.266294      0.000000      0.439737      0.226446      0.484427          0.226513          0.430257                                    0.238470                                    0.225765                                    0.654231                                    0.592856             0.470060
+Pallidum (R)                                                                      0.258611                                      0.241663                                    0.253077                                    0.245172                             0.619722                             0.482603             0.601418                   0.480030               0.431574      0.490721      0.248301      0.439737      0.000000      0.216498      0.492896          0.234982          0.420309                                    0.244150                                    0.213972                                    0.644283                                    0.601325             0.462220
+Thalamus (L)                                                                      0.435186                                      0.444889                                    0.469575                                    0.456699                             0.423932                             0.266105             0.437513                   0.304398               0.215076      0.394853      0.453928      0.226446      0.216498      0.000000      0.292645          0.429454          0.203810                                    0.445606                                    0.430470                                    0.427785                                    0.422714             0.667847
+Thalamus (R)                                                                      0.314766                                      0.352027                                    0.355867                                    0.354294                             0.239369                             0.428011             0.216825                   0.449120               0.439262      0.210518      0.329034      0.484427      0.492896      0.292645      0.000000          0.257913          0.479629                                    0.309060                                    0.292223                                    0.255655                                    0.204832             0.542952
+Hypothalamus (L)                                                                  0.434487                                      0.444190                                    0.487261                                    0.476446                             0.451463                             0.286835             0.366436                   0.274179               0.214377      0.292001      0.480360      0.226513      0.234982      0.429454      0.257913          0.000000          0.249952                                    0.459913                                    0.448955                                    0.473926                                    0.366343             0.694278
+Hypothalamus (R)                                                                  0.245159                                      0.258500                                    0.274859                                    0.252889                             0.627742                             0.469916             0.596643                   0.473888               0.418887      0.505827      0.250118      0.430257      0.420309      0.203810      0.479629          0.249952          0.000000                                    0.241795                                    0.634281                                    0.223974                                    0.598443             0.464037
+Primary somatosensory area, upper limb (L)                                        0.465645                                      0.475348                                    0.497227                                    0.488403                             0.494877                             0.340624             0.371355                   0.297748               0.245535      0.350497      0.491913      0.238470      0.244150      0.445606      0.309060          0.459913          0.241795                                    0.000000                                    0.458122                                    0.465770                                    0.394373             0.705832
+Primary somatosensory area, upper limb (R)                                        0.470887                                      0.455636                                    0.467050                                    0.459144                             0.405750                             0.271152             0.412388                   0.266058               0.634825      0.276748      0.462274      0.225765      0.213972      0.430470      0.292223          0.448955          0.634281                                    0.458122                                    0.000000                                    0.472311                                    0.440713             0.676193
+Primary somatosensory area, unassigned (L)                                        0.469134                                      0.482474                                    0.498833                                    0.476863                             0.439607                             0.301135             0.372668                   0.249914               0.595106      0.281853      0.474092      0.654231      0.644283      0.427785      0.255655          0.473926          0.223974                                    0.465770                                    0.472311                                    0.000000                                    0.374469             0.688011
+Primary somatosensory area, unassigned (R)                                        0.443824                                      0.507700                                    0.461503                                    0.469587                             0.277375                             0.223179             0.360816                   0.502123               0.580721      0.267728      0.415175      0.592856      0.601325      0.422714      0.204832          0.366343          0.598443                                    0.394373                                    0.440713                                    0.374469                                    0.000000             0.629094
+Olfactory areas (L)                                                               0.700011                                      0.703884                                    0.209312                                    0.707392                             0.736389                             0.579353             0.650743                   0.537425               0.479901      0.566643      0.213919      0.470060      0.462220      0.667847      0.542952          0.694278          0.464037                                    0.705832                                    0.676193                                    0.688011                                    0.629094             0.000000
+
+Shortest path fromPrimary somatosensory area, barrel field (L)toPrimary somatosensory area, barrel field (R):
+['Primary somatosensory area, barrel field (L)', 'Primary somatosensory area, barrel field (R)']
+
+Average shortest path length:1.2727272727272727
+
+Average weighted shortest path length:0.4089038473306199
+
+Diameter:2
+
+Weighted diameter:0.7363887684348891
+
+GLOBAL NETWORK PROPERTIES
+
+Number of islands:1
+[{'Primary somatosensory area, unassigned (L)', 'Primary somatosensory area, unassigned (R)', 'Pallidum (L)', 'Primary somatosensory area, lower limb (R)', 'Primary somatosensory area, lower limb (L)', 'Striatum (L)', 'Hypothalamus (L)', 'Primary somatosensory area, barrel field (R)', 'Pallidum (R)', 'Olfactory areas (R)', 'Striatum (R)', 'Supplemental somatosensory area (R)', 'Primary somatosensory area, barrel field (L)', 'Primary somatosensory area, upper limb (L)', 'Thalamus (R)', 'Olfactory areas (L)', 'Primary somatosensory area, upper limb (R)', 'Cortical subplate (R)', 'Hippocampal formation (L)', 'Thalamus (L)', 'Hypothalamus (R)', 'Supplemental somatosensory area (L)'}]
+
+Largest island:
+{'Primary somatosensory area, unassigned (L)', 'Primary somatosensory area, unassigned (R)', 'Pallidum (L)', 'Primary somatosensory area, lower limb (R)', 'Primary somatosensory area, lower limb (L)', 'Striatum (L)', 'Hypothalamus (L)', 'Primary somatosensory area, barrel field (R)', 'Pallidum (R)', 'Olfactory areas (R)', 'Striatum (R)', 'Supplemental somatosensory area (R)', 'Primary somatosensory area, barrel field (L)', 'Primary somatosensory area, upper limb (L)', 'Thalamus (R)', 'Olfactory areas (L)', 'Primary somatosensory area, upper limb (R)', 'Cortical subplate (R)', 'Hippocampal formation (L)', 'Thalamus (L)', 'Hypothalamus (R)', 'Supplemental somatosensory area (L)'}
+
+Modularity:-0.0023956482680004276
+
+Weighted modularity:-0.0023956482680004276
+
+Assortativity:-0.4057500038872354
+
+FLOW AND ROBUSTNESS
+
+Network efficiency:0.8636363636363636
+
+Weighted network efficiency:2.7297870744366337
+
+Robustness test to random failure:
+
+Node removal
+
+network efficiency	number of connected components	size of largest island	average of shortest path lengths	average of weighted shortest path lengths
+0.8690476190476191	1	21	1.2619047619047619	0.41263192747395266
+0.8657894736842106	1	20	1.268421052631579	0.409228304103612
+0.868421052631579	1	19	1.263157894736842	0.41589996721352507
+0.8529411764705882	1	18	1.2941176470588236	0.41939590828941814
+0.8382352941176471	1	17	1.3235294117647058	0.41900907179926294
+0.8208333333333333	1	16	1.3583333333333334	0.421677259481345
+0.8142857142857143	1	15	1.3714285714285714	0.42192677984303323
+0.8021978021978022	1	14	1.3956043956043955	0.42172705912169456
+0.8076923076923077	1	13	1.3846153846153846	0.42267968573855624
+0.8560606060606061	1	12	1.2878787878787878	0.39546667428003873
+0.8272727272727273	1	11	1.3454545454545455	0.4006715541866622
+0.7888888888888889	1	10	1.4222222222222223	0.4236176992771872
+0.8194444444444444	1	9	1.3611111111111112	0.42100215870867025
+0.8392857142857143	1	8	1.3214285714285714	0.40182721768269375
+0.7857142857142857	1	7	1.4285714285714286	0.41706384055604556
+0.7	1	6	1.6	0.5199475271675005
+0.75	1	5	1.5	0.501022634278173
+0.8333333333333334	1	4	1.3333333333333333	0.4589292822576157
+1.0	1	3	1.0	0.36601323546762315
+1.0	1	2	1.0	0.3284527223003402
+0	1	1	0	0
+
+
+Edge removal
+
+network efficiency	number of connected components	size of largest island	average of shortest path lengths	average of weighted shortest path lengths
+0.8614718614718615	1	22	1.277056277056277	0.4096496610886644
+0.8593073593073594	1	22	1.2813852813852813	0.4096496610886644
+0.8571428571428571	1	22	1.2857142857142858	0.4107657394587618
+0.854978354978355	1	22	1.29004329004329	0.4107657394587618
+0.8528138528138528	1	22	1.2943722943722944	0.4111842989095246
+0.8506493506493507	1	22	1.2987012987012987	0.4111842989095246
+0.8484848484848485	1	22	1.303030303030303	0.41369904535497776
+0.8463203463203464	1	22	1.3073593073593073	0.41369904535497776
+0.8441558441558441	1	22	1.3116883116883118	0.4159671756032579
+0.841991341991342	1	22	1.316017316017316	0.4178611234550072
+0.8398268398268398	1	22	1.3203463203463204	0.4197681949722967
+0.8376623376623377	1	22	1.3246753246753247	0.4211847274655556
+0.8354978354978355	1	22	1.329004329004329	0.4221390404262904
+0.8333333333333334	1	22	1.3333333333333333	0.4231491228815226
+0.8311688311688312	1	22	1.3376623376623376	0.4233008758252216
+0.829004329004329	1	22	1.341991341991342	0.42403282899129924
+0.8268398268398268	1	22	1.3463203463203464	0.42436085413572067
+0.8246753246753247	1	22	1.3506493506493507	0.42527852754904455
+0.8225108225108225	1	22	1.354978354978355	0.4264086825253384
+0.8203463203463204	1	22	1.3593073593073592	0.4279637138658684
+0.8181818181818182	1	22	1.3636363636363635	0.428432586773759
+0.816017316017316	1	22	1.367965367965368	0.43197771554914505
+0.8138528138528138	1	22	1.3722943722943723	0.43434750091386926
+0.8116883116883117	1	22	1.3766233766233766	0.43555362216469995
+0.8095238095238095	1	22	1.380952380952381	0.43555362216469995
+0.8073593073593074	1	22	1.3852813852813852	0.4364326911437208
+0.8051948051948052	1	22	1.3896103896103895	0.4367330937956873
+0.803030303030303	1	22	1.393939393939394	0.43850411764705566
+0.8008658008658008	1	22	1.3982683982683983	0.43850411764705566
+0.7987012987012987	1	22	1.4025974025974026	0.4407540611206402
+0.7965367965367965	1	22	1.406926406926407	0.44297384661779765
+0.7943722943722944	1	22	1.4112554112554112	0.4452878291120772
+0.7922077922077922	1	22	1.4155844155844155	0.44834477787222726
+0.79004329004329	1	22	1.41991341991342	0.4519819766867734
+0.7878787878787878	1	22	1.4242424242424243	0.4519819766867734
+0.7857142857142857	1	22	1.4285714285714286	0.4519819766867734
+0.7835497835497836	1	22	1.432900432900433	0.4523786765034496
+0.7813852813852814	1	22	1.4372294372294372	0.45518312405749795
+0.7792207792207793	1	22	1.4415584415584415	0.45518312405749795
+0.7770562770562771	1	22	1.4458874458874458	0.45518312405749795
+0.7748917748917749	1	22	1.4502164502164503	0.45518312405749795
+0.7727272727272727	1	22	1.4545454545454546	0.4566170997994686
+0.7705627705627706	1	22	1.4588744588744589	0.45717699097239556
+0.7683982683982684	1	22	1.4632034632034632	0.4605481899528085
+0.7662337662337663	1	22	1.4675324675324675	0.46189989290699807
+0.7640692640692641	1	22	1.4718614718614718	0.46451697009960147
+0.7619047619047619	1	22	1.4761904761904763	0.46656452599607184
+0.7597402597402597	1	22	1.4805194805194806	0.4670820874604436
+0.7575757575757576	1	22	1.4848484848484849	0.4670820874604436
+0.7554112554112554	1	22	1.4891774891774892	0.4670820874604436
+0.7525252525252526	1	22	1.4978354978354977	0.4725995774792792
+0.7503607503607505	1	22	1.5021645021645023	0.4727880882783092
+0.7481962481962482	1	22	1.5064935064935066	0.47605738076161536
+0.746031746031746	1	22	1.5108225108225108	0.47605738076161536
+0.7438672438672439	1	22	1.5151515151515151	0.47834541940236075
+0.7417027417027418	1	22	1.5194805194805194	0.47834541940236075
+0.7395382395382396	1	22	1.5238095238095237	0.48005779634511403
+0.7373737373737375	1	22	1.5281385281385282	0.4823922213958082
+0.7352092352092352	1	22	1.5324675324675325	0.4823922213958082
+0.7301587301587299	1	22	1.5541125541125542	0.48899823281830856
+0.7279942279942277	1	22	1.5584415584415585	0.4894342714425808
+0.7258297258297255	1	22	1.5627705627705628	0.49295487010343075
+0.7229437229437227	1	22	1.5714285714285714	0.49295487010343075
+0.7207792207792205	1	22	1.5757575757575757	0.49372511273977787
+0.7178932178932176	1	22	1.5844155844155845	0.5007069665182016
+0.7157287157287154	1	22	1.5887445887445888	0.507285299459376
+0.7135642135642133	1	22	1.593073593073593	0.507285299459376
+0.711399711399711	1	22	1.5974025974025974	0.507285299459376
+0.7085137085137081	1	22	1.606060606060606	0.5099739615801743
+0.706349206349206	1	22	1.6103896103896105	0.5127136593570037
+0.7041847041847038	1	22	1.6147186147186148	0.5155276486064744
+0.7020202020202017	1	22	1.619047619047619	0.5155276486064744
+0.6998556998556994	1	22	1.6233766233766234	0.5165885640545015
+0.6976911976911973	1	22	1.6277056277056277	0.5192678604659035
+0.6940836940836937	1	22	1.6406926406926408	0.5193988976037629
+0.6911976911976909	1	22	1.6493506493506493	0.5220028921753626
+0.6890331890331888	1	22	1.6536796536796536	0.5222350044335767
+0.686147186147186	1	22	1.6623376623376624	0.531825904221935
+0.6839826839826837	1	22	1.6666666666666667	0.531825904221935
+0.6818181818181815	1	22	1.670995670995671	0.5329099083314658
+0.6796536796536794	1	22	1.6753246753246753	0.5329099083314658
+0.6767676767676765	1	22	1.683982683982684	0.5375146394426378
+0.6746031746031743	1	22	1.6883116883116882	0.538363150856134
+0.6724386724386721	1	22	1.6926406926406927	0.5388163778917376
+0.6695526695526692	1	22	1.7012987012987013	0.5414042213765773
+0.6673881673881671	1	22	1.7056277056277056	0.5416433472554433
+0.6645021645021643	1	22	1.7142857142857142	0.5462304440664867
+0.6616161616161613	1	22	1.722943722943723	0.552009998503754
+0.6587301587301583	1	22	1.7316017316017316	0.5549383645672068
+0.6551226551226548	1	22	1.7445887445887447	0.5574743301938249
+0.6529581529581526	1	22	1.748917748917749	0.5615930060394375
+0.6489898989898987	1	22	1.7662337662337662	0.5682148035252003
+0.6468253968253965	1	22	1.7705627705627707	0.5741556490001949
+0.6424963924963922	1	22	1.7878787878787878	0.576646533485932
+0.6403318903318901	1	22	1.7922077922077921	0.5865014541808986
+0.6374458874458871	1	22	1.800865800865801	0.5898335518730752
+0.6352813852813851	1	22	1.8051948051948052	0.5912836431485182
+0.633116883116883	1	22	1.8095238095238095	0.5924863725911821
+0.63023088023088	1	22	1.8181818181818181	0.5924863725911821
+0.625901875901876	1	22	1.8354978354978355	0.5924863725911821
+0.6237373737373738	1	22	1.8398268398268398	0.5956166848303325
+0.6201298701298702	1	22	1.852813852813853	0.5956166848303325
+0.6165223665223665	1	22	1.8658008658008658	0.6011573751995122
+0.6136363636363638	1	22	1.8744588744588744	0.6011573751995122
+0.6107503607503608	1	22	1.8831168831168832	0.6064456772001942
+0.6078643578643581	1	22	1.8917748917748918	0.6064456772001942
+0.605699855699856	1	22	1.896103896103896	0.6101436994028886
+0.6035353535353537	1	22	1.9004329004329004	0.6138720742375038
+0.5984848484848487	1	22	1.922077922077922	0.6210343507428806
+0.5598845598845604	2	21	1.8571428571428572	0.59967978617515
+0.5562770562770569	2	21	1.8714285714285714	0.6086666863029843
+0.5526695526695534	2	21	1.8857142857142857	0.6119382274067969
+0.5505050505050512	2	21	1.8904761904761904	0.6169952980691545
+0.5476190476190483	2	21	1.9	0.6184084061820928
+0.5447330447330455	2	21	1.9095238095238096	0.6301080420185805
+0.5404040404040412	2	21	1.9285714285714286	0.6313522648000369
+0.5346320346320357	2	21	1.957142857142857	0.6465438969823625
+0.5295815295815307	2	21	1.980952380952381	0.6466498967561956
+0.5241702741702754	2	21	2.0095238095238095	0.6624386215784394
+0.5191197691197704	2	21	2.033333333333333	0.6737241297900168
+0.5147907647907661	2	21	2.052380952380952	0.6876592130658082
+0.5119047619047631	2	21	2.0619047619047617	0.6973097486055011
+0.5082972582972595	2	21	2.0761904761904764	0.7055005476179423
+0.5000000000000011	2	21	2.1285714285714286	0.7162253531583533
+0.4953102453102465	2	21	2.1523809523809523	0.7247836984999729
+0.4848484848484859	2	21	2.2333333333333334	0.739826438726594
+0.4788600288600299	2	21	2.2714285714285714	0.7747543323396113
+0.47128427128427225	2	21	2.3190476190476192	0.8079872378580324
+0.46623376623376706	2	21	2.3476190476190477	0.8289746587650546
+0.46024531024531096	2	21	2.3904761904761904	0.8699154683561408
+0.4556998556998563	2	21	2.419047619047619	0.8909232872169264
+0.4506493506493513	2	21	2.442857142857143	0.8909232872169264
+0.44321789321789373	2	21	2.4952380952380953	0.9068543962086902
+0.4347041847041851	2	21	2.5619047619047617	0.964212824273513
+0.4318181818181822	2	21	2.5714285714285716	0.9814666897169617
+0.42821067821067865	2	21	2.585714285714286	0.9814666897169617
+0.411111111111111	2	21	2.8	1.0553173539940783
+0.393207586064729	2	21	3.0619047619047617	1.0789549065942359
+0.3875798804370232	2	21	3.1	1.1410391339359314
+0.3743918779633062	2	21	3.3047619047619046	1.2793421623732708
+0.3676149247577815	2	21	3.376190476190476	1.367197671203991
+0.3619872191300759	2	21	3.414285714285714	1.444322030908389
+0.3349309420737993	3	20	3.3684210526315788	1.433900191141225
+0.3217274788703362	3	20	3.5210526315789474	1.4723183048213426
+0.3177592249020823	3	20	3.542105263157895	1.4792126245834123
+0.29015666872809737	4	19	3.526315789473684	1.4779849500695796
+0.27891843606129324	4	19	3.719298245614035	1.4919530898151332
+0.25672198172198185	5	18	3.6143790849673203	1.4721209978803276
+0.21541091183948335	6	16	3.533333333333333	1.4948652003752192
+0.18324572253143687	7	14	3.197802197802198	1.3616301881650628
+0.1622809729952588	8	13	3.1538461538461537	1.3433550682518323
+0.12857142857142864	9	10	2.2444444444444445	1.1258431128788784
+0.12460317460317469	9	10	2.3333333333333335	1.184070744704928
+0.12027417027417033	10	10	2.3333333333333335	1.184070744704928
+0.10367965367965368	11	9	2.2222222222222223	1.1573045581242776
+0.09711399711399711	11	9	2.5555555555555554	1.3872373447876984
+0.09256854256854256	11	9	2.7222222222222223	1.551344395092641
+0.06919191919191918	12	7	2.4761904761904763	1.526960441535176
+0.05714285714285714	13	6	2.3333333333333335	1.3945983875300754
+0.04256854256854256	14	4	1.6666666666666667	1.164257684221145
+0.03463203463203463	15	3	1.3333333333333333	1.0318269927635297
+0.02813852813852814	16	3	1.3333333333333333	0.2792577072772897
+0.023809523809523808	17	3	1.3333333333333333	0.2792577072772897
+0.017316017316017316	18	2	1.0	0.5814599222259041
+0.012987012987012988	19	2	1.0	0.26772844377972826
+0.008658008658008658	20	2	1.0	0.20381045911934195
+0.004329004329004329	21	2	1.0	0.6805431034103216
+Robustness test to targeted attack
+
+Highest ranking node removal
+
+network efficiency	number of connected components	size of largest island	average of shortest path lengths	average of weighted shortest path lengths
+0.85	1	21	1.3	0.4094920210216905
+0.7842105263157895	2	19	1.2573099415204678	0.3887430950456619
+0.7660818713450293	2	18	1.2875816993464053	0.3894034419265298
+0.7450980392156863	2	17	1.3235294117647058	0.38936513673375817
+0.7205882352941176	2	16	1.3666666666666667	0.3898177637605439
+0.6916666666666667	2	15	1.4190476190476191	0.40057766033078773
+0.6571428571428571	2	14	1.4835164835164836	0.41472223375905487
+0.6062271062271062	2	13	1.6282051282051282	0.45269061454463255
+0.4401709401709402	4	10	1.488888888888889	0.3895037185197475
+0.3333333333333333	5	8	1.4285714285714286	0.36939741528648273
+0.21818181818181817	6	6	1.4	0.3313361934434199
+0.1111111111111111	7	4	1.3333333333333333	0.3041959142138922
+0.027777777777777776	8	2	1.0	0.2105179592002105
+0.0	8	1	0	0
+0.0	7	1	0	0
+0.0	6	1	0	0
+0.0	5	1	0	0
+0.0	4	1	0	0
+0.0	3	1	0	0
+0.0	2	1	0	0
+0	1	1	0	0
+
+
+Most important bridge removal
+
+network efficiency	number of connected components	size of largest island	average of shortest path lengths	average of weighted shortest path lengths
+0.8614718614718615	1	22	1.277056277056277	0.41152837320831037
+0.8138528138528138	2	21	1.2095238095238094	0.39261638957204065
+0.8116883116883117	2	21	1.2142857142857142	0.3949124019401112
+0.8095238095238095	2	21	1.2190476190476192	0.39713425569030664
+0.8073593073593074	2	21	1.223809523809524	0.40194990219289506
+0.8051948051948052	2	21	1.2285714285714286	0.4045303202258813
+0.803030303030303	2	21	1.2333333333333334	0.40734395635270665
+0.8008658008658008	2	21	1.2380952380952381	0.41010614191057626
+0.7987012987012987	2	21	1.2428571428571429	0.41287467125267174
+0.7943722943722943	2	21	1.2619047619047619	0.4232693141775755
+0.7510822510822511	3	20	1.1736842105263159	0.396370816579856
+0.7489177489177489	3	20	1.1789473684210525	0.3996050711797575
+0.7467532467532467	3	20	1.1842105263157894	0.402370862451871
+0.7445887445887446	3	20	1.1894736842105262	0.4044433284138385
+0.7424242424242424	3	20	1.194736842105263	0.4065158520949031
+0.7402597402597403	3	20	1.2	0.4086011340109944
+0.7380952380952381	3	20	1.2052631578947368	0.4113209664610632
+0.7359307359307359	3	20	1.2105263157894737	0.41390832108033193
+0.7323232323232324	3	20	1.2263157894736842	0.4192441537006031
+0.6904761904761905	4	19	1.1345029239766082	0.3998600239844104
+0.6883116883116883	4	19	1.1403508771929824	0.4028666644231079
+0.6861471861471862	4	19	1.1461988304093567	0.4052718766184714
+0.683982683982684	4	19	1.152046783625731	0.4078032456385049
+0.6818181818181818	4	19	1.1578947368421053	0.41037402768165254
+0.6796536796536796	4	19	1.1637426900584795	0.41284036739554975
+0.6774891774891775	4	19	1.1695906432748537	0.41543168981298245
+0.6753246753246753	4	19	1.1754385964912282	0.41866430216430783
+0.6731601731601732	4	19	1.1812865497076024	0.421631420987825
+0.6320346320346321	5	18	1.091503267973856	0.40084746187368653
+0.6298701298701299	5	18	1.0980392156862746	0.409976363084038
+0.6277056277056277	5	18	1.1045751633986929	0.41985648003810044
+0.6255411255411255	5	18	1.1111111111111112	0.4287875683625185
+0.6233766233766234	5	18	1.1176470588235294	0.4350380946740077
+0.6212121212121212	5	18	1.1241830065359477	0.4422336560969238
+0.6190476190476191	5	18	1.130718954248366	0.4488462881315784
+0.6168831168831169	5	18	1.1372549019607843	0.45342077890728416
+0.6147186147186147	5	18	1.1437908496732025	0.45737288011292526
+0.5757575757575758	6	17	1.0441176470588236	0.434445354367397
+0.5735930735930735	6	17	1.0514705882352942	0.43813940241424687
+0.5714285714285714	6	17	1.0588235294117647	0.44122944771393696
+0.5692640692640693	6	17	1.0661764705882353	0.4450197045792171
+0.5670995670995671	6	17	1.0735294117647058	0.44924486512902706
+0.564935064935065	6	17	1.0808823529411764	0.4525383297103724
+0.5627705627705628	6	17	1.088235294117647	0.4615519839904292
+0.5606060606060606	6	17	1.0955882352941178	0.4655167303488681
+0.5584415584415584	6	17	1.1029411764705883	0.4685180694027309
+0.5562770562770563	6	17	1.1102941176470589	0.4721114356731223
+0.5541125541125541	6	17	1.1176470588235294	0.47592275301568954
+0.551948051948052	6	17	1.125	0.47963822489176783
+0.5151515151515151	7	16	1.0166666666666666	0.45215574020393595
+0.512987012987013	7	16	1.025	0.4551908873725599
+0.5108225108225108	7	16	1.0333333333333334	0.45817346981148044
+0.5086580086580087	7	16	1.0416666666666667	0.46076130710274865
+0.5064935064935064	7	16	1.05	0.46293685543211455
+0.5043290043290043	7	16	1.0583333333333333	0.4656464851015213
+0.5021645021645021	7	16	1.0666666666666667	0.4676090236073281
+0.5	7	16	1.075	0.47099947959174127
+0.49783549783549785	7	16	1.0833333333333333	0.4741643781491613
+0.49567099567099565	7	16	1.0916666666666666	0.4766867704737953
+0.4935064935064935	7	16	1.1	0.47899449491386636
+0.49134199134199136	7	16	1.1083333333333334	0.48226732490859114
+0.48917748917748916	7	16	1.1166666666666667	0.48473826694970806
+0.45454545454545453	8	15	1.0	0.4706072203580355
+0.4523809523809524	8	15	1.0095238095238095	0.4706140428875091
+0.45021645021645024	8	15	1.019047619047619	0.4706140428875091
+0.44805194805194803	8	15	1.0285714285714285	0.4706140428875091
+0.4458874458874459	8	15	1.0380952380952382	0.4709092850456418
+0.44372294372294374	8	15	1.0476190476190477	0.4717901953593741
+0.44155844155844154	8	15	1.0571428571428572	0.4733337823415948
+0.4393939393939394	8	15	1.0666666666666667	0.4733337823415948
+0.43722943722943725	8	15	1.0761904761904761	0.47339484960009937
+0.43506493506493504	8	15	1.0857142857142856	0.49534976865847946
+0.4329004329004329	8	15	1.0952380952380953	0.4974042647560074
+0.43073593073593075	8	15	1.1047619047619048	0.4988151475449221
+0.42857142857142855	8	15	1.1142857142857143	0.5019794388340145
+0.4264069264069264	8	15	1.1238095238095238	0.5041601866718883
+0.3939393939393939	9	14	1.0	0.4589005839755103
+0.3917748917748918	9	14	1.010989010989011	0.45894984815123435
+0.38961038961038963	9	14	1.021978021978022	0.4592299372019576
+0.3874458874458874	9	14	1.032967032967033	0.4605908824444158
+0.3852813852813853	9	14	1.043956043956044	0.46158779556674373
+0.38311688311688313	9	14	1.054945054945055	0.4634810151063951
+0.38095238095238093	9	14	1.065934065934066	0.4635187447488672
+0.3787878787878788	9	14	1.0769230769230769	0.46373994238794997
+0.37662337662337664	9	14	1.0879120879120878	0.4871087852075556
+0.37445887445887444	9	14	1.098901098901099	0.4903104274523308
+0.3722943722943723	9	14	1.10989010989011	0.4936462911215584
+0.37012987012987014	9	14	1.120879120879121	0.4976787355271843
+0.36796536796536794	9	14	1.1318681318681318	0.5012315257033031
+0.33766233766233766	10	13	1.0	0.44303006652716637
+0.3354978354978355	10	13	1.0128205128205128	0.44303006652716637
+0.3333333333333333	10	13	1.0256410256410255	0.44355908464948823
+0.33116883116883117	10	13	1.0384615384615385	0.4451066173235681
+0.329004329004329	10	13	1.0512820512820513	0.4481722437164827
+0.3268398268398268	10	13	1.064102564102564	0.4481722437164827
+0.3246753246753247	10	13	1.0769230769230769	0.4485670497261532
+0.3225108225108225	10	13	1.0897435897435896	0.46980756392699635
+0.3203463203463203	10	13	1.1025641025641026	0.4720879941099905
+0.3181818181818182	10	13	1.1153846153846154	0.4736450539271276
+0.31601731601731603	10	13	1.1282051282051282	0.4775766057835141
+0.31385281385281383	10	13	1.141025641025641	0.4799917569918267
+0.2857142857142857	11	12	1.0	0.42283623732019326
+0.28354978354978355	11	12	1.0151515151515151	0.4235294467456662
+0.2813852813852814	11	12	1.0303030303030303	0.42550156105644976
+0.2792207792207792	11	12	1.0454545454545454	0.42976183308189553
+0.27705627705627706	11	12	1.0606060606060606	0.42976183308189553
+0.2748917748917749	11	12	1.0757575757575757	0.4303350683218104
+0.2727272727272727	11	12	1.0909090909090908	0.4532156075231223
+0.27056277056277056	11	12	1.106060606060606	0.4558654433214665
+0.2683982683982684	11	12	1.121212121212121	0.4577326188267883
+0.2662337662337662	11	12	1.1363636363636365	0.46207180318062496
+0.26406926406926406	11	12	1.1515151515151516	0.46513551980952517
+0.23809523809523808	12	11	1.0	0.40016263722424683
+0.23593073593073594	12	11	1.018181818181818	0.4028679645280501
+0.23376623376623376	12	11	1.0363636363636364	0.40688824838592197
+0.23160173160173161	12	11	1.0545454545454545	0.4077233837181841
+0.22943722943722944	12	11	1.0727272727272728	0.4096885051654211
+0.22727272727272727	12	11	1.0909090909090908	0.42445713835439713
+0.22510822510822512	12	11	1.1090909090909091	0.4279526785343339
+0.22294372294372294	12	11	1.1272727272727272	0.4311685067911812
+0.22077922077922077	12	11	1.1454545454545455	0.43684737300302584
+0.21861471861471862	12	11	1.1636363636363636	0.44070622612097315
+0.19480519480519481	13	10	1.0	0.4048429035125741
+0.19264069264069264	13	10	1.0222222222222221	0.40771701153359924
+0.19047619047619047	13	10	1.0444444444444445	0.41013998848534616
+0.18831168831168832	13	10	1.0666666666666667	0.41155339840269484
+0.18614718614718614	13	10	1.0888888888888888	0.4349804335907302
+0.18398268398268397	13	10	1.1111111111111112	0.44299649115386425
+0.18181818181818182	13	10	1.1333333333333333	0.4515261181478072
+0.17965367965367965	13	10	1.1555555555555554	0.46017368961833194
+0.1774891774891775	13	10	1.1777777777777778	0.46823182727250995
+0.15584415584415584	14	9	1.0	0.41490956053065475
+0.15367965367965367	14	9	1.0277777777777777	0.42009572608270307
+0.15151515151515152	14	9	1.0555555555555556	0.4231043272416675
+0.14935064935064934	14	9	1.0833333333333333	0.43956751491705237
+0.1471861471861472	14	9	1.1111111111111112	0.44906946134529174
+0.14502164502164502	14	9	1.1388888888888888	0.45772513236477763
+0.14285714285714285	14	9	1.1666666666666667	0.4697166000057783
+0.1406926406926407	14	9	1.1944444444444444	0.4797261729379209
+0.12121212121212122	15	8	1.0	0.4467748470513652
+0.11904761904761904	15	8	1.0357142857142858	0.4467748470513652
+0.11688311688311688	15	8	1.0714285714285714	0.46886767748029545
+0.11471861471861472	15	8	1.1071428571428572	0.473723104962951
+0.11255411255411256	15	8	1.1428571428571428	0.4782947568161404
+0.11038961038961038	15	8	1.1785714285714286	0.4883479311098207
+0.10822510822510822	15	8	1.2142857142857142	0.4953339041788992
+0.09090909090909091	16	7	1.0	0.41712764573123695
+0.08874458874458875	16	7	1.0476190476190477	0.43307536011628744
+0.08658008658008658	16	7	1.0952380952380953	0.44614114458871146
+0.08441558441558442	16	7	1.1428571428571428	0.4591490727727243
+0.08225108225108226	16	7	1.1904761904761905	0.4779398418067163
+0.08008658008658008	16	7	1.2380952380952381	0.49386920678541263
+0.06493506493506493	17	6	1.0	0.4036158307638184
+0.06277056277056277	17	6	1.0666666666666667	0.4252188309948584
+0.06060606060606061	17	6	1.1333333333333333	0.4522836706750272
+0.05844155844155844	17	6	1.2	0.475838491215358
+0.05627705627705628	17	6	1.2666666666666666	0.49741489667006616
+0.04329004329004329	18	5	1.0	0.4861165152260135
+0.04112554112554113	18	5	1.1	0.504412443702955
+0.03896103896103896	18	5	1.2	0.5342461687080883
+0.0367965367965368	18	5	1.3	0.5570311246710882
+0.025974025974025976	19	4	1.0	0.48256407187629136
+0.023809523809523808	19	4	1.1666666666666667	0.5329156261783544
+0.021645021645021644	19	4	1.3333333333333333	0.5476320375340441
+0.012987012987012988	20	3	1.0	0.4291642225054053
+0.010822510822510822	20	3	1.3333333333333333	0.543454466000679
+0.004329004329004329	21	2	1.0	0.3744689519821161

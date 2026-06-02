@@ -4,11 +4,15 @@
 
 TO DO LIST
 --
+- file load function
+- administration / thr, sampling_freq
 - plot time signals
-- find k for k means clustering
+- (find k for k-means clustering)
+- (visualize k-means clustering)
+- save 2 ROI spectral coherence analysis
+- write SCA to file with tabulators so it fits into Excel
 - add missing graph parametres
 - check correctness of computation of graph parametres
-- clean up functions
 - test for 4D data
 - compair data
 
@@ -16,6 +20,7 @@ TO DO LIST
 
 NOTES
 --
+- test with 0s_to_600.024s_2D_Matrix
 - K-means does not accept NaN data
 
 Abbrevitations
