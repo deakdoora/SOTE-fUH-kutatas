@@ -1,0 +1,21 @@
+Matrix;Primary somatosensory area, barrel field (L);Primary somatosensory area, barrel field (R);Primary somatosensory area, lower limb (L);Primary somatosensory area, lower limb (R);Supplemental somatosensory area (L);Supplemental somatosensory area (R);Olfactory areas (L);Olfactory areas (R);Hippocampal formation (L);Hippocampal formation (R);Cortical subplate (L);Cortical subplate (R);Striatum (L);Striatum (R);Pallidum (L);Pallidum (R);Thalamus (L);Thalamus (R);Hypothalamus (L);Hypothalamus (R)
+Primary somatosensory area, barrel field (L);;;;;;;;;;;;;;;;;;;;
+Primary somatosensory area, barrel field (R);;;;;;;;;;;;;;;;;;;;
+Primary somatosensory area, lower limb (L);;;;;;;;;;;;;;;;;;;;
+Primary somatosensory area, lower limb (R);;;;;;;;;;;;;;;;;;;;
+Supplemental somatosensory area (L);;;;;;;;;;;;;;;;;;;;
+Supplemental somatosensory area (R);;;;;;;;;;;;;;;;;;;;
+Olfactory areas (L);;;;;;;1;;0.692289746838395;0.61457017213516;0.222984728134923;;;;;;0.648145440559885;0.0606195730552792;;
+Olfactory areas (R);;;;;;;;;;;;;;;;;;;;
+Hippocampal formation (L);;;;;;;0.692289746838395;;0.999999999999999;0.707580541464088;0.188328382439303;;;;;;0.908720135482565;0.094296032542503;;
+Hippocampal formation (R);;;;;;;0.61457017213516;;0.707580541464088;1;0.207707703824988;;;;;;0.627740970182901;0.102804410927729;;
+Cortical subplate (L);;;;;;;0.222984728134923;;0.188328382439303;0.207707703824988;1;;;;;;0.178259578659066;0.015698817729427;;
+Cortical subplate (R);;;;;;;;;;;;;;;;;;;;
+Striatum (L);;;;;;;;;;;;;;;;;;;;
+Striatum (R);;;;;;;;;;;;;;;;;;;;
+Pallidum (L);;;;;;;;;;;;;;;;;;;;
+Pallidum (R);;;;;;;;;;;;;;;;;;;;
+Thalamus (L);;;;;;;0.648145440559885;;0.908720135482565;0.627740970182901;0.178259578659066;;;;;;1;0.0788789826850352;;
+Thalamus (R);;;;;;;0.0606195730552792;;0.094296032542503;0.102804410927729;0.015698817729427;;;;;;0.0788789826850352;1;;
+Hypothalamus (L);;;;;;;;;;;;;;;;;;;;
+Hypothalamus (R);;;;;;;;;;;;;;;;;;;;

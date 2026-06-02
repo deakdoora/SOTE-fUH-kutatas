@@ -1,0 +1,21 @@
+Matrix;Primary somatosensory area, barrel field (L);Primary somatosensory area, barrel field (R);Primary somatosensory area, lower limb (L);Primary somatosensory area, lower limb (R);Supplemental somatosensory area (L);Supplemental somatosensory area (R);Olfactory areas (L);Olfactory areas (R);Hippocampal formation (L);Hippocampal formation (R);Cortical subplate (L);Cortical subplate (R);Striatum (L);Striatum (R);Pallidum (L);Pallidum (R);Thalamus (L);Thalamus (R);Hypothalamus (L);Hypothalamus (R)
+Primary somatosensory area, barrel field (L);;;;;;;;;;;;;;;;;;;;
+Primary somatosensory area, barrel field (R);;;;;;;;;;;;;;;;;;;;
+Primary somatosensory area, lower limb (L);;;;;;;;;;;;;;;;;;;;
+Primary somatosensory area, lower limb (R);;;;;;;;;;;;;;;;;;;;
+Supplemental somatosensory area (L);;;;;;;;;;;;;;;;;;;;
+Supplemental somatosensory area (R);;;;;;;;;;;;;;;;;;;;
+Olfactory areas (L);;;;;;;1;0.273287450297485;0.559812006527705;0.496275109117145;0.104179870736241;;;;;;0.126819739034984;0.284704188047255;;
+Olfactory areas (R);;;;;;;0.273287450297485;1;0.43320049167894;0.443730341522878;0.0729992625435144;;;;;;0.0939153066659964;0.189856253189471;;
+Hippocampal formation (L);;;;;;;0.559812006527705;0.43320049167894;1;0.776040413068725;0.0835414465741051;;;;;;0.239134905160998;0.429641371531799;;
+Hippocampal formation (R);;;;;;;0.496275109117145;0.443730341522878;0.776040413068725;1;0.078313676295751;;;;;;0.254444643294766;0.375655850837476;;
+Cortical subplate (L);;;;;;;0.104179870736241;0.0729992625435144;0.0835414465741051;0.078313676295751;1;;;;;;0.0611594396957795;0.00611681609602083;;
+Cortical subplate (R);;;;;;;;;;;;;;;;;;;;
+Striatum (L);;;;;;;;;;;;;;;;;;;;
+Striatum (R);;;;;;;;;;;;;;;;;;;;
+Pallidum (L);;;;;;;;;;;;;;;;;;;;
+Pallidum (R);;;;;;;;;;;;;;;;;;;;
+Thalamus (L);;;;;;;0.126819739034984;0.0939153066659964;0.239134905160998;0.254444643294766;0.0611594396957795;;;;;;1;0.116396569401507;;
+Thalamus (R);;;;;;;0.284704188047255;0.189856253189471;0.429641371531799;0.375655850837476;0.00611681609602083;;;;;;0.116396569401507;1;;
+Hypothalamus (L);;;;;;;;;;;;;;;;;;;;
+Hypothalamus (R);;;;;;;;;;;;;;;;;;;;

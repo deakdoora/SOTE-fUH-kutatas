@@ -1,0 +1,21 @@
+Matrix;Primary somatosensory area, barrel field (L);Primary somatosensory area, barrel field (R);Primary somatosensory area, lower limb (L);Primary somatosensory area, lower limb (R);Supplemental somatosensory area (L);Supplemental somatosensory area (R);Olfactory areas (L);Olfactory areas (R);Hippocampal formation (L);Hippocampal formation (R);Cortical subplate (L);Cortical subplate (R);Striatum (L);Striatum (R);Pallidum (L);Pallidum (R);Thalamus (L);Thalamus (R);Hypothalamus (L);Hypothalamus (R)
+Primary somatosensory area, barrel field (L);;;;;;;;;;;;;;;;;;;;
+Primary somatosensory area, barrel field (R);;;;;;;;;;;;;;;;;;;;
+Primary somatosensory area, lower limb (L);;;;;;;;;;;;;;;;;;;;
+Primary somatosensory area, lower limb (R);;;;;;;;;;;;;;;;;;;;
+Supplemental somatosensory area (L);;;;;;;;;;;;;;;;;;;;
+Supplemental somatosensory area (R);;;;;;;;;;;;;;;;;;;;
+Olfactory areas (L);;;;;;;1;0.167978296568693;0.00623990054601477;-0.0121642603298804;0.0961412878841267;0.0369041521245067;;;;;-0.0720013276003671;-0.0396710980515447;;
+Olfactory areas (R);;;;;;;0.167978296568693;1;-0.252243547772424;-0.293989576066122;0.0365240028737667;0.117202813308952;;;;;-0.118307551381031;-0.116924875774267;;
+Hippocampal formation (L);;;;;;;0.00623990054601477;-0.252243547772424;1;0.68962153816108;-0.0131935594687568;0.00933833346444599;;;;;0.516596030832365;0.57945725579492;;
+Hippocampal formation (R);;;;;;;-0.0121642603298804;-0.293989576066122;0.68962153816108;1;-0.0303328888053432;-0.00414304902344156;;;;;0.387482110142738;0.494187743267814;;
+Cortical subplate (L);;;;;;;0.0961412878841267;0.0365240028737667;-0.0131935594687568;-0.0303328888053432;1;-0.00502800939453983;;;;;-0.0103222526628571;-0.0163483282766535;;
+Cortical subplate (R);;;;;;;0.0369041521245067;0.117202813308952;0.00933833346444599;-0.00414304902344156;-0.00502800939453983;1;;;;;0.00994588824219395;-0.0161300423242868;;
+Striatum (L);;;;;;;;;;;;;;;;;;;;
+Striatum (R);;;;;;;;;;;;;;;;;;;;
+Pallidum (L);;;;;;;;;;;;;;;;;;;;
+Pallidum (R);;;;;;;;;;;;;;;;;;;;
+Thalamus (L);;;;;;;-0.0720013276003671;-0.118307551381031;0.516596030832365;0.387482110142738;-0.0103222526628571;0.00994588824219395;;;;;1;0.440564237803464;;
+Thalamus (R);;;;;;;-0.0396710980515447;-0.116924875774267;0.57945725579492;0.494187743267814;-0.0163483282766535;-0.0161300423242868;;;;;0.440564237803464;1;;
+Hypothalamus (L);;;;;;;;;;;;;;;;;;;;
+Hypothalamus (R);;;;;;;;;;;;;;;;;;;;
