@@ -1165,7 +1165,7 @@ def runtime():
 
                                 path = shortest_path(network_graph)
                                 save_path(path, fng)
-                                print('Shortest paths:\n', path)
+                                print('\nShortest paths:\n', path)
 
                                 ng = True
 
@@ -1173,7 +1173,7 @@ def runtime():
 
                                 ave_l = ave_path_length(network_graph)
                                 save_one_liner('Average shortest path length', ave_l, fng)
-                                print('Average shortest path length:', ave_l)
+                                print('\nAverage shortest path length:', ave_l)
 
                                 ave_wl = ave_weighted_path_length(network_graph)
                                 save_one_liner('Average weighted shortest path length', ave_wl, fng)
@@ -1181,63 +1181,94 @@ def runtime():
 
                                 ng = True
 
-                            case 12:    # 
+                            case 12:    # diameter
 
+                                d = diameter(network_graph)
+                                save_one_liner('Diameter', d, fng)
+                                print('\nDiameter:', d)
 
-
-                                ng = True
-
-                            case 13:    # 
-
-
-
-                                ng = True
-
-                            case 14:    # 
-
-
+                                wd = weighted_diameter(network_graph)
+                                save_one_liner('Weighted diameter', wd, fng)
+                                print('Weighted diameter', wd)
 
                                 ng = True
 
-                            case 15:    # 
+                            case 13:    # connected components
 
-
-
-                                ng = True
-
-                            case 16:    # 
-
-
+                                n, conn_comp = connected_components(network_graph)
+                                fng.write('Number of islands: ' + str(n) + '\n')
+                                fng.write(str(conn_comp) + '\n\n')
+                                print('\nNumber of islands:', n)
+                                print(str(conn_comp))
 
                                 ng = True
 
-                            case 17:    # 
+                            case 14:    # largest connected component
 
-
-
-                                ng = True
-
-                            case 18:    # 
-
-
+                                giant = giant_component(network_graph)
+                                save_array('Largest island', giant, fng)
+                                print('\nLargest island:\n', giant)
 
                                 ng = True
 
-                            case 19:    # 
+                            case 15:    # modularity
 
+                                mod = modularity(network_graph)
+                                save_one_liner('Modularity', mod, fng)
+                                print('\nModularity:', mod)
 
+                                wmod = weighted_modularity(network_graph)
+                                save_one_liner('Weighted modularity', wmod, fng)
+                                print('Weighted modularity:', wmod)
+
+                                ng = True
+
+                            case 16:    # assortativity
+
+                                a = assortativity(network_graph)
+                                save_one_liner('Assortativity', a, fng)
+                                print('\nAssortativity:', a)
+
+                                ng = True
+
+                            case 17:    # network efficiency
+
+                                ne = network_efficiency(network_graph)
+                                save_one_liner('Network efficiency', ne, fng)
+                                print('\nNetwork efficiency:', ne)
+
+                                wne = weighted_network_efficiency(network_graph)
+                                save_one_liner('Weighted network efficiency', wne, fng)
+                                print('Weighted network efficiency:', wne)
+
+                                ng = True
+
+                            case 18:    # robustness to random failure
+
+                                robustness_to_random_failure(network_graph, fng)
+                                print('\n< Robustness to random failure has been saved to file >')
+
+                                ng = True
+
+                            case 19:    # robustness to targetted attack
+
+                                robustness_to_targeted_attack(network_graph, fng)
+                                print('\n< Robustness to targetted attack has been saved to file >')
 
                                 ng = True
 
                             case 20:    # Quit network graph
                                 options = True
                                 break
+                            
                             case 21:    # New data file
                                 userinput = 5
                                 options = False
                                 break
+                            
                             case 22:    # Quit
                                 return
+                            
                             case _:
                                 print("Choose from above:")
                                 userinput_ng = 0

@@ -11,6 +11,7 @@ TO DO LIST
 - (visualize k-means clustering)
 - save 2 ROI spectral coherence analysis
 - write SCA to file with tabulators so it fits into Excel
+- visualize connected components
 - add missing graph parametres
 - check correctness of computation of graph parametres
 - test for 4D data
