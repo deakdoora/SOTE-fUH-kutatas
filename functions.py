@@ -32,19 +32,20 @@ def load_data(filepath):
     data_list = []
 
     # Read labels (first row, skip first column)
-    with open(filepath, "r") as f:
-        reader = csv.reader(f)
-        labels = next(reader)[1:] # (handles quoted commas, reads only brain regions)
+    for file in glob.glob(filepath):
+        with open(file, "r") as f:
+            reader = csv.reader(f)
+            labels = next(reader)[1:] # (handles quoted commas, reads only brain regions)
 
-        # Read numeric data rows (skip header)
-        for row in reader:
-            processed_row = []
-            for value in row:
-                if value.strip() == "":   # empty field
-                    processed_row.append(np.nan)
-                else:
-                    processed_row.append(float(value))
-            data_list.append(processed_row)
+            # Read numeric data rows (skip header)
+            for row in reader:
+                processed_row = []
+                for value in row:
+                    if value.strip() == "":   # empty field
+                        processed_row.append(np.nan)
+                    else:
+                        processed_row.append(float(value))
+                data_list.append(processed_row)
 
     # Convert to numpy array
     data = np.array(data_list)
@@ -773,6 +774,23 @@ def save_array(text, array, file):
 
 # VISUALIZATION .................................................................................................
 
+def show_time_signals(timestamp, data_matrix, labels):
+    '''
+    Recieves: timestamp (instances of elapsed time)
+              data_matrix (signal values of all ROIs in time)
+              labels (names of ROIs)
+    Returns: (creates a plot of the time signals of all ROIs with respect to time)
+    '''
+    
+    for i in range(len(np.transpose(data_matrix))):
+        plt.plot(timestamp, np.transpose(data_matrix)[i], alpha = 1/20 * (i+1))
+
+    plt.title('Signal Strenghts of Brain Regions with respect to Time')
+    plt.xlabel('Time')
+    plt.ylabel('Signal Strength')
+    plt.legend(labels)
+    plt.grid()
+    plt.show()
 def show_corr_matrix(corr_matrix):
     '''
     Recieves: corr_matrix (correlation matrix)

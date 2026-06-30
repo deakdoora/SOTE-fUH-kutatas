@@ -2,26 +2,19 @@
 
 import functions as func
 
-# READ TIMESTAMPED DATA
-
-base_dir = Path(__file__).parent
-# Template for accessing file in nested folder
-#filename = base_dir / "folder name" / "filename.txt"
-
-sub_1663 = base_dir / "sub-1663" / "0s_to_1199.832s_sub1663-fus2D.txt"
-sub_2581 = base_dir / "sub-2581" / "0s_to_1199.832s_sub2581-fus2D.txt"
-sub_2584 = base_dir / "sub-2584" / "0s_to_900.036s_sub2584-fus2D.txt"
-sub_2585 = base_dir / "sub-2585" / "0s_to_900.036s_sub2585-fus2D.txt"
-sub_f01 = base_dir / "sub-f01" / "0s_to_899.824s_subf01-fus2D.txt"
-sub_fUS_2357 = base_dir / "sub-fUS-2357" / "0s_to_1800.001s_subfUS2357-fus2D.txt"
-sub_fUS_2358 = base_dir / "sub-fUS-2358" / "0s_to_900.0005s_subfUS2358-fus2D.txt"
-sub_fUS_2383_WT = base_dir / "sub-fUS-2383-WT" / "0s_to_1200.0006s_subfUS2383WT-fus2D.txt"
-sub_second = base_dir / "sub-second" / "0s_to_1199.832s_subsecond-fus2D.txt"
-
 # TEST INTERFACE
+
+labels, timestamp, data_matrix = func.load_data('sub-1663/*fus2D.txt')
+func.show_time_signals(timestamp, data_matrix, labels)
+corr_matrix = func.correlation_matrix(data_matrix, labels)
+func.show_corr_matrix(corr_matrix)
+#k_means_clusters = func.k_means_clustering(corr_matrix, labels)
+network_graph = func.graph(corr_matrix, 0)
+func.show_graph(network_graph)
 
 # USER INTERFACE
 
+'''
 def runtime():
     
     userinput = 0
@@ -524,8 +517,7 @@ def analysis(input_filename, output_filename): # complete analysis of a measurem
 
     # CLOSE FILE
     file.close()
-
-runtime()  # test with 0s_to_600.024s_2D_Matrix
+'''
+    
+#runtime()  # test with 0s_to_600.024s_2D_Matrix
 #analysis(sub_second, 'analysis_sub_second.txt')   # test with '0s_to_600.024s_2D_Matrix.txt' & 'analysis_test_i.txt'
-
-# glob.glob('*hu*n')
