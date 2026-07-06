@@ -782,13 +782,20 @@ def show_time_signals(timestamp, data_matrix, labels):
     Returns: (creates a plot of the time signals of all ROIs with respect to time)
     '''
     
+    notnan_index = []
     for i in range(len(np.transpose(data_matrix))):
-        plt.plot(timestamp, np.transpose(data_matrix)[i], alpha = 1/20 * (i+1))
+        if not np.isnan(np.transpose(data_matrix)[i][0]):
+            plt.plot(timestamp, np.transpose(data_matrix)[i]) #alpha = 1/20 * (i+1))
+            notnan_index.append(i)
 
-    plt.title('Signal Strenghts of Brain Regions with respect to Time')
+    notnan_roi_name = []
+    for j in range(len(notnan_index)):
+        notnan_roi_name.append(labels[notnan_index[j]])
+
+    plt.title('fUS Signal Strenghts of Brain Regions with respect to Time')
     plt.xlabel('Time')
     plt.ylabel('Signal Strength')
-    plt.legend(labels)
+    plt.legend(notnan_roi_name)
     plt.grid()
     plt.show()
 def show_corr_matrix(corr_matrix):

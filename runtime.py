@@ -4,7 +4,9 @@ import functions as func
 
 # TEST INTERFACE
 
-labels, timestamp, data_matrix = func.load_data('sub-1663/*fus2D.txt')
+subject = str(2585)
+
+labels, timestamp, data_matrix = func.load_data('sub-' + subject + '/*_sub' + subject + '-fus2D.txt')
 func.show_time_signals(timestamp, data_matrix, labels)
 corr_matrix = func.correlation_matrix(data_matrix, labels)
 func.show_corr_matrix(corr_matrix)
