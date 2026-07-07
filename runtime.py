@@ -4,17 +4,48 @@ import functions as func
 
 # TEST INTERFACE
 
-subject = '2585'
-setting = '3D_vol'
+subject = '2581' #'fUS-2383-WT'
+setting = '2D'
 
 labels, timestamp, data_matrix = func.load_data('sub-' + subject + '/*_*_*_sub*-fus' + setting + '.txt')
 data = func.group_var(subject, setting, labels, timestamp, data_matrix)
+
+corr_matrix = func.correlation_matrix(data)
+func.show_corr_matrix(data, corr_matrix)
+corr_matrix_validentries = func.correlation_matrix_dropnan(corr_matrix)
+func.show_corr_matrix(data, corr_matrix_validentries)
+
+'''
+file = None
+while (file == None):
+    try:
+        file = open('k-Means-Clustering_2581_3D-sbsi-slice.txt', "w")
+    except IOError:
+        print("Error opening file")
+k_means_clusters = func.k_means_clustering(corr_matrix_validentries, labels)
+func.save_k_means_clustering(k_means_clusters, file)
+file.close()
+'''
+
+'''
 func.show_time_signals(data)
 corr_matrix = func.correlation_matrix(data)
 func.show_corr_matrix(data, corr_matrix)
 #k_means_clusters = func.k_means_clustering(corr_matrix, labels)
 network_graph = func.graph(corr_matrix, 0)
 func.show_graph(data, network_graph)
+
+file = None
+while (file == None):
+    try:
+        file = open('test.txt', "w")
+    except IOError:
+        print("Error opening file")
+sca = func.spectral_coherence_analysis(data)
+func.save_spectral_coherence_analysis(sca, file)
+func.show_all_spectral_coherence_analysis(data, sca)
+file.close()
+'''
 
 # USER INTERFACE
 

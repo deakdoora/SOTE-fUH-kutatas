@@ -5,7 +5,7 @@ TO DO LIST
 ---
 
 <ul>
-<li> write SCA to file with tabulators so it fits into Excel
+<li> fix k-means clustering
 <li> add missing graph parametres
 </ul>
 

@@ -4,6 +4,7 @@ from collections import Counter
 from collections import namedtuple
 import csv
 import datetime
+import glob
 import matplotlib.pyplot as plt
 import networkx as nx
 import networkx.algorithms.community as nxac
@@ -11,11 +12,11 @@ from nilearn.connectome import ConnectivityMeasure
 import numpy as np
 import pandas as pd
 from pathlib import Path
+import plotly.express as px
 import random
 from scipy import signal
 import seaborn as sns
 from sklearn.cluster import KMeans
-import glob
 
 # FUNCTIONS °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 
@@ -83,6 +84,18 @@ def correlation_matrix(data):
     
     corr_matrix = pd.DataFrame(data = data.data_matrix, columns = data.labels).corr()
     return corr_matrix
+def correlation_matrix_dropnan(corr_matrix):
+    '''
+    Receives: corr_matrix (correlation matrix)
+    Returns: corr_matrix_validentries (correlation matrix excluding nan values)
+    '''
+    
+    corr_matrix_validentries = corr_matrix
+
+    corr_matrix_validentries = corr_matrix_validentries.dropna(axis = 'index', how = 'all')  # exclude all nan rows
+    corr_matrix_validentries = corr_matrix_validentries.dropna(axis = 'columns', how ='all') # exclude all nan columns
+    
+    return corr_matrix_validentries
 def k_means_clustering(data, corr_matrix):
     '''
     Receives: data (grouped original variables)
@@ -150,6 +163,7 @@ def graph(corr_matrix, thr):
     return network_graph
 '''
 corr_matrix = correlation_matrix(data)
+corr_matrix_validentries = correlation_matrix_dropnan(corr_matrix)
 k_means_clusters = k_means_clustering(data, corr_matrix)
 sca = spectral_coherence_analysis(data, sampling_freq = 15000000)
 network_graph = graph(corr_matrix, thr)
@@ -666,11 +680,9 @@ def save_k_means_clustering(k_means_clusters, file):
                 file.write('\t' + str(k_means_clusters[k][i][j]))
             file.write('\n')
         file.write('\n')
-def save_spectral_coherence_analysis(ROI_pair_s, f_s, Cxy_s, file):
+def save_spectral_coherence_analysis(sca, file):
     '''
-    Receives: ROI_pair_s (names of ROI pairs)
-              f_s (frequencies)
-              Cxy_s (coherence)
+    Receives: sca (ROI_pair_s & f_s & Cxy_s grouped)
               file (output file variable)
     Returns: (saves spectral coherence analysis data for all ROI pairs to file)
     '''
@@ -679,15 +691,15 @@ def save_spectral_coherence_analysis(ROI_pair_s, f_s, Cxy_s, file):
 
     # Title
     file.write('Frequency')
-    for k in range(len(ROI_pair_s)):
-        file.write('\t' + ROI_pair_s[k])
+    for k in range(len(sca.ROI_pair_s)):
+        file.write('\t' + sca.ROI_pair_s[k])
     file.write('\n')
 
     # Data
-    for j in range(len(f_s[0])):
-        file.write(str(f_s[0][j]))
-        for k in range(len(ROI_pair_s)):
-            file.write('\t' + str(Cxy_s[k][j]))
+    for j in range(len(sca.f_s[0])):
+        file.write(str(sca.f_s[0][j]))
+        for k in range(len(sca.ROI_pair_s)):
+            file.write('\t' + str(sca.Cxy_s[k][j]))
         file.write('\n')
     file.write('\n')
 def save_graph(graph, file):
