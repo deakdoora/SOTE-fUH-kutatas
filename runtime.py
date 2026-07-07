@@ -4,15 +4,17 @@ import functions as func
 
 # TEST INTERFACE
 
-subject = str(2585)
+subject = '2585'
+setting = '3D_vol'
 
-labels, timestamp, data_matrix = func.load_data('sub-' + subject + '/*_sub' + subject + '-fus2D.txt')
-func.show_time_signals(timestamp, data_matrix, labels)
-corr_matrix = func.correlation_matrix(data_matrix, labels)
-func.show_corr_matrix(corr_matrix)
+labels, timestamp, data_matrix = func.load_data('sub-' + subject + '/*_*_*_sub*-fus' + setting + '.txt')
+data = func.group_var(subject, setting, labels, timestamp, data_matrix)
+func.show_time_signals(data)
+corr_matrix = func.correlation_matrix(data)
+func.show_corr_matrix(data, corr_matrix)
 #k_means_clusters = func.k_means_clustering(corr_matrix, labels)
 network_graph = func.graph(corr_matrix, 0)
-func.show_graph(network_graph)
+func.show_graph(data, network_graph)
 
 # USER INTERFACE
 

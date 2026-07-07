@@ -1,6 +1,7 @@
 # IMPORTS °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 
 from collections import Counter
+from collections import namedtuple
 import csv
 import datetime
 import matplotlib.pyplot as plt
@@ -22,7 +23,7 @@ import glob
 
 def load_data(filepath):
     '''
-    Recieves: filepath (signals of ROIs in time)
+    Receives: filepath (signals of ROIs in time)
     Returns: labels (names of ROIs)
              timestamp (time instances)
              data_matrix (signal values of all ROIs in time)
@@ -55,29 +56,42 @@ def load_data(filepath):
     data_matrix = data[:, 1:]
 
     return labels, timestamp, data_matrix
+def group_var(subject, setting, labels, timestamp, data_matrix):
+    '''
+    Receives: subject (unique code of subject animal)
+              setting (abbreviation of the type of data preproceccing used)
+              labels (names of ROIs)
+              timestamp (time instances)
+              data_matrix (signal values of all ROIs in time)
+    Returns: data (received variables in a single group variable)
+    '''
+    
+    Data = namedtuple('Data', ('subject', 'setting', 'labels', 'timestamp', 'data_matrix'))
+    data = Data(subject, setting, labels, timestamp, data_matrix)
+
+    return data
 '''
-labels, timestamp, data_matrix = load_data('sub-1663/*fus2D.txt')
+labels, timestamp, data_matrix = load_data('sub-' + subject + '/*_*_*_sub*-fus' + setting + '.txt')
+data = group_var(subject, setting, labels, timestamp, data_matrix)
 '''
 
-def correlation_matrix(data_matrix, labels):
+def correlation_matrix(data):
     '''
-    Recieves: data_matrix (signal values of all ROIs in time)
-              labels (names of ROIs)
+    Receives: data (grouped original variables)
     Returns: corr_matrix (correlation matrix)
     '''
     
-    corr_matrix = pd.DataFrame(data = data_matrix, columns = labels).corr()
+    corr_matrix = pd.DataFrame(data = data.data_matrix, columns = data.labels).corr()
     return corr_matrix
-def k_means_clustering(corr_matrix, labels):
+def k_means_clustering(data, corr_matrix):
     '''
-    Recieves: corr_matrix (correlation matrix)
-              labels (names of ROIs)
-              num_clusters (# of clusters to distribute ROIs into)
+    Receives: data (grouped original variables)
+              corr_matrix (correlation matrix)
     Returns: k_means_clusters (names of ROIs serated into n # of clusters where 1 < n < # of ROIs)
     '''
 
     k_means_clusters = []
-    for num_clusters in range(2, len(labels)-1):
+    for num_clusters in range(2, len(data.labels)-1):
         # Initialize K-means model
         kmeans = KMeans(n_clusters = num_clusters, random_state = 42)
         # Fit K-means model (to rows)
@@ -89,36 +103,37 @@ def k_means_clustering(corr_matrix, labels):
             labels_i = []
             for j in range(len(clusters)):
                 if clusters[j] == i:
-                    labels_i.append(labels[j])
+                    labels_i.append(data.labels[j])
             labels_by_clusters.append(labels_i)
         k_means_clusters.append(labels_by_clusters)
 
     return k_means_clusters
-def spectral_coherence_analysis(data_matrix, labels, sampling_freq = 15000000):
+def spectral_coherence_analysis(data, sampling_freq = 15000000):
     '''
-    Recieves: data_matrix (signal values of all ROIs in time)
-              labels (names of ROIs)
+    Receives: data (grouped original variables)
               sampling_freq (sampling frequency of fUS device)
-    Returns: ROI_pair_s (names of ROI pairs)
-             f_s (frequencies)
-             Cxy_s (coherence)
+    Returns: sca (ROI_pair_s & f_s & Cxy_s grouped)
     '''
     
-    ROI_pair_s = []
-    f_s = []
-    Cxy_s = []
-    for i in range(len(data_matrix[0])-1):
-        for j in range(i+1, len(data_matrix[0])):
-            ROI_pair_s.append(str(labels[i]) + ', ' + str(labels[j]))
+    ROI_pair_s = [] # names of ROI pairs
+    f_s = []        # frequencies
+    Cxy_s = []      # coherence
 
-            f, Cxy = signal.coherence(data_matrix[:,i], data_matrix[:,j], fs = sampling_freq, nperseg = 256) # nperseg defines the frequency resolution
-            f_s.append(f)
-            Cxy_s.append(Cxy)
+    SCA = namedtuple('SCA', ('ROI_pair_s', 'f_s', 'Cxy_s'))
+    sca = SCA(ROI_pair_s, f_s, Cxy_s)
 
-    return ROI_pair_s, f_s, Cxy_s
+    for i in range(len(data.data_matrix[0])-1):
+        for j in range(i+1, len(data.data_matrix[0])):
+            sca.ROI_pair_s.append(str(data.labels[i]) + ', ' + str(data.labels[j]))
+
+            f, Cxy = signal.coherence(data.data_matrix[:,i], data.data_matrix[:,j], fs = sampling_freq, nperseg = 256) # nperseg defines the frequency resolution
+            sca.f_s.append(f)
+            sca.Cxy_s.append(Cxy)
+
+    return sca
 def graph(corr_matrix, thr):
     '''
-    Recieves: corr_matrix (correlation matrix)
+    Receives: corr_matrix (correlation matrix)
               thr (minimum threshold for edge weights)
     Returns: network_graph (network graph)
     '''
@@ -134,9 +149,9 @@ def graph(corr_matrix, thr):
 
     return network_graph
 '''
-corr_matrix = correlation_matrix(data_matrix, labels)
-k_means_clusters = k_means_clustering(corr_matrix, labels)
-ROI_pair_s, f_s, Cxy_s = spectral_coherence_analysis(data_matrix, labels, sampling_freq = 15000000)
+corr_matrix = correlation_matrix(data)
+k_means_clusters = k_means_clustering(data, corr_matrix)
+sca = spectral_coherence_analysis(data, sampling_freq = 15000000)
 network_graph = graph(corr_matrix, thr)
 '''
 
@@ -148,7 +163,7 @@ network_graph = graph(corr_matrix, thr)
 
 def graph_nodes(network_graph):
     '''
-    Recieves: network_graph (network graph)
+    Receives: network_graph (network graph)
     Returns: n (# of nodes)
     '''
 
@@ -156,7 +171,7 @@ def graph_nodes(network_graph):
     return n
 def graph_edges(network_graph):
     '''
-    Recieves: network_graph (network graph)
+    Receives: network_graph (network graph)
     Returns: e (# of edges)
     '''
 
@@ -164,7 +179,7 @@ def graph_edges(network_graph):
     return e
 def graph_density(network_graph): # present / possible edges
     '''
-    Recieves: network_graph (network graph)
+    Receives: network_graph (network graph)
     Returns: d (graph density)
     '''
     
@@ -182,7 +197,7 @@ d = graph_density(network_graph)
 
 def node_degree(network_graph): # edges of given node
     '''
-    Recieves: network_graph (network graph)
+    Receives: network_graph (network graph)
     Returns: nodes (names of nodes)
              degrees (# of connections of nodes)
     '''
@@ -195,7 +210,7 @@ def node_degree(network_graph): # edges of given node
     return nodes, degrees
 def degree_distribution(network_graph): # probability of a node having given number of edges
     '''
-    Recieves: network_graph (network graph)
+    Receives: network_graph (network graph)
     Returns: degrees (# of connections)
              probabilities (probability of a node having given degree)
     '''
@@ -215,7 +230,7 @@ def degree_distribution(network_graph): # probability of a node having given num
     return degrees, probabilities
 def clustering_coeff(network_graph): # present / possible edges of neighbours of given node
     '''
-    Recieves: network_graph (network graph)
+    Receives: network_graph (network graph)
     Returns: node (names of nodes)
              cc (clustering coefficients)
     '''
@@ -228,7 +243,7 @@ def clustering_coeff(network_graph): # present / possible edges of neighbours of
     return node, cc
 def degree_centrality(network_graph): # popularity, normalized degree of given node
     '''
-    Recieves: network_graph (network graph)
+    Receives: network_graph (network graph)
     Returns: node (names of nodes)
              dc (degree centralities)
     '''
@@ -240,7 +255,7 @@ def degree_centrality(network_graph): # popularity, normalized degree of given n
     return node, dc
 def betweenness_centrality(network_graph): # control over information flow, how many shortest paths between nodes contain given node
     '''
-    Recieves: network_graph (network graph)
+    Receives: network_graph (network graph)
     Returns: node (names of nodes)
              bc (betweenness centralities)
     '''
@@ -252,7 +267,7 @@ def betweenness_centrality(network_graph): # control over information flow, how 
     return node, bc
 def closeness_centrality(network_graph): # speed of communication, how quickly are other nodes reachable from given
     '''
-    Recieves: network_graph (network graph)
+    Receives: network_graph (network graph)
     Returns: node (names of nodes)
              cc (closeness centralities)
     '''
@@ -264,7 +279,7 @@ def closeness_centrality(network_graph): # speed of communication, how quickly a
     return node, cc
 def eigenvector_centrality(network_graph): # well-connectedness, amount of inluential neighbouring nodes
     '''
-    Recieves: network_graph (network graph)
+    Receives: network_graph (network graph)
     Returns: node (names of nodes)
              ec (eigenvector centralities)
     '''
@@ -288,7 +303,7 @@ node, ec = eigenvector_centrality(network_graph)
 
 def shortest_path_length(network_graph):
     '''
-    Recieves: network_graph (network graph)
+    Receives: network_graph (network graph)
     Returns: l_matrix (matrix of shortest path lengths)
     '''
     
@@ -308,7 +323,7 @@ def shortest_path_length(network_graph):
     return l_matrix
 def weighted_shortest_path_length(network_graph):
     '''
-    Recieves: network_graph (network graph)
+    Receives: network_graph (network graph)
     Returns: wl_matrix (matrix of weighted shortest path lengths)
     '''
     
@@ -328,7 +343,7 @@ def weighted_shortest_path_length(network_graph):
     return wl_matrix
 def shortest_path(network_graph): # actual path
     '''
-    Recieves: network_graph (network graph)
+    Receives: network_graph (network graph)
     Returns: path (node names in order on the shortest path from source to target)
     '''
     
@@ -346,7 +361,7 @@ def shortest_path(network_graph): # actual path
     return path
 def ave_path_length(network_graph): # average of shortest path lengths
     '''
-    Recieves: network_graph (network graph)
+    Receives: network_graph (network graph)
     Returns: np.average(l) (average shortest path length)
     '''
     
@@ -363,7 +378,7 @@ def ave_path_length(network_graph): # average of shortest path lengths
     return np.average(l)
 def ave_weighted_path_length(network_graph): # average of weighted shortest path lengths
     '''
-    Recieves: network_graph (network graph)
+    Receives: network_graph (network graph)
     Returns: np.average(wl) (average weighted shortest path length)
     '''
     
@@ -380,7 +395,7 @@ def ave_weighted_path_length(network_graph): # average of weighted shortest path
     return np.average(wl)
 def diameter(network_graph): # longest shortest path length
     '''
-    Recieves: network_graph (network graph)
+    Receives: network_graph (network graph)
     Returns: np.max(l) (diameter)
     '''
     
@@ -397,7 +412,7 @@ def diameter(network_graph): # longest shortest path length
     return np.max(l)
 def weighted_diameter(network_graph): # longest shortest weighted path length
     '''
-    Recieves: network_graph (network graph)
+    Receives: network_graph (network graph)
     Returns: np.max(wl) (weighted diameter)
     '''
     
@@ -426,7 +441,7 @@ wdia = weighted_diameter(network_graph)
 
 def connected_components(network_graph): # islands
     '''
-    Recieves: network_graph (network graph)
+    Receives: network_graph (network graph)
     Returns: n (# of connected components / islands)
              conn_comp (lists of connected components / islands)
     '''
@@ -436,7 +451,7 @@ def connected_components(network_graph): # islands
     return n, conn_comp
 def giant_component(network_graph): # largest island
     '''
-    Recieves: network_graph (network graph)
+    Receives: network_graph (network graph)
     Returns: giant (list of largest set of connected components / island)
     '''
     
@@ -444,7 +459,7 @@ def giant_component(network_graph): # largest island
     return giant
 def modularity(network_graph): # how well the graph separates into islands (0: random, 0.3: meaningful structure, 0.5: strong islands)
     '''
-    Recieves: network_graph (network graph)
+    Receives: network_graph (network graph)
     Returns: mod (modularity)
     '''
     
@@ -453,7 +468,7 @@ def modularity(network_graph): # how well the graph separates into islands (0: r
     return mod
 def weighted_modularity(network_graph): # how well the weighted graph separates into islands
     '''
-    Recieves: network_graph (network graph)
+    Receives: network_graph (network graph)
     Returns: wmod (weighted modularity)
     '''
     
@@ -462,7 +477,7 @@ def weighted_modularity(network_graph): # how well the weighted graph separates 
     return wmod
 def assortativity(network_graph): # network mixing pattern, connectivity of similar nodes (-1 to 1, 0: random)
     '''
-    Recieves: network_graph (network graph)
+    Receives: network_graph (network graph)
     Returns: a (assortativity)
     '''
     
@@ -480,7 +495,7 @@ a = assortativity(network_graph)
 
 def network_efficiency(network_graph): # how easily and quickly information spreads
     '''
-    Recieves: network_graph (network graph)
+    Receives: network_graph (network graph)
     Returns: ne (network efficiency)
     '''
     
@@ -502,7 +517,7 @@ def network_efficiency(network_graph): # how easily and quickly information spre
     return ne
 def weighted_network_efficiency(network_graph):
     '''
-    Recieves: network_graph (network graph)
+    Receives: network_graph (network graph)
     Returns: wne (weighted network efficiency)
     '''
     
@@ -524,7 +539,7 @@ def weighted_network_efficiency(network_graph):
     return wne
 def robustness_to_random_failure(network_graph, f): # resilience to failure (node / edge removal)
     '''
-    Recieves: network_graph (network graph)
+    Receives: network_graph (network graph)
               f (output file variable)
     Returns: (saves random failure robustness test results to file)
     '''
@@ -569,7 +584,7 @@ def robustness_to_random_failure(network_graph, f): # resilience to failure (nod
             f.write(str(network_efficiency) + '\t' + str(num_connected_components) + '\t' + str(largest_island_size) + '\t' + str(ave_shortest_path_length) + '\t' + str(ave_weighted_shortest_path_length) + '\n')
 def robustness_to_targeted_attack(network_graph, f): # resilience to failure (node / edge removal)
     '''
-    Recieves: network_graph (network graph)
+    Receives: network_graph (network graph)
               f (output file variable)
     Returns: (saves targeted failure robustness test results to file)
     '''
@@ -625,7 +640,7 @@ robustness_to_targeted_attack(network_graph, f)
 
 def save_corr_matrix(corr_matrix, file):
     '''
-    Recieves: corr_matrix (correlation matrix)
+    Receives: corr_matrix (correlation matrix)
               file (output file variable)
     Returns: (saves correlation matrix data to file)
     '''
@@ -635,7 +650,7 @@ def save_corr_matrix(corr_matrix, file):
     file.write('\n\n')
 def save_k_means_clustering(k_means_clusters, file):
     '''
-    Recieves: corr_matrix (correlation matrix)
+    Receives: corr_matrix (correlation matrix)
               labels (names of ROIs)
               num_clusters (# of clusters to distribute ROIs into)
     Returns: (saves k means clustering into file)
@@ -653,7 +668,7 @@ def save_k_means_clustering(k_means_clusters, file):
         file.write('\n')
 def save_spectral_coherence_analysis(ROI_pair_s, f_s, Cxy_s, file):
     '''
-    Recieves: ROI_pair_s (names of ROI pairs)
+    Receives: ROI_pair_s (names of ROI pairs)
               f_s (frequencies)
               Cxy_s (coherence)
               file (output file variable)
@@ -677,7 +692,7 @@ def save_spectral_coherence_analysis(ROI_pair_s, f_s, Cxy_s, file):
     file.write('\n')
 def save_graph(graph, file):
     '''
-    Recieves: graph (network graph)
+    Receives: graph (network graph)
               file (output file variable)
     Returns: (saves the network graph to file edge by edge)
     '''
@@ -692,7 +707,7 @@ def save_graph(graph, file):
 
 def save_one_liner(text, value, file):
     '''
-    Recieves: text (definition of the value)
+    Receives: text (definition of the value)
               value (computed quantity)
               file (output file variable)
     Returns: (saves one line of concatenaited string to file)
@@ -703,7 +718,7 @@ def save_one_liner(text, value, file):
     file.write(text + ': ' + str(value) + '\n\n')
 def save_two_dim(cat1, cat2, data1, data2, file):
     '''
-    Recieves: cat1, cat2 (cathegory name strings)
+    Receives: cat1, cat2 (cathegory name strings)
               data1, data2 (data arrays)
               file (output file variable)
     Returns: (saves two corresponding columns of data to file)
@@ -721,7 +736,7 @@ def save_two_dim(cat1, cat2, data1, data2, file):
     file.write('\n')
 def save_five_dim(cat1, cat2, cat3, cat4, cat5, data1, data2, data3, data4, data5, file):
     '''
-    Recieves: cat1, ... cat5 (cathegory name strings)
+    Receives: cat1, ... cat5 (cathegory name strings)
               data1, ... data5 (data arrays)
               file (output file variable)
     Returns: (saves five corresponding columns of data to file)
@@ -739,7 +754,7 @@ def save_five_dim(cat1, cat2, cat3, cat4, cat5, data1, data2, data3, data4, data
     file.write('\n')
 def save_heatmap(title, heatmap, file): # greys
     '''
-    Recieves: title (title of heatmap)
+    Receives: title (title of heatmap)
               heatmap (pandas heatmap)
               file (output file variable)
     Returns: (saves all heatmap data to file)
@@ -750,7 +765,7 @@ def save_heatmap(title, heatmap, file): # greys
     file.write('\n\n')
 def save_path(path, file):
     '''
-    Recieves: path (2D array containing shortest paths between each ordered node pair)
+    Receives: path (2D array containing shortest paths between each ordered node pair)
               file (output file variable)
     Returns: (saves all shortest paths to file)
     '''
@@ -762,7 +777,7 @@ def save_path(path, file):
     file.write('\n')
 def save_array(text, array, file):
     '''
-    Recieves: text (what the array contains)
+    Receives: text (what the array contains)
               array (array of data)
               file (output file variable)
     Returns: (saves text and array into separate lines of file)
@@ -774,79 +789,75 @@ def save_array(text, array, file):
 
 # VISUALIZATION .................................................................................................
 
-def show_time_signals(timestamp, data_matrix, labels):
+def show_time_signals(data):
     '''
-    Recieves: timestamp (instances of elapsed time)
-              data_matrix (signal values of all ROIs in time)
-              labels (names of ROIs)
+    Receives: data (grouped original variables)
     Returns: (creates a plot of the time signals of all ROIs with respect to time)
     '''
     
     notnan_index = []
-    for i in range(len(np.transpose(data_matrix))):
-        if not np.isnan(np.transpose(data_matrix)[i][0]):
-            plt.plot(timestamp, np.transpose(data_matrix)[i]) #alpha = 1/20 * (i+1))
+    for i in range(len(np.transpose(data.data_matrix))):
+        if not np.isnan(np.transpose(data.data_matrix)[i][0]):
+            plt.plot(data.timestamp, np.transpose(data.data_matrix)[i]) #alpha = 1/20 * (i+1))
             notnan_index.append(i)
 
     notnan_roi_name = []
     for j in range(len(notnan_index)):
-        notnan_roi_name.append(labels[notnan_index[j]])
+        notnan_roi_name.append(data.labels[notnan_index[j]])
 
-    plt.title('fUS Signal Strenghts of Brain Regions with respect to Time')
+    plt.title('fUS Signal Strenghts of ROIs of subject ' + data.subject + ' in Time with ' + data.setting + ' setting')
     plt.xlabel('Time')
     plt.ylabel('Signal Strength')
     plt.legend(notnan_roi_name)
     plt.grid()
     plt.show()
-def show_corr_matrix(corr_matrix):
+def show_corr_matrix(data, corr_matrix):
     '''
-    Recieves: corr_matrix (correlation matrix)
+    Receives: data (grouped original variables)
+              corr_matrix (correlation matrix)
     Returns: (heatmap of the correlation matrix)
     '''
 
     sns.heatmap(corr_matrix, square = True, cmap="jet", vmin=-1, vmax=1)
-    plt.title("Correlation matrix")
+    plt.title('fUS Correlation Matrix of ROIs of subject ' + data.subject + ' with ' + data.setting + ' setting')
     plt.show()
-def show_spectral_coherence_analysis(regionA, regionB, labels, ROI_pair_s, f_s, Cxy_s):
+def show_spectral_coherence_analysis(regionA, regionB, data, sca):
     '''
-    Recieves: regionA (index of first region)
+    Receives: regionA (index of first region)
               regionB (index of second region)
-              labels (names of ROIs)
-              ROI_pair_s (names of ROI pairs)
-              f_s (frequencies)
-              Cxy_s (coherence)
+              data (grouped original variables)
+              sca (ROI_pair_s & f_s & Cxy_s grouped)
     Returns: (creates a plot of coherence with respect to frequency)
     '''
     
-    n = ROI_pair_s.index(str(labels[regionA] + ', ' + labels[regionB]))
+    n = sca.ROI_pair_s.index(str(data.labels[regionA] + ', ' + data.labels[regionB]))
     
-    plt.semilogy(f_s[n], Cxy_s[n]) # logarithmic y axis
-    title = 'Spectral Coherence between Brain Regions: ' + ROI_pair_s[n]
-    plt.title(title)
+    plt.semilogy(sca.f_s[n], sca.Cxy_s[n]) # logarithmic y axis
+    plt.title('Spectral Coherence between Brain Regions: ' + sca.ROI_pair_s[n] + ' of subject ' + data.subject + ' with ' + data.setting + ' setting')
     plt.xlabel('Frequency [Hz]')
     plt.ylabel('Coherence')
     plt.grid()
     plt.show()
-def show_all_spectral_coherence_analysis(f_s, Cxy_s):
+def show_all_spectral_coherence_analysis(data, sca):
     '''
-    Recieves: ROI_pair_s (names of ROI pairs)
-              f_s (frequencies)
-              Cxy_s (coherence)
+    Receives: data (grouped original variables)
+              sca (ROI_pair_s & f_s & Cxy_s grouped)
     Returns: (creates a plot of coherence with respect to frequency)
     '''
     
-    for n in range(len(Cxy_s)):
-        plt.plot(f_s[n], Cxy_s[n], '.k', markeredgecolor = 'none', alpha = 0.5)
+    for n in range(len(sca.Cxy_s)):
+        plt.plot(sca.f_s[n], sca.Cxy_s[n], '.k', markeredgecolor = 'none', alpha = 0.5)
 
-    plt.title('Spectral Coherence between Brain Regions with respect to Frequency')
+    plt.title('Spectral Coherence between Brain Regions with respect to Frequency of subject ' + data.subject + ' with ' + data.setting + ' setting')
     plt.xlabel('Frequency [Hz]')
     plt.ylabel('Coherence')
     plt.ylim(0, 1)
     plt.grid()
     plt.show()
-def show_graph(graph):
+def show_graph(data, graph):
     '''
-    Recieves: graph (network graph)
+    Receives: data (grouped original variables)
+              graph (network graph)
     Returns: (visualizes the network graph)
     '''
 
@@ -854,11 +865,12 @@ def show_graph(graph):
     edges = graph.edges(data = True)
     edge_widths = [abs(data['weight'])*3 for _, _, data in edges]
 
+    plt.title('Network Graph of Brain Regions of subject ' + data.subject + ' with ' + data.setting + ' setting')
     nx.draw(graph, nodes, with_labels = True, node_color = 'skyblue', node_size = 2000, width = edge_widths)
     plt.show()
 def show_heatmap(heatmap, title):
     '''
-    Recieves: heatmap (pandas heatmap)
+    Receives: heatmap (pandas heatmap)
     Returns: (visualization of heatmap)
     '''
 
@@ -866,15 +878,16 @@ def show_heatmap(heatmap, title):
     plt.title(title)
     plt.show()
 
-def show_node_degree(nodes, degrees):
+def show_node_degree(data, nodes, degrees):
     '''
-    Recieves: nodes (names of nodes)
+    Receives: data (grouped original variables)
+              nodes (names of nodes)
               degrees (# of connections of nodes)
     Returns: (plots degrees with respect to nodes)
     '''
     
     plt.scatter(nodes, degrees)
-    plt.title('Degree of nodes')
+    plt.title('Degree of Nodes in the Network Graph of subject ' + data.subject + ' with ' + data.setting + ' setting')
     plt.xlabel('Node')
     plt.ylabel('Degree')
     plt.xticks(rotation = 90)
@@ -883,29 +896,31 @@ def show_node_degree(nodes, degrees):
     plt.ylim(top = np.max(degrees) + (np.max(degrees)-np.min(degrees))*0.1) # for y values to fit on plot
     plt.subplots_adjust(bottom=0.5) # for x labels to fit on screen
     plt.show()
-def show_degree_distribution(degrees, probabilities):
+def show_degree_distribution(data, degrees, probabilities):
     '''
-    Recieves: degrees (# of connections)
+    Receives: data (grouped original variables)
+              degrees (# of connections)
               probabilities (probability of a node having given degree)
     Returns: (plots probabilities with respect to degrees)
     '''
     
     plt.scatter(degrees, probabilities)
-    plt.title('Degree distribution')
+    plt.title('Degree Distribution in the Network Graph of subject ' + data.subject + ' with ' + data.setting + ' setting')
     plt.xlabel('Degree')
     plt.ylabel('Probability')
     for i in range(len(degrees)): # add y value to each point
         plt.annotate(f"{probabilities[i]:.2f}", (degrees[i], probabilities[i]), textcoords="offset points", xytext=(0,5), ha='center')
     plt.show()
-def show_clustering_coeff(node, cc):
+def show_clustering_coeff(data, node, cc):
     '''
-    Recieves: node (names of nodes)
+    Receives: data (grouped original variables)
+              node (names of nodes)
               cc (clustering coefficients)
     Returns: (plots clustering coefficient for each node)
     '''
     
     plt.scatter(node, cc)
-    plt.title('Clustering coefficient of nodes')
+    plt.title('Clustering Coefficient of Nodes in the Network Graph of subject ' + data.subject + ' with ' + data.setting + ' setting')
     plt.xlabel('Node')
     plt.ylabel('Clustering coefficient')
     plt.xticks(rotation = 90)
@@ -914,16 +929,17 @@ def show_clustering_coeff(node, cc):
     plt.ylim(top = np.max(cc) + (np.max(cc)-np.min(cc))*0.1) # for y values to fit on plot
     plt.subplots_adjust(bottom=0.5) # for x labels to fit on screen
     plt.show()
-def show_centrality(node, c, prefix):
+def show_centrality(data, node, c, prefix):
     '''
-    Recieves: node (names of nodes)
+    Receives: data (grouped original variables)
+              node (names of nodes)
               c (some kind of centralities)
               prefix (distinguishable part of centrality name)
     Returns: (plots some kind of centrality for each node)
     '''
     
     plt.scatter(node, c)
-    title_parts = [str(prefix), 'centrality of nodes']
+    title_parts = [str(prefix), 'Centrality of Nodes in the Network Graph of subject ' + data.subject + ' with ' + data.setting + ' setting']
     plt.title(' '.join(title_parts))
     plt.xlabel('Node')
     ylabel_parts = [str(prefix), 'centrality']

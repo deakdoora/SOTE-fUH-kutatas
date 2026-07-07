@@ -5,8 +5,6 @@ TO DO LIST
 ---
 
 <ul>
-<li> modify load_data function to work for '*fus3D_sbsi-slice.txt'
-<li> plot time signals
 <li> write SCA to file with tabulators so it fits into Excel
 <li> add missing graph parametres
 </ul>
@@ -21,6 +19,7 @@ TO DO LIST
 <li> (visualize k-means clustering)
 <li> (visualize connected components)
 <li> (integrate graph parametres into the runtime function)
+<li> (function to decode setting abbreviations)
 </ul>
 
 NOTES
