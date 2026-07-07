@@ -22,6 +22,29 @@ from sklearn.cluster import KMeans
 
 # DATA HANDLING .................................................................................................
 
+def open_analysis_file(subject, setting, output_filename):
+    '''
+    Receives: subject (unique code of subject animal)
+              setting (abbreviation of the type of data preproceccing used)
+              output_filename (desired filename for the file being edited)
+    Returns: file (variable of opened file to edit or None)
+    '''
+
+    # OPEN FILE
+    file = None
+    while (file == None):
+        try:
+            file = open(output_filename, "w")
+        except IOError:
+            print("Error opening file")
+
+    # ADMINISTRATION
+    if file != None:
+        file.write('Date: ' + str(datetime.datetime.now()) + '\n')
+        file.write('Subject: ' + str(subject) + '\n')
+        file.write('Setting: ' + str(setting) + '\n\n')
+
+    return file
 def load_data(filepath):
     '''
     Receives: filepath (signals of ROIs in time)
@@ -50,11 +73,11 @@ def load_data(filepath):
                 data_list.append(processed_row)
 
     # Convert to numpy array
-    data = np.array(data_list)
+    data_array = np.array(data_list)
 
     # Split into time and matrix
-    timestamp = data[:, 0]
-    data_matrix = data[:, 1:]
+    timestamp = data_array[:, 0]
+    data_matrix = data_array[:, 1:]
 
     return labels, timestamp, data_matrix
 def group_var(subject, setting, labels, timestamp, data_matrix):
@@ -72,7 +95,8 @@ def group_var(subject, setting, labels, timestamp, data_matrix):
 
     return data
 '''
-labels, timestamp, data_matrix = load_data('sub-' + subject + '/*_*_*_sub*-fus' + setting + '.txt')
+file = open_file_w(input_filename, output_filename)
+labels, timestamp, data_matrix = load_data('sub-' + subject + '/*_sub*-fus' + setting + '.txt')
 data = group_var(subject, setting, labels, timestamp, data_matrix)
 '''
 
@@ -652,6 +676,33 @@ robustness_to_targeted_attack(network_graph, f)
 
 # SAVING TO FILE ................................................................................................
 
+def save_time_signals(data, file):
+    '''
+    Receives: data (grouped original variables)
+              file (output file variable)
+    Returns: (saves the CBV signals of all ROIs with respect to time into file)
+    '''
+    
+    notnan_index = []
+    for i in range(len(np.transpose(data.data_matrix))):
+        if not np.isnan(np.transpose(data.data_matrix)[i][0]):
+            notnan_index.append(i)
+
+    notnan_roi_name = []
+    for j in range(len(notnan_index)):
+        notnan_roi_name.append(data.labels[notnan_index[j]])
+
+    file.write('CBV SIGNALS IN TIME\n\n')
+    file.write('Time' + '\t')
+    for k in range(len(notnan_roi_name)):
+        file.write(notnan_roi_name[k] + '\t')
+    file.write('\n')
+    for m in range(len(data.timestamp)):
+        file.write(str(data.timestamp[m]) + '\t')
+        for n in range(len(notnan_roi_name)):
+            file.write(str(np.transpose(data.data_matrix)[n][m]) + '\t')
+        file.write('\n')
+    file.write('\n')
 def save_corr_matrix(corr_matrix, file):
     '''
     Receives: corr_matrix (correlation matrix)

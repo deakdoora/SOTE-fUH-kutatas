@@ -25,6 +25,7 @@ TO DO LIST
 NOTES
 ---
 <ul>
+<li> (spike) 2581, 3D_vol
 <li> K-means does not accept NaN data
 </ul>
 
@@ -34,7 +35,8 @@ Abbrevitations
 <ul>
 <li> nblc = no base line correction
 <li> ngs = no global signal
-<li> sbsi = slice-by-slice interpolation
+<li> vol = volumic interpolation
+<li> sbsi-slice = slice-by-slice interpolation
 </ul>
 
 <ul>
