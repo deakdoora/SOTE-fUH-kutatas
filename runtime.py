@@ -4,22 +4,44 @@ import functions as func
 
 # TEST INTERFACE
 
-'''
 subject = '2581'
 setting = '3D_vol'
 
 labels, timestamp, data_matrix = func.load_data('sub-' + subject + '/*_sub*-fus' + setting + '.txt')
 data = func.group_var(subject, setting, labels, timestamp, data_matrix)
+print('data saved')
 
-func.show_time_signals(data)
-'''
+#func.show_time_signals(data)
 
-'''
 corr_matrix = func.correlation_matrix(data)
-func.show_corr_matrix(data, corr_matrix)
-corr_matrix_validentries = func.correlation_matrix_dropnan(corr_matrix)
-func.show_corr_matrix(data, corr_matrix_validentries)
+print('correlation matrix computed')
+#func.show_corr_matrix(data, corr_matrix)
+#corr_matrix_validentries = func.correlation_matrix_dropnan(corr_matrix)
+#func.show_corr_matrix(data, corr_matrix_validentries)
 
+#sca = func.spectral_coherence_analysis(data)
+#func.show_all_spectral_coherence_analysis(data, sca)
+
+network_graph = func.graph(corr_matrix, 0)
+print('network graph formed')
+#func.show_graph(data, network_graph)
+
+file = None
+while (file == None):
+    try:
+        file = open('test.txt', "w")
+        print('file opened')
+    except OSError:
+        print("Error opening file")
+fr_r_n, gc_r_n, fr_r_e, gc_r_e = func.robustness_to_random_failure(network_graph, file)
+fr_t_n, gc_t_n, fr_t_e, gc_t_e = func.robustness_to_targeted_attack(network_graph, file)
+print('robustness saved')
+file.close()
+print('file closed')
+fractions, giant_components = func.group_robustness(fr_r_n, gc_r_n, fr_r_e, gc_r_e, fr_t_n, gc_t_n, fr_t_e, gc_t_e)
+func.show_percolation_threshold(data, fractions, giant_components)
+
+'''
 file = None
 while (file == None):
     try:
@@ -28,26 +50,6 @@ while (file == None):
         print("Error opening file")
 k_means_clusters = func.k_means_clustering(corr_matrix_validentries, labels)
 func.save_k_means_clustering(k_means_clusters, file)
-file.close()
-'''
-
-'''
-func.show_time_signals(data)
-corr_matrix = func.correlation_matrix(data)
-func.show_corr_matrix(data, corr_matrix)
-#k_means_clusters = func.k_means_clustering(corr_matrix, labels)
-network_graph = func.graph(corr_matrix, 0)
-func.show_graph(data, network_graph)
-
-file = None
-while (file == None):
-    try:
-        file = open('test.txt', "w")
-    except OSError:
-        print("Error opening file")
-sca = func.spectral_coherence_analysis(data)
-func.save_spectral_coherence_analysis(sca, file)
-func.show_all_spectral_coherence_analysis(data, sca)
 file.close()
 '''
 
@@ -602,5 +604,5 @@ def analysis(subject, setting, end_of_output_filename): # complete analysis of a
     # CLOSE FILE
     file.close()
 
-runtime()
+#runtime()
 #analysis('2581', '3D_vol', 'test.txt')

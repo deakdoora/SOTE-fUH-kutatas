@@ -580,76 +580,124 @@ def robustness_to_random_failure(network_graph, f): # resilience to failure (nod
     Receives: network_graph (network graph)
               f (output file variable)
     Returns: (saves random failure robustness test results to file)
+             fr_r_n (fraction of random node failures)
+             gc_r_n (size of giant component during random node failures)
+             fr_r_e (fraction of random edge failures)
+             gc_r_e (size of giant component during random edge failures)
     '''
     
-    # Robustness test
-    f.write('Robustness test to random failure')
+    # Return variables
+    fr_r_n = [] # fraction of random node failures
+    gc_r_n = [] # size of giant component during random node failures
+    fr_r_e = [] # fraction of random edge failures
+    gc_r_e = [] # size of giant component during random edge failures
 
-    f.write('\n\nNode removal\n\n')
-    f.write('network efficiency\tnumber of connected components\tsize of largest island\taverage of shortest path lengths\taverage of weighted shortest path lengths\n')
+    # Robustness test
+    f.write('Robustness test to random failure\n')
+
+    f.write('\nNode removal\n\n')
+    f.write('fraction removed\tnetwork efficiency\tnumber of connected components\tsize of largest island\taverage of shortest path lengths\taverage of weighted shortest path lengths\n')
+
+    n = network_graph.number_of_nodes()
+    i = 0
 
     ng = network_graph.copy()
     nodes = list(ng.nodes())
     random.shuffle(nodes)
     for node in nodes:
         ng.remove_node(node) # random failure
+        i = i+1
         if len(list(ng.nodes())) > 0:
+            fraction = i/n
+            fr_r_n.append(fraction)
             network_efficiency = nx.global_efficiency(ng)
             num_connected_components = nx.number_connected_components(ng)
             largest_island_size = len(max(nx.connected_components(ng), key = len))
+            gc_r_n.append(largest_island_size)
             ng_sub = ng.subgraph(max(nx.connected_components(ng), key = len))
             ave_shortest_path_length = nx.average_shortest_path_length(ng_sub)
             ave_weighted_shortest_path_length = nx.average_shortest_path_length(ng_sub, weight = 'weight')
 
-            f.write(str(network_efficiency) + '\t' + str(num_connected_components) + '\t' + str(largest_island_size) + '\t' + str(ave_shortest_path_length) + '\t' + str(ave_weighted_shortest_path_length) + '\n')
+            f.write(str(fraction) + '\t' + str(network_efficiency) + '\t' + str(num_connected_components) + '\t' + str(largest_island_size) + '\t' + str(ave_shortest_path_length) + '\t' + str(ave_weighted_shortest_path_length) + '\n')
 
-    f.write('\n\nEdge removal\n\n')
-    f.write('network efficiency\tnumber of connected components\tsize of largest island\taverage of shortest path lengths\taverage of weighted shortest path lengths\n')
+    f.write('\nEdge removal\n\n')
+    f.write('fraction removed\tnetwork efficiency\tnumber of connected components\tsize of largest island\taverage of shortest path lengths\taverage of weighted shortest path lengths\n')
+
+    e = network_graph.number_of_edges()
+    i = 0
 
     ng = network_graph.copy()
     edges = list(ng.edges())
     random.shuffle(edges)
     for edge in edges:
         ng.remove_edge(edge[0], edge[1]) # random failure
+        i = i+1
         if len(list(ng.edges())) > 0:
+            fraction = i/e
+            fr_r_e.append(fraction)
             network_efficiency = nx.global_efficiency(ng)
             num_connected_components = nx.number_connected_components(ng)
             largest_island_size = len(max(nx.connected_components(ng), key = len))
+            gc_r_e.append(largest_island_size)
             ng_sub = ng.subgraph(max(nx.connected_components(ng), key = len))
             ave_shortest_path_length = nx.average_shortest_path_length(ng_sub)
             ave_weighted_shortest_path_length = nx.average_shortest_path_length(ng_sub, weight = 'weight')
 
-            f.write(str(network_efficiency) + '\t' + str(num_connected_components) + '\t' + str(largest_island_size) + '\t' + str(ave_shortest_path_length) + '\t' + str(ave_weighted_shortest_path_length) + '\n')
+            f.write(str(fraction) + '\t' + str(network_efficiency) + '\t' + str(num_connected_components) + '\t' + str(largest_island_size) + '\t' + str(ave_shortest_path_length) + '\t' + str(ave_weighted_shortest_path_length) + '\n')
+
+    f.write('\n')
+
+    return fr_r_n, gc_r_n, fr_r_e, gc_r_e
 def robustness_to_targeted_attack(network_graph, f): # resilience to failure (node / edge removal)
     '''
     Receives: network_graph (network graph)
               f (output file variable)
     Returns: (saves targeted failure robustness test results to file)
+             fr_t_n (fraction of targetted node failures)
+             gc_t_n (size of giant component during targetted node failures)
+             fr_t_e (fraction of targetted edge failures)
+             gc_t_e (size of giant component during targetted edge failures)
     '''
     
+    # Return variables
+    fr_t_n = [] # fraction of targetted node failures
+    gc_t_n = [] # size of giant component during targetted node failures
+    fr_t_e = [] # fraction of targetted edge failures
+    gc_t_e = [] # size of giant component during targetted edge failures
+    
     # Robustness test
-    f.write('Robustness test to targeted attack')
+    f.write('Robustness test to targeted attack\n')
 
-    f.write('\n\nHighest ranking node removal\n\n')
-    f.write('network efficiency\tnumber of connected components\tsize of largest island\taverage of shortest path lengths\taverage of weighted shortest path lengths\n')
+    f.write('\nHighest ranking node removal\n\n')
+    f.write('fraction removed\tnetwork efficiency\tnumber of connected components\tsize of largest island\taverage of shortest path lengths\taverage of weighted shortest path lengths\n')
+
+    n = network_graph.number_of_nodes()
+    i = 0
 
     ng = network_graph.copy()
     n = len(list(ng.nodes()))
     for i in range(n):
         node = max(ng.degree, key = lambda x: x[1])[0] # highest degree node
         ng.remove_node(node) # targetted attack
+        i = i+1
         if len(list(ng.nodes())) > 0:
+            fraction = i/n
+            fr_t_n.append(fraction)
             network_efficiency = nx.global_efficiency(ng)
             num_connected_components = nx.number_connected_components(ng)
             largest_island_size = len(max(nx.connected_components(ng), key = len))
+            gc_t_n.append(largest_island_size)
             ng_sub = ng.subgraph(max(nx.connected_components(ng), key = len))
             ave_shortest_path_length = nx.average_shortest_path_length(ng_sub)
             ave_weighted_shortest_path_length = nx.average_shortest_path_length(ng_sub, weight = 'weight')
 
-            f.write(str(network_efficiency) + '\t' + str(num_connected_components) + '\t' + str(largest_island_size) + '\t' + str(ave_shortest_path_length) + '\t' + str(ave_weighted_shortest_path_length) + '\n')
+            f.write(str(fraction) + '\t' + str(network_efficiency) + '\t' + str(num_connected_components) + '\t' + str(largest_island_size) + '\t' + str(ave_shortest_path_length) + '\t' + str(ave_weighted_shortest_path_length) + '\n')
 
-    f.write('\n\nMost important bridge removal\n\n')
-    f.write('network efficiency\tnumber of connected components\tsize of largest island\taverage of shortest path lengths\taverage of weighted shortest path lengths\n')
+    f.write('\nMost important bridge removal\n\n')
+    f.write('fraction removed\tnetwork efficiency\tnumber of connected components\tsize of largest island\taverage of shortest path lengths\taverage of weighted shortest path lengths\n')
+
+    e = network_graph.number_of_edges()
+    i = 0
 
     ng = network_graph.copy()
     e = len(list(ng.edges()))
@@ -657,21 +705,50 @@ def robustness_to_targeted_attack(network_graph, f): # resilience to failure (no
         eb = nx.edge_betweenness_centrality(ng) # edge betweenness
         edge = max(eb, key = eb.get)
         ng.remove_edge(edge[0], edge[1]) # targetted attack
+        i = i+1
         if len(list(ng.edges())) > 0:
+            fraction = i/e
+            fr_t_e.append(fraction)
             network_efficiency = nx.global_efficiency(ng)
             num_connected_components = nx.number_connected_components(ng)
             largest_island_size = len(max(nx.connected_components(ng), key = len))
+            gc_t_e.append(largest_island_size)
             ng_sub = ng.subgraph(max(nx.connected_components(ng), key = len))
             ave_shortest_path_length = nx.average_shortest_path_length(ng_sub)
             ave_weighted_shortest_path_length = nx.average_shortest_path_length(ng_sub, weight = 'weight')
 
-            f.write(str(network_efficiency) + '\t' + str(num_connected_components) + '\t' + str(largest_island_size) + '\t' + str(ave_shortest_path_length) + '\t' + str(ave_weighted_shortest_path_length) + '\n')
-# define new method here
+            f.write(str(fraction) + '\t' + str(network_efficiency) + '\t' + str(num_connected_components) + '\t' + str(largest_island_size) + '\t' + str(ave_shortest_path_length) + '\t' + str(ave_weighted_shortest_path_length) + '\n')
+
+    f.write('\n')
+
+    return fr_t_n, gc_t_n, fr_t_e, gc_t_e
+def group_robustness(fr_r_n, gc_r_n, fr_r_e, gc_r_e, fr_t_n, gc_t_n, fr_t_e, gc_t_e):
+    '''
+    Receives: fr_r_n (fraction of random node failures)
+              gc_r_n (size of giant component during random node failures)
+              fr_r_e (fraction of random edge failures)
+              gc_r_e (size of giant component during random edge failures)
+              fr_t_n (fraction of targetted node failures)
+              gc_t_n (size of giant component during targetted node failures)
+              fr_t_e (fraction of targetted edge failures)
+              gc_t_e (size of giant component during targetted edge failures)
+    Returns: fractions (fraction of removed nodes or edges)
+             giant_components (size of largest connected component)  
+    '''
+
+    FR = namedtuple('FR', ('rand_n', 'rand_e', 'targ_n', 'targ_e'))
+    fractions = FR(fr_r_n, fr_r_e, fr_t_n, fr_t_e)
+
+    GC = namedtuple('GC', ('rand_n', 'rand_e', 'targ_n', 'targ_e'))
+    giant_components = GC(gc_r_n, gc_r_e, gc_t_n, gc_t_e)
+    
+    return fractions, giant_components
 '''
 ne = network_efficiency(network_graph)
 wne = weighted_network_efficiency(network_graph)
-robustness_to_random_failure(network_graph, f)
-robustness_to_targeted_attack(network_graph, f)
+fr_r_n, gc_r_n, fr_r_e, gc_r_e = robustness_to_random_failure(network_graph, f)
+fr_t_n, gc_t_n, fr_t_e, gc_t_e = robustness_to_targeted_attack(network_graph, f)
+fractions, giant_components = group_robustness(fr_r_n, gc_r_n, fr_r_e, gc_r_e, fr_t_n, gc_t_n, fr_t_e, gc_t_e)
 '''
 
 # SAVING TO FILE ................................................................................................
@@ -1012,4 +1089,45 @@ def show_centrality(data, node, c, prefix):
         plt.annotate(f"{c[i]:.2f}", (node[i], c[i]), textcoords="offset points", xytext=(0,5), ha='center')
     plt.ylim(top = np.max(c) + (np.max(c)-np.min(c))*0.1) # for y values to fit on plot
     plt.subplots_adjust(bottom=0.5) # for x labels to fit on screen
+    plt.show()
+def show_percolation_threshold(data, fractions, giant_components):
+    '''
+    Receives: network_graph (network graph)
+              fractions (fraction of removed nodes or edges)
+              giant_components (size of largest connected component)
+    Returns: (creates plots of the size of the giant component with respect to the fraction of removed data)
+    '''
+
+    fig, axs = plt.subplots(2,2)
+    fig.suptitle('Visualization of Percolation Thresholds for subject ' + data.subject + ' with ' + data.setting + ' setting')
+
+    # top left
+    axs[0,0].plot(fractions.rand_n, giant_components.rand_n, '.b')
+    axs[0,0].set_title('Random Failure / Node Removal')
+    for i in range(len(fractions.rand_n)): # add x & y values to each point
+        axs[0,0].annotate(f"{fractions.rand_n[i]:.2f}" + ', ' + f"{giant_components.rand_n[i]:.2f}", (fractions.rand_n[i], giant_components.rand_n[i]), textcoords="offset points", xytext=(0,5), ha='center')
+
+    # top right
+    axs[0,1].plot(fractions.rand_e, giant_components.rand_e, '.b')
+    axs[0,1].set_title('Random Failure / Edge Removal')
+    for i in range(len(fractions.rand_e)): # add x & y values to each point
+        axs[0,1].annotate(f"{fractions.rand_e[i]:.2f}" + ', ' + f"{giant_components.rand_e[i]:.2f}", (fractions.rand_e[i], giant_components.rand_e[i]), textcoords="offset points", xytext=(0,5), ha='center')
+
+    # bottom left
+    axs[1,0].plot(fractions.targ_n, giant_components.targ_n, '.b')
+    axs[1,0].set_title('Targetted Attack / Node Removal')
+    for i in range(len(fractions.targ_n)): # add x & y values to each point
+        axs[1,0].annotate(f"{fractions.targ_n[i]:.2f}" + ', ' + f"{giant_components.targ_n[i]:.2f}", (fractions.targ_n[i], giant_components.targ_n[i]), textcoords="offset points", xytext=(0,5), ha='center')
+
+    # bottom right
+    axs[1,1].plot(fractions.targ_e, giant_components.targ_e, '.b') #'tab:orange'
+    axs[1,1].set_title('Targetted Attack / Edge Removal')
+    for i in range(len(fractions.targ_e)): # add x & y values to each point
+        axs[1,1].annotate(f"{fractions.targ_e[i]:.2f}" + ', ' + f"{giant_components.targ_e[i]:.2f}", (fractions.targ_e[i], giant_components.targ_e[i]), textcoords="offset points", xytext=(0,5), ha='center')
+
+    for ax in axs.flat:
+        ax.set(xlabel='Fraction of removal', ylabel='Giant component size')
+    for ax in axs.flat:
+        ax.label_outer()
+    
     plt.show()
