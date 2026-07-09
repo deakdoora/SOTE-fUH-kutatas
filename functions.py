@@ -593,10 +593,11 @@ def robustness_to_random_failure(network_graph, f): # resilience to failure (nod
     gc_r_e = [] # size of giant component during random edge failures
 
     # Robustness test
-    f.write('Robustness test to random failure\n')
+    if f != None:
+        f.write('Robustness test to random failure\n')
 
-    f.write('\nNode removal\n\n')
-    f.write('fraction removed\tnetwork efficiency\tnumber of connected components\tsize of largest island\taverage of shortest path lengths\taverage of weighted shortest path lengths\n')
+        f.write('\nNode removal\n\n')
+        f.write('fraction removed\tnetwork efficiency\tnumber of connected components\tsize of largest island\taverage of shortest path lengths\taverage of weighted shortest path lengths\n')
 
     n = network_graph.number_of_nodes()
     i = 0
@@ -618,10 +619,12 @@ def robustness_to_random_failure(network_graph, f): # resilience to failure (nod
             ave_shortest_path_length = nx.average_shortest_path_length(ng_sub)
             ave_weighted_shortest_path_length = nx.average_shortest_path_length(ng_sub, weight = 'weight')
 
-            f.write(str(fraction) + '\t' + str(network_efficiency) + '\t' + str(num_connected_components) + '\t' + str(largest_island_size) + '\t' + str(ave_shortest_path_length) + '\t' + str(ave_weighted_shortest_path_length) + '\n')
+            if f != None:
+                f.write(str(fraction) + '\t' + str(network_efficiency) + '\t' + str(num_connected_components) + '\t' + str(largest_island_size) + '\t' + str(ave_shortest_path_length) + '\t' + str(ave_weighted_shortest_path_length) + '\n')
 
-    f.write('\nEdge removal\n\n')
-    f.write('fraction removed\tnetwork efficiency\tnumber of connected components\tsize of largest island\taverage of shortest path lengths\taverage of weighted shortest path lengths\n')
+    if f != None:
+        f.write('\nEdge removal\n\n')
+        f.write('fraction removed\tnetwork efficiency\tnumber of connected components\tsize of largest island\taverage of shortest path lengths\taverage of weighted shortest path lengths\n')
 
     e = network_graph.number_of_edges()
     i = 0
@@ -643,9 +646,11 @@ def robustness_to_random_failure(network_graph, f): # resilience to failure (nod
             ave_shortest_path_length = nx.average_shortest_path_length(ng_sub)
             ave_weighted_shortest_path_length = nx.average_shortest_path_length(ng_sub, weight = 'weight')
 
-            f.write(str(fraction) + '\t' + str(network_efficiency) + '\t' + str(num_connected_components) + '\t' + str(largest_island_size) + '\t' + str(ave_shortest_path_length) + '\t' + str(ave_weighted_shortest_path_length) + '\n')
+            if f != None:
+                f.write(str(fraction) + '\t' + str(network_efficiency) + '\t' + str(num_connected_components) + '\t' + str(largest_island_size) + '\t' + str(ave_shortest_path_length) + '\t' + str(ave_weighted_shortest_path_length) + '\n')
 
-    f.write('\n')
+    if f != None:
+        f.write('\n')
 
     return fr_r_n, gc_r_n, fr_r_e, gc_r_e
 def robustness_to_targeted_attack(network_graph, f): # resilience to failure (node / edge removal)
@@ -666,10 +671,11 @@ def robustness_to_targeted_attack(network_graph, f): # resilience to failure (no
     gc_t_e = [] # size of giant component during targetted edge failures
     
     # Robustness test
-    f.write('Robustness test to targeted attack\n')
+    if f != None:
+        f.write('Robustness test to targeted attack\n')
 
-    f.write('\nHighest ranking node removal\n\n')
-    f.write('fraction removed\tnetwork efficiency\tnumber of connected components\tsize of largest island\taverage of shortest path lengths\taverage of weighted shortest path lengths\n')
+        f.write('\nHighest ranking node removal\n\n')
+        f.write('fraction removed\tnetwork efficiency\tnumber of connected components\tsize of largest island\taverage of shortest path lengths\taverage of weighted shortest path lengths\n')
 
     n = network_graph.number_of_nodes()
     i = 0
@@ -691,10 +697,12 @@ def robustness_to_targeted_attack(network_graph, f): # resilience to failure (no
             ave_shortest_path_length = nx.average_shortest_path_length(ng_sub)
             ave_weighted_shortest_path_length = nx.average_shortest_path_length(ng_sub, weight = 'weight')
 
-            f.write(str(fraction) + '\t' + str(network_efficiency) + '\t' + str(num_connected_components) + '\t' + str(largest_island_size) + '\t' + str(ave_shortest_path_length) + '\t' + str(ave_weighted_shortest_path_length) + '\n')
+            if f != None:
+                f.write(str(fraction) + '\t' + str(network_efficiency) + '\t' + str(num_connected_components) + '\t' + str(largest_island_size) + '\t' + str(ave_shortest_path_length) + '\t' + str(ave_weighted_shortest_path_length) + '\n')
 
-    f.write('\nMost important bridge removal\n\n')
-    f.write('fraction removed\tnetwork efficiency\tnumber of connected components\tsize of largest island\taverage of shortest path lengths\taverage of weighted shortest path lengths\n')
+    if f != None:
+        f.write('\nMost important bridge removal\n\n')
+        f.write('fraction removed\tnetwork efficiency\tnumber of connected components\tsize of largest island\taverage of shortest path lengths\taverage of weighted shortest path lengths\n')
 
     e = network_graph.number_of_edges()
     i = 0
@@ -717,9 +725,11 @@ def robustness_to_targeted_attack(network_graph, f): # resilience to failure (no
             ave_shortest_path_length = nx.average_shortest_path_length(ng_sub)
             ave_weighted_shortest_path_length = nx.average_shortest_path_length(ng_sub, weight = 'weight')
 
-            f.write(str(fraction) + '\t' + str(network_efficiency) + '\t' + str(num_connected_components) + '\t' + str(largest_island_size) + '\t' + str(ave_shortest_path_length) + '\t' + str(ave_weighted_shortest_path_length) + '\n')
+            if f != None:
+                f.write(str(fraction) + '\t' + str(network_efficiency) + '\t' + str(num_connected_components) + '\t' + str(largest_island_size) + '\t' + str(ave_shortest_path_length) + '\t' + str(ave_weighted_shortest_path_length) + '\n')
 
-    f.write('\n')
+    if f != None:
+        f.write('\n')
 
     return fr_t_n, gc_t_n, fr_t_e, gc_t_e
 def group_robustness(fr_r_n, gc_r_n, fr_r_e, gc_r_e, fr_t_n, gc_t_n, fr_t_e, gc_t_e):
@@ -1099,35 +1109,40 @@ def show_percolation_threshold(data, fractions, giant_components):
     '''
 
     fig, axs = plt.subplots(2,2)
-    fig.suptitle('Visualization of Percolation Thresholds for subject ' + data.subject + ' with ' + data.setting + ' setting')
+
+    # TITLES
+    fig.suptitle('Visualization of Percolation Thresholds for subject ' + data.subject + ' with ' + data.setting + ' setting', size=15)
+    plt.figtext(0.5118, 0.918, 'Random Failure', va='center', ha='center', size=13, color='blue')
+    plt.figtext(0.5118, 0.4808, 'Targetted Attack', va='center', ha='center', size=13, color='maroon')
 
     # top left
-    axs[0,0].plot(fractions.rand_n, giant_components.rand_n, '.b')
-    axs[0,0].set_title('Random Failure / Node Removal')
-    for i in range(len(fractions.rand_n)): # add x & y values to each point
-        axs[0,0].annotate(f"{fractions.rand_n[i]:.2f}" + ', ' + f"{giant_components.rand_n[i]:.2f}", (fractions.rand_n[i], giant_components.rand_n[i]), textcoords="offset points", xytext=(0,5), ha='center')
+    axs[0,0].plot(fractions.rand_n, giant_components.rand_n, '.', color='blue')
+    axs[0,0].set(xlabel = '', ylabel = 'Size of giant component')
 
     # top right
-    axs[0,1].plot(fractions.rand_e, giant_components.rand_e, '.b')
-    axs[0,1].set_title('Random Failure / Edge Removal')
-    for i in range(len(fractions.rand_e)): # add x & y values to each point
-        axs[0,1].annotate(f"{fractions.rand_e[i]:.2f}" + ', ' + f"{giant_components.rand_e[i]:.2f}", (fractions.rand_e[i], giant_components.rand_e[i]), textcoords="offset points", xytext=(0,5), ha='center')
+    axs[0,1].plot(fractions.rand_e, giant_components.rand_e, '.', color='blue')
+    axs[0,1].set(xlabel = '', ylabel = '')
 
     # bottom left
-    axs[1,0].plot(fractions.targ_n, giant_components.targ_n, '.b')
-    axs[1,0].set_title('Targetted Attack / Node Removal')
-    for i in range(len(fractions.targ_n)): # add x & y values to each point
-        axs[1,0].annotate(f"{fractions.targ_n[i]:.2f}" + ', ' + f"{giant_components.targ_n[i]:.2f}", (fractions.targ_n[i], giant_components.targ_n[i]), textcoords="offset points", xytext=(0,5), ha='center')
+    axs[1,0].plot(fractions.targ_n, giant_components.targ_n, '.', color='maroon')
+    axs[1,0].set(xlabel = 'Fraction of nodes removed', ylabel = 'Size of giant component')
 
     # bottom right
-    axs[1,1].plot(fractions.targ_e, giant_components.targ_e, '.b') #'tab:orange'
-    axs[1,1].set_title('Targetted Attack / Edge Removal')
-    for i in range(len(fractions.targ_e)): # add x & y values to each point
-        axs[1,1].annotate(f"{fractions.targ_e[i]:.2f}" + ', ' + f"{giant_components.targ_e[i]:.2f}", (fractions.targ_e[i], giant_components.targ_e[i]), textcoords="offset points", xytext=(0,5), ha='center')
+    axs[1,1].plot(fractions.targ_e, giant_components.targ_e, '.', color='maroon')
+    axs[1,1].set(xlabel = 'Fraction of edges removed', ylabel = '')
 
-    for ax in axs.flat:
-        ax.set(xlabel='Fraction of removal', ylabel='Giant component size')
-    for ax in axs.flat:
-        ax.label_outer()
+    #for ax in axs.flat: # keep only labels on the outside
+        #ax.label_outer()
+
+    #for i in range(len(fractions.rand_n)): # add x & y values to each point
+        #axs[0,0].annotate(f"{fractions.rand_n[i]:.2f}" + ', ' + f"{giant_components.rand_n[i]:.2f}", (fractions.rand_n[i], giant_components.rand_n[i]), textcoords="offset points", xytext=(0,5), ha='center')
+    #for i in range(10): # add x & y values to each point
+        #sum = len(fractions.rand_n)
+        #gap = int(sum/10)
+        #axs[0,0].annotate(f"{fractions.rand_n[i*gap]:.2f}" + ', ' + f"{giant_components.rand_n[i*gap]:.2f}", (fractions.rand_n[i*gap], giant_components.rand_n[i*gap]), textcoords="offset points", xytext=(0,5), ha='center')
     
+    axs[0,0].grid()
+    axs[0,1].grid()
+    axs[1,0].grid()
+    axs[1,1].grid()
     plt.show()

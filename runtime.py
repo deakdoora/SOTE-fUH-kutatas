@@ -4,17 +4,18 @@ import functions as func
 
 # TEST INTERFACE
 
+'''
 subject = '2581'
 setting = '3D_vol'
 
 labels, timestamp, data_matrix = func.load_data('sub-' + subject + '/*_sub*-fus' + setting + '.txt')
 data = func.group_var(subject, setting, labels, timestamp, data_matrix)
-print('data saved')
+print('data')
 
 #func.show_time_signals(data)
 
 corr_matrix = func.correlation_matrix(data)
-print('correlation matrix computed')
+print('correlation matrix')
 #func.show_corr_matrix(data, corr_matrix)
 #corr_matrix_validentries = func.correlation_matrix_dropnan(corr_matrix)
 #func.show_corr_matrix(data, corr_matrix_validentries)
@@ -23,7 +24,7 @@ print('correlation matrix computed')
 #func.show_all_spectral_coherence_analysis(data, sca)
 
 network_graph = func.graph(corr_matrix, 0)
-print('network graph formed')
+print('network graph')
 #func.show_graph(data, network_graph)
 
 file = None
@@ -35,11 +36,13 @@ while (file == None):
         print("Error opening file")
 fr_r_n, gc_r_n, fr_r_e, gc_r_e = func.robustness_to_random_failure(network_graph, file)
 fr_t_n, gc_t_n, fr_t_e, gc_t_e = func.robustness_to_targeted_attack(network_graph, file)
-print('robustness saved')
+print('robustness')
 file.close()
 print('file closed')
 fractions, giant_components = func.group_robustness(fr_r_n, gc_r_n, fr_r_e, gc_r_e, fr_t_n, gc_t_n, fr_t_e, gc_t_e)
 func.show_percolation_threshold(data, fractions, giant_components)
+print('percolation threshold plots')
+'''
 
 '''
 file = None
@@ -269,7 +272,7 @@ def runtime():
                     func.save_graph(network_graph, fng)
 
                     userinput_ng = 0
-                    while (userinput_ng != 20 and userinput_ng != 21 and userinput_ng != 22):
+                    while (userinput_ng != 21 and userinput_ng != 22 and userinput_ng != 23):
                     
                         ng = True
                         if (ng == True):
@@ -294,9 +297,10 @@ def runtime():
                             print('17. Network efficiency')
                             print('18. Robustness to random failure')
                             print('19. Robustness to targetted attack')
-                            print('20. Quit Network Graph')
-                            print('21. Provide new data file')
-                            print('22. Quit\n')
+                            print('20. Percolation threshold')
+                            print('21. Quit Network Graph')
+                            print('22. Provide new data file')
+                            print('23. Quit\n')
 
                             ng = False
 
@@ -480,16 +484,26 @@ def runtime():
 
                                 ng = True
 
-                            case 20:    # Quit network graph
+                            case 20:    # percolation threshold
+
+                                fr_r_n, gc_r_n, fr_r_e, gc_r_e = func.robustness_to_random_failure(network_graph, None)
+                                fr_t_n, gc_t_n, fr_t_e, gc_t_e = func.robustness_to_targeted_attack(network_graph, None)
+                                fractions, giant_components = func.group_robustness(fr_r_n, gc_r_n, fr_r_e, gc_r_e, fr_t_n, gc_t_n, fr_t_e, gc_t_e)
+                                
+                                func.show_percolation_threshold(data, fractions, giant_components)
+
+                                ng = True
+
+                            case 21:    # Quit network graph
                                 options = True
                                 break
                             
-                            case 21:    # New data file
+                            case 22:    # New data file
                                 userinput = 6
                                 options = False
                                 break
                             
-                            case 22:    # Quit
+                            case 23:    # Quit
                                 return
                             
                             case _:
@@ -604,5 +618,5 @@ def analysis(subject, setting, end_of_output_filename): # complete analysis of a
     # CLOSE FILE
     file.close()
 
-#runtime()
+runtime()
 #analysis('2581', '3D_vol', 'test.txt')
