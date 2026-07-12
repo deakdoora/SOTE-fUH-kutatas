@@ -1,0 +1,22 @@
+2026 06 02
+
+- gephi for visualization
+- comparison using PCA (principal component analysis) of graph parameters of all subject graphs integrated into the same N-dimensional space
+- read Babett's article
+- has anyone done this? look up articles (fMRI, exc. graph data evaluation methods)
+
+2026 04 14
+
+- credibility of graph parameters
+- ATLAS
+
+2026 03 31
+
+- graph parameters
+- Barabási-Albert book
+- conference posters
+
+2026 03 17
+
+- articles
+- comparison of correlation matrices

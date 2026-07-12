@@ -185,12 +185,24 @@ def graph(corr_matrix, thr):
                 network_graph.add_edge(i, j, weight=corr_matrix.loc[i, j])
 
     return network_graph
+def adjacency_matrix(network_graph):
+    '''
+    Receives: network_graph (network graph)
+    Returns: adj_matrix (adjacency matrix)
+    '''
+    
+    arr_adj_matrix = nx.adjacency_matrix(network_graph)
+    arr_adj_matrix.toarray()
+    adj_matrix = pd.DataFrame(data = arr_adj_matrix, columns = network_graph.nodes).corr()
+
+    return adj_matrix
 '''
 corr_matrix = correlation_matrix(data)
 corr_matrix_validentries = correlation_matrix_dropnan(corr_matrix)
 k_means_clusters = k_means_clustering(data, corr_matrix)
 sca = spectral_coherence_analysis(data, sampling_freq = 15000000)
 network_graph = graph(corr_matrix, thr)
+adj_matrix = adjacency_matrix(network_graph)
 '''
 
 # GRAPH PROPERTIES ..............................................................................................
@@ -902,7 +914,7 @@ def save_five_dim(cat1, cat2, cat3, cat4, cat5, data1, data2, data3, data4, data
     for i in range(len(data1)):
         file.write(str(data1[i]) + '\t' + str(data2[i]) + '\t' + str(data3[i]) + '\t' + str(data4[i]) + '\t' + str(data5[i]) + '\n')
     file.write('\n')
-def save_heatmap(title, heatmap, file): # greys
+def save_heatmap(title, heatmap, file):
     '''
     Receives: title (title of heatmap)
               heatmap (pandas heatmap)
@@ -1018,13 +1030,14 @@ def show_graph(data, graph):
     plt.title('Network Graph of Brain Regions of subject ' + data.subject + ' with ' + data.setting + ' setting')
     nx.draw(graph, nodes, with_labels = True, node_color = 'skyblue', node_size = 2000, width = edge_widths)
     plt.show()
-def show_heatmap(heatmap, title):
+def show_heatmap(heatmap, title, data):
     '''
     Receives: heatmap (pandas heatmap)
     Returns: (visualization of heatmap)
     '''
 
-    sns.heatmap(heatmap, square = True, annot = True, cmap = "Greys", cbar = False)
+    sns.heatmap(heatmap, square = True, annot = True, cmap = 'jet', cbar = False) #cmap = 'Greys'
+    title = title + ' of subject ' + data.subject + ' with ' + data.setting + ' setting'
     plt.title(title)
     plt.show()
 

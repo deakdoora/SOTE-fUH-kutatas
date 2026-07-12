@@ -68,6 +68,12 @@ Spectral coherence analysis is a frequency-domain method used to evaluate the co
 
 ---
 
+#### ADJECENCY MATRIX
+
+Contains the weights of edges between graph nodes arranged in matrix form.
+
+---
+
 #### BASIC STRUCTURAL PARAMETERS
 
 **Number of nodes**

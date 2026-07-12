@@ -5,56 +5,30 @@ import functions as func
 # TEST INTERFACE
 
 '''
-subject = '2581'
+subject = '1663-TG'
 setting = '3D_vol'
 
 labels, timestamp, data_matrix = func.load_data('sub-' + subject + '/*_sub*-fus' + setting + '.txt')
 data = func.group_var(subject, setting, labels, timestamp, data_matrix)
 print('data')
 
-#func.show_time_signals(data)
-
 corr_matrix = func.correlation_matrix(data)
+func.show_corr_matrix(data, corr_matrix)
 print('correlation matrix')
-#func.show_corr_matrix(data, corr_matrix)
-#corr_matrix_validentries = func.correlation_matrix_dropnan(corr_matrix)
-#func.show_corr_matrix(data, corr_matrix_validentries)
-
-#sca = func.spectral_coherence_analysis(data)
-#func.show_all_spectral_coherence_analysis(data, sca)
 
 network_graph = func.graph(corr_matrix, 0)
 print('network graph')
-#func.show_graph(data, network_graph)
-
-file = None
-while (file == None):
-    try:
-        file = open('test.txt', "w")
-        print('file opened')
-    except OSError:
-        print("Error opening file")
-fr_r_n, gc_r_n, fr_r_e, gc_r_e = func.robustness_to_random_failure(network_graph, file)
-fr_t_n, gc_t_n, fr_t_e, gc_t_e = func.robustness_to_targeted_attack(network_graph, file)
-print('robustness')
-file.close()
-print('file closed')
-fractions, giant_components = func.group_robustness(fr_r_n, gc_r_n, fr_r_e, gc_r_e, fr_t_n, gc_t_n, fr_t_e, gc_t_e)
-func.show_percolation_threshold(data, fractions, giant_components)
-print('percolation threshold plots')
 '''
 
-'''
-file = None
-while (file == None):
-    try:
-        file = open('k-Means-Clustering_2581_3D-sbsi-slice.txt', "w")
-    except OSError:
-        print("Error opening file")
-k_means_clusters = func.k_means_clustering(corr_matrix_validentries, labels)
-func.save_k_means_clustering(k_means_clusters, file)
-file.close()
-'''
+#file = None
+#while (file == None):
+    #try:
+        #file = open('k-Means-Clustering_2581_3D-sbsi-slice.txt', "w")
+    #except OSError:
+        #print("Error opening file")
+#k_means_clusters = func.k_means_clustering(corr_matrix_validentries, labels)
+#func.save_k_means_clustering(k_means_clusters, file)
+#file.close()
 
 # USER INTERFACE
 
@@ -272,35 +246,36 @@ def runtime():
                     func.save_graph(network_graph, fng)
 
                     userinput_ng = 0
-                    while (userinput_ng != 21 and userinput_ng != 22 and userinput_ng != 23):
+                    while (userinput_ng != 22 and userinput_ng != 23 and userinput_ng != 24):
                     
                         ng = True
                         if (ng == True):
                             print('\nPick one of the following options:')
 
                             print('\n1. Show network graph')
-                            print('2. Number of nodes')
-                            print('3. Number of edges')
-                            print('4. Density')
-                            print('5. Node degree')
-                            print('6. Degree distribution')
-                            print('7. Clustering coefficient')
-                            print('8. Centralities')
-                            print('9. Shortest path lengths')
-                            print('10. Shortest paths')
-                            print('11. Average path length')
-                            print('12. Diameter')
-                            print('13. Connected components')
-                            print('14. Largest connected component')
-                            print('15. Modularity')
-                            print('16. Assortativity')
-                            print('17. Network efficiency')
-                            print('18. Robustness to random failure')
-                            print('19. Robustness to targetted attack')
-                            print('20. Percolation threshold')
-                            print('21. Quit Network Graph')
-                            print('22. Provide new data file')
-                            print('23. Quit\n')
+                            print('2. Show adjacency matrix')
+                            print('3. Number of nodes')
+                            print('4. Number of edges')
+                            print('5. Density')
+                            print('6. Node degree')
+                            print('7. Degree distribution')
+                            print('8. Clustering coefficient')
+                            print('9. Centralities')
+                            print('10. Shortest path lengths')
+                            print('11. Shortest paths')
+                            print('12. Average path length')
+                            print('13. Diameter')
+                            print('14. Connected components')
+                            print('15. Largest connected component')
+                            print('16. Modularity')
+                            print('17. Assortativity')
+                            print('18. Network efficiency')
+                            print('19. Robustness to random failure')
+                            print('20. Robustness to targetted attack')
+                            print('21. Percolation threshold')
+                            print('22. Quit Network Graph')
+                            print('23. Provide new data file')
+                            print('24. Quit\n')
 
                             ng = False
 
@@ -312,7 +287,14 @@ def runtime():
 
                                 ng = True
 
-                            case 2:    # nodes
+                            case 2:    # show adjacency matrix
+                                
+                                adj_matrix = func.adjacency_matrix(network_graph)
+                                func.show_heatmap(adj_matrix, 'Adjacency Matrix', data)
+
+                                ng = True
+
+                            case 3:    # nodes
 
                                 n = func.graph_nodes(network_graph)
                                 print('\nNumber of nodes:', n)
@@ -320,7 +302,7 @@ def runtime():
 
                                 ng = True
 
-                            case 3:    # edges
+                            case 4:    # edges
 
                                 e = func.graph_edges(network_graph)
                                 print('\nNumber of edges:', e)
@@ -328,7 +310,7 @@ def runtime():
 
                                 ng = True
 
-                            case 4:    # density
+                            case 5:    # density
 
                                 d = func.graph_density(network_graph)
                                 print('\nGraph density:', d)
@@ -336,7 +318,7 @@ def runtime():
 
                                 ng = True
 
-                            case 5:    # node degree
+                            case 6:    # node degree
 
                                 nodes, degrees = func.node_degree(network_graph)
                                 func.save_two_dim('Node', 'Degree', nodes, degrees, fng)
@@ -344,7 +326,7 @@ def runtime():
 
                                 ng = True
 
-                            case 6:    # degree distribution
+                            case 7:    # degree distribution
 
                                 degrees, probabilities = func.degree_distribution(network_graph)
                                 func.save_two_dim('Degree', 'Probability', degrees, probabilities, fng)
@@ -352,7 +334,7 @@ def runtime():
 
                                 ng = True
 
-                            case 7:    # clustering coeff
+                            case 8:    # clustering coeff
 
                                 node, cc = func.clustering_coeff(network_graph)
                                 func.save_two_dim('Node', 'Clustering coefficient', node, cc, fng)
@@ -360,7 +342,7 @@ def runtime():
 
                                 ng = True
 
-                            case 8:    # centralities
+                            case 9:    # centralities
 
                                 node, dc = func.degree_centrality(network_graph)
                                 node, bc = func.betweenness_centrality(network_graph)
@@ -376,7 +358,7 @@ def runtime():
 
                                 ng = True
 
-                            case 9:    # shortest path lengths
+                            case 10:    # shortest path lengths
 
                                 l_matrix = func.shortest_path_length(network_graph)
                                 func.save_heatmap('Shortest path lengths', l_matrix, fng)
@@ -388,7 +370,7 @@ def runtime():
 
                                 ng = True
 
-                            case 10:    # shortest paths
+                            case 11:    # shortest paths
 
                                 path = func.shortest_path(network_graph)
                                 func.save_path(path, fng)
@@ -396,7 +378,7 @@ def runtime():
 
                                 ng = True
 
-                            case 11:    # average path length
+                            case 12:    # average path length
 
                                 ave_l = func.ave_path_length(network_graph)
                                 func.save_one_liner('Average shortest path length', ave_l, fng)
@@ -408,7 +390,7 @@ def runtime():
 
                                 ng = True
 
-                            case 12:    # diameter
+                            case 13:    # diameter
 
                                 d = func.diameter(network_graph)
                                 func.save_one_liner('Diameter', d, fng)
@@ -420,7 +402,7 @@ def runtime():
 
                                 ng = True
 
-                            case 13:    # connected components
+                            case 14:    # connected components
 
                                 n, conn_comp = func.connected_components(network_graph)
                                 fng.write('Number of islands: ' + str(n) + '\n')
@@ -430,7 +412,7 @@ def runtime():
 
                                 ng = True
 
-                            case 14:    # largest connected component
+                            case 15:    # largest connected component
 
                                 giant = func.giant_component(network_graph)
                                 func.save_array('Largest island', giant, fng)
@@ -438,7 +420,7 @@ def runtime():
 
                                 ng = True
 
-                            case 15:    # modularity
+                            case 16:    # modularity
 
                                 mod = func.modularity(network_graph)
                                 func.save_one_liner('Modularity', mod, fng)
@@ -450,7 +432,7 @@ def runtime():
 
                                 ng = True
 
-                            case 16:    # assortativity
+                            case 17:    # assortativity
 
                                 a = func.assortativity(network_graph)
                                 func.save_one_liner('Assortativity', a, fng)
@@ -458,7 +440,7 @@ def runtime():
 
                                 ng = True
 
-                            case 17:    # network efficiency
+                            case 18:    # network efficiency
 
                                 ne = func.network_efficiency(network_graph)
                                 func.save_one_liner('Network efficiency', ne, fng)
@@ -470,21 +452,21 @@ def runtime():
 
                                 ng = True
 
-                            case 18:    # robustness to random failure
+                            case 19:    # robustness to random failure
 
                                 func.robustness_to_random_failure(network_graph, fng)
                                 print('\n< Robustness to random failure has been saved to file >')
 
                                 ng = True
 
-                            case 19:    # robustness to targetted attack
+                            case 20:    # robustness to targetted attack
 
                                 func.robustness_to_targeted_attack(network_graph, fng)
                                 print('\n< Robustness to targetted attack has been saved to file >')
 
                                 ng = True
 
-                            case 20:    # percolation threshold
+                            case 21:    # percolation threshold
 
                                 fr_r_n, gc_r_n, fr_r_e, gc_r_e = func.robustness_to_random_failure(network_graph, None)
                                 fr_t_n, gc_t_n, fr_t_e, gc_t_e = func.robustness_to_targeted_attack(network_graph, None)
@@ -494,16 +476,16 @@ def runtime():
 
                                 ng = True
 
-                            case 21:    # Quit network graph
+                            case 22:    # Quit network graph
                                 options = True
                                 break
                             
-                            case 22:    # New data file
+                            case 23:    # New data file
                                 userinput = 6
                                 options = False
                                 break
                             
-                            case 23:    # Quit
+                            case 24:    # Quit
                                 return
                             
                             case _:
@@ -523,13 +505,13 @@ def runtime():
                 case _:
                     print("Choose from above:")
                     userinput = 0
-def analysis(subject, setting, end_of_output_filename): # complete analysis of a measurement
+def analysis(subject, setting, unique_filename_part): # complete analysis of a measurement
     # ALL INPUT
     sampling_freq = 15000000
     thr = 0
     
     # OPEN FILE
-    output_filename = 'subject-' + str(subject) + '_' + setting + '_' + end_of_output_filename
+    output_filename = 'subject-' + str(subject) + '_' + setting + '_' + unique_filename_part + '.txt'
     file = func.open_analysis_file(subject, setting, output_filename)
 
     # LOAD DATA
@@ -555,12 +537,16 @@ def analysis(subject, setting, end_of_output_filename): # complete analysis of a
     network_graph = func.graph(corr_matrix, thr)
     func.save_graph(network_graph, file)
 
+    # Adjacency matrix
+    adj_matrix = func.adjacency_matrix(network_graph)
+    func.save_heatmap('Adjacency matrix', adj_matrix, file)
+
     # Basic structural parametres
     file.write('BASIC STRUCTURAL PARAMETRES\n\n')
     func.save_one_liner('Number of nodes', func.graph_nodes(network_graph), file)
     func.save_one_liner('Number of edges', func.graph_edges(network_graph), file)
     func.save_one_liner('Graph density', func.graph_density(network_graph), file)
-
+    
     # Node level metrics
     file.write('NODE LEVEL METRICS\n\n')
     nodes, degrees = func.node_degree(network_graph)
@@ -618,5 +604,5 @@ def analysis(subject, setting, end_of_output_filename): # complete analysis of a
     # CLOSE FILE
     file.close()
 
-runtime()
-#analysis('2581', '3D_vol', 'test.txt')
+#runtime()
+#analysis('1663-TG', '3D_vol', 'test')
