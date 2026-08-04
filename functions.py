@@ -1,6 +1,7 @@
 # IMPORTS °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 
 from collections import Counter
+from collections import defaultdict
 from collections import namedtuple
 import csv
 import datetime
@@ -787,33 +788,6 @@ def my_infomap(network_graph, num = 20, seed = 123):
 
     imap = infomap.run(network_graph, seed = seed, num_trials = num)
     return imap
-def save_infomap(imap, file):
-    '''
-    Receives: imap (result of running infomap)
-              file (output file name)
-    Returns: ? (???)
-    '''
-
-    file.write('INFOMAP\n\n')
-
-    file.write('Codelength: ', str(imap.codelength), '\n\n')
-
-    file.write('Number of levels: ', str(imap.num_levels), '\n')
-    file.write('Number of top level communities: ', str(imap.num_top_modules), '\n')
-    file.write('Community structure:\n')
-
-    '''
-    from collections import defaultdict
-
-    modules = defaultdict(list)
-
-    for node in im.nodes:
-        modules[node.module_id].append(node.node_id)
-
-    print(dict(modules))
-    '''
-
-    return
 '''
 imap = my_infomap(network_graph) / imap = my_infomap(network_graph, num, seed)
 '''
@@ -912,6 +886,7 @@ def save_graph(graph, file):
     
     file.write('\n')
 
+# graph
 def save_one_liner(text, value, file):
     '''
     Receives: text (definition of the value)
@@ -993,6 +968,46 @@ def save_array(text, array, file):
     file.write(text + ':\n')
     file.write(str(array))
     file.write('\n\n')
+
+# community detection
+def save_infomap(imap, graph, file):
+    '''
+    Receives: imap (result of running infomap)
+              file (output file name)
+    Returns: ? (???)
+    '''
+
+    file.write('INFOMAP\n\n')
+
+    file.write('Codelength: ' + str(imap.codelength) + '\n\n')
+
+    file.write('Number of levels: ' + str(imap.num_levels) + '\n')
+    file.write('Number of top level communities: ' + str(imap.num_top_modules) + '\n\n')
+
+    file.write('Community structure:\n')
+    communities = [[]]
+    file.write('1')
+    for i in range(1, imap.num_top_modules):
+        file.write('\t' + str(i+1))
+        communities.append([])
+    file.write('\n')
+    for node in imap.nodes():
+        communities[node.module_id - 1].append(node.node_id)
+    for i in range(max(len(comm) for comm in communities)):
+        for j in range(imap.num_top_modules):
+            if j != 0:
+                file.write('\t')
+            if len(communities[j]) > i:
+                node_ID = list(graph.nodes)[communities[j][i]]
+                node_name = graph.nodes[node_ID].get("name", str(node_ID))
+                file.write(str(node_name))         
+        file.write('\n')
+    file.write('\n')
+
+    #node_ID = list(network_graph.nodes)[int(node)]
+    #node_name = network_graph.nodes[node_ID].get("name", str(node_ID))
+    
+    return
 
 # VISUALIZATION .................................................................................................
 
@@ -1086,6 +1101,7 @@ def show_heatmap(heatmap, title, data):
     plt.title(title)
     plt.show()
 
+# graph
 def show_node_degree(data, nodes, degrees):
     '''
     Receives: data (grouped original variables)
@@ -1195,6 +1211,7 @@ def show_percolation_threshold(data, fractions, giant_components):
     axs[1,1].grid()
     plt.show()
 
+# community detection
 def show_infomap(data, thr, graph, imap):
     '''
     Receives: imap (result of running infomap)

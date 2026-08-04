@@ -18,9 +18,19 @@ network_graph = func.graph(corr_matrix, thr)
 #func.show_graph(data, network_graph)
 
 imap = func.my_infomap(network_graph, 20, 123)
-func.show_infomap(data, thr, network_graph, imap)
+
+#func.show_infomap(data, thr, network_graph, imap)
+
 #print(imap.num_top_modules, imap.codelength)
 #print(imap.modules())  # {node_id: module_id}
+file = None
+while (file == None):
+    try:
+        file = open('infomap-test.txt', "w")
+    except OSError:
+        print("Error opening file")
+func.save_infomap(imap, network_graph, file)
+file.close()
 
 #file = None
 #while (file == None):

@@ -1,0 +1,148 @@
+INFOMAP
+
+Codelength: 7.422302312746268
+
+Number of levels: 2
+Number of top level communities: 9
+
+Community structure:
+1	2	3	4	5	6	7	8	9
+Hippocampal formation (L) slice 1	Olfactory areas (R) slice 9	Thalamus (R) slice 9	Hippocampal formation (R) slice 2	Cortical subplate (R) slice 20	Primary somatosensory area, barrel field (R) slice 13	Primary somatosensory area, barrel field (L) slice 11	Supplemental somatosensory area (R) slice 12	Primary somatosensory area, barrel field (R) slice 17
+Hippocampal formation (R) slice 1	Olfactory areas (L) slice 9	Hippocampal formation (R) slice 3	Hippocampal formation (L) slice 2	Striatum (R) slice 20	Primary somatosensory area, barrel field (L) slice 13	Supplemental somatosensory area (L) slice 11	Primary somatosensory area, barrel field (L) slice 12	Primary somatosensory area, lower limb (R) slice 17
+Olfactory areas (R) slice 8	Primary somatosensory area, barrel field (L) slice 9	Cortical subplate (R) slice 9	Primary somatosensory area, barrel field (L) slice 10	Hypothalamus (L) slice 20	Supplemental somatosensory area (R) slice 13	Olfactory areas (L) slice 11	Primary somatosensory area, barrel field (R) slice 12	Hippocampal formation (L) slice 17
+Hippocampal formation (L) slice 8	Supplemental somatosensory area (L) slice 9	Supplemental somatosensory area (L) slice 14	Supplemental somatosensory area (L) slice 10	Primary somatosensory area, lower limb (R) slice 20	Olfactory areas (R) slice 13	Olfactory areas (R) slice 11	Supplemental somatosensory area (L) slice 12	Hippocampal formation (R) slice 17
+Hippocampal formation (R) slice 8	Cortical subplate (L) slice 9	Olfactory areas (L) slice 14	Olfactory areas (L) slice 10	Supplemental somatosensory area (R) slice 20	Cortical subplate (L) slice 13	Primary somatosensory area, barrel field (R) slice 19	Olfactory areas (L) slice 12	Pallidum (L) slice 17
+Hippocampal formation (L) slice 9		Olfactory areas (R) slice 14	Olfactory areas (R) slice 10	Primary somatosensory area, barrel field (R) slice 20	Olfactory areas (L) slice 5	Cortical subplate (R) slice 19	Olfactory areas (R) slice 12	Striatum (R) slice 17
+Hippocampal formation (R) slice 9		Cortical subplate (R) slice 14	Cortical subplate (L) slice 10	Pallidum (R) slice 20	Olfactory areas (L) slice 13	Thalamus (R) slice 19	Cortical subplate (L) slice 12	Supplemental somatosensory area (L) slice 17
+Thalamus (L) slice 9		Striatum (L) slice 14	Primary somatosensory area, barrel field (R) slice 18	Cortical subplate (R) slice 8	Striatum (L) slice 13	Cortical subplate (L) slice 11	Cortical subplate (R) slice 12	Olfactory areas (R) slice 17
+Hypothalamus (L) slice 9		Striatum (R) slice 14	Primary somatosensory area, lower limb (R) slice 18	Primary somatosensory area, lower limb (L) slice 20	Cortical subplate (R) slice 13	Striatum (L) slice 11	Striatum (L) slice 12	Hypothalamus (R) slice 17
+Primary somatosensory area, lower limb (L) slice 15		Hippocampal formation (R) slice 5	Pallidum (L) slice 18	Pallidum (L) slice 20	Supplemental somatosensory area (L) slice 13	Primary somatosensory area, barrel field (L) slice 19		Pallidum (R) slice 17
+Striatum (L) slice 22		Cortical subplate (L) slice 14	Thalamus (R) slice 18	Striatum (L) slice 20		Primary somatosensory area, lower limb (L) slice 19		Striatum (L) slice 17
+Pallidum (L) slice 22		Cortical subplate (R) slice 11	Hypothalamus (L) slice 18	Olfactory areas (R) slice 20		Primary somatosensory area, lower limb (R) slice 19		Primary somatosensory area, barrel field (L) slice 17
+Hippocampal formation (L) slice 5		Primary somatosensory area, barrel field (L) slice 14	Hypothalamus (R) slice 18	Supplemental somatosensory area (L) slice 20		Supplemental somatosensory area (R) slice 19		Primary somatosensory area, lower limb (L) slice 17
+Hippocampal formation (L) slice 6		Pallidum (L) slice 14	Hippocampal formation (R) slice 22	Hypothalamus (R) slice 20		Olfactory areas (L) slice 19		Olfactory areas (L) slice 17
+Thalamus (L) slice 6			Supplemental somatosensory area (R) slice 18	Thalamus (R) slice 20		Olfactory areas (R) slice 19		Cortical subplate (L) slice 17
+Olfactory areas (L) slice 7			Cortical subplate (L) slice 18	Olfactory areas (L) slice 20		Hippocampal formation (R) slice 19		Cortical subplate (R) slice 17
+Hippocampal formation (L) slice 7			Striatum (L) slice 18	Cortical subplate (L) slice 20		Striatum (L) slice 19		
+Thalamus (L) slice 7			Striatum (R) slice 18	Thalamus (L) slice 20		Hypothalamus (R) slice 19		
+Olfactory areas (L) slice 8			Striatum (R) slice 21			Striatum (R) slice 19		
+Thalamus (L) slice 8			Primary somatosensory area, lower limb (R) slice 21			Supplemental somatosensory area (L) slice 19		
+Hippocampal formation (L) slice 10			Hippocampal formation (R) slice 18			Hippocampal formation (L) slice 19		
+Hippocampal formation (R) slice 10			Striatum (L) slice 21			Cortical subplate (L) slice 19		
+Thalamus (L) slice 10			Supplemental somatosensory area (L) slice 21			Pallidum (L) slice 19		
+Thalamus (R) slice 10			Pallidum (L) slice 21			Pallidum (R) slice 19		
+Hypothalamus (L) slice 10			Primary somatosensory area, barrel field (L) slice 18					
+Thalamus (L) slice 11			Primary somatosensory area, lower limb (L) slice 18					
+Thalamus (R) slice 11			Supplemental somatosensory area (L) slice 18					
+Thalamus (L) slice 12			Olfactory areas (L) slice 18					
+Hippocampal formation (L) slice 13			Olfactory areas (R) slice 18					
+Hippocampal formation (R) slice 13			Hippocampal formation (L) slice 18					
+Thalamus (L) slice 13			Cortical subplate (R) slice 18					
+Hypothalamus (L) slice 13			Olfactory areas (R) slice 21					
+Primary somatosensory area, barrel field (R) slice 14			Olfactory areas (L) slice 21					
+Supplemental somatosensory area (R) slice 14			Pallidum (R) slice 21					
+Hippocampal formation (L) slice 14			Thalamus (L) slice 21					
+Hippocampal formation (R) slice 14			Primary somatosensory area, barrel field (R) slice 21					
+Thalamus (L) slice 14			Thalamus (R) slice 21					
+Thalamus (R) slice 14			Hypothalamus (R) slice 21					
+Hypothalamus (L) slice 14			Hippocampal formation (R) slice 21					
+Hypothalamus (R) slice 14			Pallidum (R) slice 18					
+Hippocampal formation (L) slice 15			Primary somatosensory area, lower limb (L) slice 21					
+Pallidum (L) slice 15			Cortical subplate (L) slice 21					
+Thalamus (L) slice 15								
+Hypothalamus (L) slice 15								
+Primary somatosensory area, barrel field (R) slice 16								
+Hippocampal formation (L) slice 16								
+Hippocampal formation (R) slice 16								
+Thalamus (L) slice 16								
+Thalamus (R) slice 16								
+Hypothalamus (L) slice 16								
+Hypothalamus (R) slice 16								
+Supplemental somatosensory area (R) slice 17								
+Thalamus (L) slice 17								
+Hypothalamus (L) slice 17								
+Thalamus (L) slice 18								
+Primary somatosensory area, lower limb (R) slice 22								
+Supplemental somatosensory area (L) slice 22								
+Supplemental somatosensory area (R) slice 22								
+Olfactory areas (L) slice 22								
+Olfactory areas (R) slice 22								
+Cortical subplate (R) slice 22								
+Hypothalamus (L) slice 22								
+Hypothalamus (R) slice 22								
+Supplemental somatosensory area (L) slice 23								
+Supplemental somatosensory area (R) slice 23								
+Olfactory areas (R) slice 23								
+Hippocampal formation (R) slice 7								
+Hippocampal formation (L) slice 12								
+Thalamus (R) slice 13								
+Hypothalamus (R) slice 13								
+Supplemental somatosensory area (R) slice 21								
+Hippocampal formation (L) slice 3								
+Hippocampal formation (L) slice 4								
+Olfactory areas (L) slice 6								
+Hippocampal formation (R) slice 6								
+Cortical subplate (L) slice 6								
+Hippocampal formation (L) slice 11								
+Hippocampal formation (R) slice 11								
+Hypothalamus (L) slice 11								
+Hypothalamus (R) slice 11								
+Hippocampal formation (R) slice 12								
+Thalamus (R) slice 12								
+Hypothalamus (L) slice 12								
+Hypothalamus (R) slice 12								
+Thalamus (R) slice 17								
+Hypothalamus (L) slice 19								
+Primary somatosensory area, lower limb (R) slice 23								
+Striatum (L) slice 23								
+Pallidum (L) slice 23								
+Hypothalamus (L) slice 23								
+Hippocampal formation (R) slice 4								
+Thalamus (L) slice 4								
+Thalamus (L) slice 5								
+Cortical subplate (R) slice 10								
+Thalamus (L) slice 19								
+Cortical subplate (R) slice 21								
+Hypothalamus (L) slice 21								
+Cortical subplate (R) slice 23								
+Hippocampal formation (R) slice 15								
+Hypothalamus (R) slice 15								
+Striatum (R) slice 22								
+Thalamus (R) slice 15								
+Thalamus (R) slice 7								
+Primary somatosensory area, barrel field (L) slice 15								
+Primary somatosensory area, barrel field (R) slice 15								
+Supplemental somatosensory area (L) slice 15								
+Supplemental somatosensory area (R) slice 15								
+Olfactory areas (L) slice 15								
+Cortical subplate (L) slice 15								
+Cortical subplate (R) slice 15								
+Striatum (L) slice 15								
+Primary somatosensory area, lower limb (L) slice 23								
+Olfactory areas (L) slice 23								
+Cortical subplate (L) slice 23								
+Striatum (R) slice 23								
+Pallidum (R) slice 23								
+Hypothalamus (R) slice 23								
+Pallidum (L) slice 16								
+Striatum (R) slice 15								
+Thalamus (R) slice 8								
+Primary somatosensory area, barrel field (L) slice 16								
+Primary somatosensory area, lower limb (L) slice 16								
+Supplemental somatosensory area (L) slice 16								
+Supplemental somatosensory area (R) slice 16								
+Olfactory areas (L) slice 16								
+Olfactory areas (R) slice 16								
+Cortical subplate (R) slice 16								
+Striatum (L) slice 16								
+Striatum (R) slice 16								
+Hypothalamus (R) slice 10								
+Cortical subplate (L) slice 16								
+Primary somatosensory area, barrel field (R) slice 22								
+Primary somatosensory area, lower limb (L) slice 22								
+Cortical subplate (L) slice 22								
+Pallidum (R) slice 22								
+Olfactory areas (R) slice 15								
+Thalamus (L) slice 22								
+Thalamus (R) slice 22								
+
