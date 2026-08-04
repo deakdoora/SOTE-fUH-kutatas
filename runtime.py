@@ -4,21 +4,23 @@ import functions as func
 
 # TEST INTERFACE
 
-'''
+# '1663-TG' / 'fUS-2383-WT'
 subject = '1663-TG'
-setting = '3D_vol'
+setting = '3D_sbsi-slice'
+thr = 0.4
 
 labels, timestamp, data_matrix = func.load_data('sub-' + subject + '/*_sub*-fus' + setting + '.txt')
 data = func.group_var(subject, setting, labels, timestamp, data_matrix)
-print('data')
 
 corr_matrix = func.correlation_matrix(data)
-func.show_corr_matrix(data, corr_matrix)
-print('correlation matrix')
 
-network_graph = func.graph(corr_matrix, 0)
-print('network graph')
-'''
+network_graph = func.graph(corr_matrix, thr)
+#func.show_graph(data, network_graph)
+
+imap = func.my_infomap(network_graph, 20, 123)
+func.show_infomap(data, thr, network_graph, imap)
+#print(imap.num_top_modules, imap.codelength)
+#print(imap.modules())  # {node_id: module_id}
 
 #file = None
 #while (file == None):
@@ -26,8 +28,6 @@ print('network graph')
         #file = open('k-Means-Clustering_2581_3D-sbsi-slice.txt', "w")
     #except OSError:
         #print("Error opening file")
-#k_means_clusters = func.k_means_clustering(corr_matrix_validentries, labels)
-#func.save_k_means_clustering(k_means_clusters, file)
 #file.close()
 
 # USER INTERFACE
@@ -232,7 +232,7 @@ def runtime():
                     while (fng == None):
                         try:
                             print('\nName file to write in:')
-                            filename_graph = str(input()) + '.txt'
+                            filename_graph = 'graph_subject-' + str(subject) + '_' + setting + '_' + str(input()) + '.txt'
                             fng = open(filename_graph, "w")
                         except OSError:
                             print("Error opening file")
@@ -244,6 +244,8 @@ def runtime():
 
                     network_graph = func.graph(corr_matrix, thr)
                     func.save_graph(network_graph, fng)
+                    adj_matrix = func.adjacency_matrix(network_graph)
+                    func.save_heatmap('Adjacency matrix', adj_matrix, fng)
 
                     userinput_ng = 0
                     while (userinput_ng != 22 and userinput_ng != 23 and userinput_ng != 24):
@@ -289,7 +291,6 @@ def runtime():
 
                             case 2:    # show adjacency matrix
                                 
-                                adj_matrix = func.adjacency_matrix(network_graph)
                                 func.show_heatmap(adj_matrix, 'Adjacency Matrix', data)
 
                                 ng = True
@@ -338,7 +339,7 @@ def runtime():
 
                                 node, cc = func.clustering_coeff(network_graph)
                                 func.save_two_dim('Node', 'Clustering coefficient', node, cc, fng)
-                                func.show_clustering_coeff(node, cc)
+                                func.show_clustering_coeff(data, node, cc)
 
                                 ng = True
 
@@ -351,10 +352,10 @@ def runtime():
 
                                 func.save_five_dim('Node', 'Degree centrality', 'Betweenness centrality', 'Closeness centrality', 'Eigenvector centrality', node, dc, bc, cc, ec, fng)
 
-                                func.show_centrality(node, dc, 'Degree')
-                                func.show_centrality(node, bc, 'Betweenness')
-                                func.show_centrality(node, cc, 'Closeness')
-                                func.show_centrality(node, ec, 'Eigenvector')
+                                func.show_centrality(data, node, dc, 'Degree')
+                                func.show_centrality(data, node, bc, 'Betweenness')
+                                func.show_centrality(data, node, cc, 'Closeness')
+                                func.show_centrality(data, node, ec, 'Eigenvector')
 
                                 ng = True
 

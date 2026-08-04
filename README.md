@@ -4,21 +4,19 @@
 > TO DO LIST
 > -
 > 
+> https://pmc.ncbi.nlm.nih.gov/articles/PMC6136126/#sec3
+>
 > <ul>
-> <li> fix k-means clustering
+> <li> implement modularity maximization for network graph & correlation matrix
 > <li> add missing graph parametres
-> </ul>
-> 
-> <ul>
-> <li> check correctness of computation of graph parametres
 > <li> compair data
 > </ul>
 > 
 > <ul>
+> <li> (fix k-means clustering)
 > <li> (find k for k-means clustering)
 > <li> (visualize k-means clustering)
 > <li> (visualize connected components)
-> <li> (integrate graph parametres into the runtime function)
 > <li> (function to decode setting abbreviations)
 > </ul>
 
@@ -124,6 +122,8 @@ Its principle is that a node's importance depends and is based on its neighborsâ
 
 #### PATH-BASED METRICS
 
+In functional connectivity graphs, such as those examined in this study, path-based metrics aren't as relevant, since edges are based on statistical rather than physical connections.
+
 **Shortest path length**
 
 Minimum number of edges information has to pass through between two nodes. Represents the efficiency of communication between them.
@@ -162,7 +162,7 @@ Measures the preference for nodes to connect to similar nodes, therefore shows a
 
 **Network efficiency**
 
-How efficiently information is exchanged. Shown with computation based on inverse shortest path lengths.
+How efficiently information is exchanged. Shown with computation based on inverse shortest path lengths, thus in functional connectivity graphs, it is not so relevant.
 
 **Robustness / Resilience**
 
@@ -183,3 +183,45 @@ Networks with high clustering and short path lengths. Typical in social networks
 **Scale-free property**
 
 When the degree distribution follows a power law. Means the presence of hubs = very highly connected nodes.
+
+---
+
+#### **INFOMAP**
+
+---
+
+Infomap is based on the idea that a random walker is more likely to remain in a community than to cross to an other. It aims to minimize codelengths and uses the map equation, fine-tuning and coarse-tuning.
+
+> MODULARITY MAXIMIZATION
+> 
+> Modularity maximization divides the network into non-overlapping clusters by maximizing the modularity metric function. It can only detect modules at least as large as the resolution limit and can have several, almost equally optimal partitions. Widely used and has variants that can be applied to directed and signed networks, as well as correlation matrices.
+> 
+> AGREEMENT MATRIX
+> 
+> Handles numerous partitions of a network by clustering and reclustering until a single consensus solution is reached. This also reveals the strength of the connection between a degree and its host community.
+> 
+> RESOLUTION LIMIT
+> 
+> Apply the algorithm with several resolution limits to see the modular structure of the network across different scales.
+> 
+> MULTIRESOLUTION CONSENSUS CLUSTERING
+> 
+> Returns a co-assignment matrix that contains information on wether a node remains part of the same cluster across different scales.
+> 
+> ---
+> 
+> MULTISLICE MODULARITY
+> 
+> Tracks modularity across time.
+> 
+> ---
+> 
+> PARTICIPATION COEFFICIENT
+> 
+> Measures how much the connections of a node are divided between different modules, thus a high participation coefficient indicates a node that maintains connections between many communities.
+> 
+> ---
+> 
+> NODAL FLEXIBILITY
+> 
+> Helps identify the nodes that change most in time.

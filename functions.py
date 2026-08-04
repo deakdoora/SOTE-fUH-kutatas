@@ -5,6 +5,7 @@ from collections import namedtuple
 import csv
 import datetime
 import glob
+import infomap
 import matplotlib.pyplot as plt
 import networkx as nx
 import networkx.algorithms.community as nxac
@@ -168,7 +169,7 @@ def spectral_coherence_analysis(data, sampling_freq = 15000000):
             sca.Cxy_s.append(Cxy)
 
     return sca
-def graph(corr_matrix, thr):
+def graph(corr_matrix, thr = 0):
     '''
     Receives: corr_matrix (correlation matrix)
               thr (minimum threshold for edge weights)
@@ -201,13 +202,14 @@ corr_matrix = correlation_matrix(data)
 corr_matrix_validentries = correlation_matrix_dropnan(corr_matrix)
 k_means_clusters = k_means_clustering(data, corr_matrix)
 sca = spectral_coherence_analysis(data, sampling_freq = 15000000)
-network_graph = graph(corr_matrix, thr)
+network_graph = graph(corr_matrix) / network_graph = graph(corr_matrix, thr)
 adj_matrix = adjacency_matrix(network_graph)
 '''
 
 # GRAPH PROPERTIES ..............................................................................................
-# node_ID = list(network_graph.nodes)[int(node)]
-# node_name = network_graph.nodes[node_ID].get("name", str(node_ID))
+
+#node_ID = list(network_graph.nodes)[int(node)]
+#node_name = network_graph.nodes[node_ID].get("name", str(node_ID))
 
 # Basic structural parametres
 
@@ -773,6 +775,49 @@ fr_t_n, gc_t_n, fr_t_e, gc_t_e = robustness_to_targeted_attack(network_graph, f)
 fractions, giant_components = group_robustness(fr_r_n, gc_r_n, fr_r_e, gc_r_e, fr_t_n, gc_t_n, fr_t_e, gc_t_e)
 '''
 
+# INFOMAP .......................................................................................................
+
+def my_infomap(network_graph, num = 20, seed = 123):
+    '''
+    Receives: network_graph (network graph)
+              seed (user given seed value for infomap)
+              num (number of trials of infomap)
+    Returns: imap (result of running infomap)
+    '''
+
+    imap = infomap.run(network_graph, seed = seed, num_trials = num)
+    return imap
+def save_infomap(imap, file):
+    '''
+    Receives: imap (result of running infomap)
+              file (output file name)
+    Returns: ? (???)
+    '''
+
+    file.write('INFOMAP\n\n')
+
+    file.write('Codelength: ', str(imap.codelength), '\n\n')
+
+    file.write('Number of levels: ', str(imap.num_levels), '\n')
+    file.write('Number of top level communities: ', str(imap.num_top_modules), '\n')
+    file.write('Community structure:\n')
+
+    '''
+    from collections import defaultdict
+
+    modules = defaultdict(list)
+
+    for node in im.nodes:
+        modules[node.module_id].append(node.node_id)
+
+    print(dict(modules))
+    '''
+
+    return
+'''
+imap = my_infomap(network_graph) / imap = my_infomap(network_graph, num, seed)
+'''
+
 # SAVING TO FILE ................................................................................................
 
 def save_time_signals(data, file):
@@ -1143,19 +1188,29 @@ def show_percolation_threshold(data, fractions, giant_components):
     # bottom right
     axs[1,1].plot(fractions.targ_e, giant_components.targ_e, '.', color='maroon')
     axs[1,1].set(xlabel = 'Fraction of edges removed', ylabel = '')
-
-    #for ax in axs.flat: # keep only labels on the outside
-        #ax.label_outer()
-
-    #for i in range(len(fractions.rand_n)): # add x & y values to each point
-        #axs[0,0].annotate(f"{fractions.rand_n[i]:.2f}" + ', ' + f"{giant_components.rand_n[i]:.2f}", (fractions.rand_n[i], giant_components.rand_n[i]), textcoords="offset points", xytext=(0,5), ha='center')
-    #for i in range(10): # add x & y values to each point
-        #sum = len(fractions.rand_n)
-        #gap = int(sum/10)
-        #axs[0,0].annotate(f"{fractions.rand_n[i*gap]:.2f}" + ', ' + f"{giant_components.rand_n[i*gap]:.2f}", (fractions.rand_n[i*gap], giant_components.rand_n[i*gap]), textcoords="offset points", xytext=(0,5), ha='center')
     
     axs[0,0].grid()
     axs[0,1].grid()
     axs[1,0].grid()
     axs[1,1].grid()
     plt.show()
+
+def show_infomap(data, thr, graph, imap):
+    '''
+    Receives: imap (result of running infomap)
+    Returns: (creates plot of the network graph coloured by communities)
+    '''
+
+    nodes = nx.spring_layout(graph, seed = 42)
+    edges = graph.edges(data = True)
+    edge_widths = [abs(data['weight'])*3 for _, _, data in edges]
+
+    node_ids = [node.node_id for node in imap.nodes()]
+    comm_ids = [node.module_id for node in imap.nodes()]
+    comm_struct = pd.DataFrame({ 'node':node_ids, 'comm':comm_ids })
+
+    plt.title('Network Graph of Brain Regions of subject ' + data.subject + ' with ' + data.setting + ' setting and a threshold of ' + str(thr))
+    nx.draw(graph, nodes, with_labels = True, node_color = comm_struct['comm']-1, cmap=plt.cm.tab20, node_size = 2000, width = edge_widths)
+    plt.show()
+
+    return
