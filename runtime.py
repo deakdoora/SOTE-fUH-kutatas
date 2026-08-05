@@ -4,6 +4,7 @@ import functions as func
 
 # TEST INTERFACE
 
+'''
 # '1663-TG' / 'fUS-2383-WT'
 subject = '1663-TG'
 setting = '3D_sbsi-slice'
@@ -11,26 +12,9 @@ thr = 0.4
 
 labels, timestamp, data_matrix = func.load_data('sub-' + subject + '/*_sub*-fus' + setting + '.txt')
 data = func.group_var(subject, setting, labels, timestamp, data_matrix)
-
 corr_matrix = func.correlation_matrix(data)
-
 network_graph = func.graph(corr_matrix, thr)
-#func.show_graph(data, network_graph)
-
-imap = func.my_infomap(network_graph, 20, 123)
-
-#func.show_infomap(data, thr, network_graph, imap)
-
-#print(imap.num_top_modules, imap.codelength)
-#print(imap.modules())  # {node_id: module_id}
-file = None
-while (file == None):
-    try:
-        file = open('infomap-test.txt', "w")
-    except OSError:
-        print("Error opening file")
-func.save_infomap(imap, network_graph, file)
-file.close()
+'''
 
 #file = None
 #while (file == None):
@@ -45,7 +29,7 @@ file.close()
 def runtime():
     
     userinput = 0
-    while (userinput != 7):
+    while (userinput != 8):
 
         # Choice
         print('\nPick one of the following options:')
@@ -71,7 +55,7 @@ def runtime():
         print("\nEnter SETTING abbreviation:")
         setting = str(input())
 
-        # Load data & form correlation matrix
+        # Load data & form correlation matrix & create network graph
         labels, timestamp, data_matrix = func.load_data('sub-' + subject + '/*_sub*-fus' + setting + '.txt')
         data = func.group_var(subject, setting, labels, timestamp, data_matrix)
         corr_matrix = func.correlation_matrix(data)
@@ -79,7 +63,7 @@ def runtime():
         # Choice
         userinput = 0
         options = True
-        while (userinput != 6 and userinput != 7):
+        while (userinput != 7 and userinput != 8):
 
             if (options == True):
                 print('\nPick one of the following options:')
@@ -89,8 +73,9 @@ def runtime():
                 print('3. K-means Clustering')
                 print('4. Spectral Coherence Analysis')
                 print('5. Network Graph')
-                print('6. Provide new data file')
-                print('7. Quit\n')
+                print('6. Infomap')
+                print('7. Provide new data file')
+                print('8. Quit\n')
 
                 options = False
 
@@ -139,7 +124,7 @@ def runtime():
                                 break
                             
                             case 4:    # New data file
-                                userinput = 6
+                                userinput = 7
                                 options = False
                                 break
                             
@@ -225,7 +210,7 @@ def runtime():
                                 break
                             
                             case 4:    # New data file
-                                userinput = 6
+                                userinput = 7
                                 options = False
                                 break
                             
@@ -246,11 +231,11 @@ def runtime():
                             fng = open(filename_graph, "w")
                         except OSError:
                             print("Error opening file")
-                    
-                    print('\nThreshold:')
-                    thr = 10
-                    while (thr < 0 or thr > 1): # absolute correlation
-                        thr= float(input())
+
+                    print("\nThreshold:")
+                    thr = -1
+                    while (thr < 0 or thr > 1):
+                        thr = float(input())
 
                     network_graph = func.graph(corr_matrix, thr)
                     func.save_graph(network_graph, fng)
@@ -295,7 +280,7 @@ def runtime():
                         match userinput_ng:
                             case 1:    # show network graph
 
-                                func.show_graph(data, network_graph)
+                                func.show_graph(data, network_graph, thr)
 
                                 ng = True
 
@@ -492,7 +477,7 @@ def runtime():
                                 break
                             
                             case 23:    # New data file
-                                userinput = 6
+                                userinput = 7
                                 options = False
                                 break
                             
@@ -507,19 +492,106 @@ def runtime():
 
                     options = True
 
-                case 6:    # New data file
+                case 6:    # Infomap
+
+                    userinput_im = 0
+                    while (userinput_im != 5 and userinput_im != 6 and userinput_im != 7):
+
+                        print("\nThreshold:")
+                        thr = -1
+                        while (thr < 0 or thr > 1):
+                            thr = float(input())
+
+                        network_graph = func.graph(corr_matrix, thr)
+
+                        print("\nNumber of trials:")
+                        num_trials = 0
+                        while (num_trials <= 0):
+                            num_trials = int(input())
+                        print("\nSeed:")
+                        seed = int(input())
+
+                        imap = func.my_infomap(network_graph, num_trials, seed)
+
+                        userinput_im = 0
+                        while (userinput_im != 4 and userinput_im != 5 and userinput_im != 6 and userinput_im != 7):
+                        
+                            im = True
+                            if (im == True):
+                                print('\nPick one of the following options:')
+
+                                print('\n1. Number of communities')
+                                print('2. Show infomap')
+                                print('3. Save infomap')
+                                print('4. New infomap')
+                                print('5. Quit Infomap')
+                                print('6. Provide new data file')
+                                print('7. Quit\n')
+
+                                im = False
+                                
+                            userinput_im = int(input())
+                            match userinput_im:
+                                case 1:    # Num of comm
+                                
+                                    print('\nNumber of top level communities: ', imap.num_top_modules)
+
+                                    im = True
+
+                                case 2:    # Show IM
+
+                                    func.show_infomap(data, thr, network_graph, imap)
+
+                                    im = True
+
+                                case 3:    # Save IM
+
+                                    fim = None
+                                    while (fim == None):
+                                        try:
+                                            print('\nName file to write in:')
+                                            filename_im = 'infomap_subject-' + str(subject) + '_' + setting + '_' + str(input()) + '.txt'
+                                            fim = open(filename_im, "w")
+                                        except OSError:
+                                            print("Error opening file")
+
+                                    func.save_infomap(imap, network_graph, fim)
+
+                                    fim.close()
+
+                                    im = True
+
+                                case 4:    # New IM
+                                    pass
+
+                                case 5:    # Quit IM
+                                    options = True
+                                    break
+                                
+                                case 6:    # New data file
+                                    userinput = 7
+                                    options = False
+                                    break
+                                
+                                case 7:    # Quit
+                                    return
+                                
+                                case _:
+                                    print("Choose from above:")
+                                    userinput_im = 0
+                                        
+                case 7:    # New data file
                     pass
 
-                case 7:    # Quit
+                case 8:    # Quit
                     return
                 
                 case _:
                     print("Choose from above:")
                     userinput = 0
-def analysis(subject, setting, unique_filename_part): # complete analysis of a measurement
-    # ALL INPUT
+def analysis(subject, setting, thr, unique_filename_part): # complete analysis of a measurement
+    # CONSTANT
     sampling_freq = 15000000
-    thr = 0
     
     # OPEN FILE
     output_filename = 'subject-' + str(subject) + '_' + setting + '_' + unique_filename_part + '.txt'
@@ -612,8 +684,12 @@ def analysis(subject, setting, unique_filename_part): # complete analysis of a m
     func.robustness_to_random_failure(network_graph, file)
     func.robustness_to_targeted_attack(network_graph, file)
 
+    # INFOMAP
+    imap = func.my_infomap(network_graph, 20, 123)
+    func.save_infomap(imap, network_graph, file)
+
     # CLOSE FILE
     file.close()
 
-#runtime()
-#analysis('1663-TG', '3D_vol', 'test')
+runtime()
+#analysis('1663-TG', '3D_vol', 0, 'test')

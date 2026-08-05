@@ -7,8 +7,7 @@
 > https://pmc.ncbi.nlm.nih.gov/articles/PMC6136126/#sec3
 >
 > <ul>
-> <li> implement modularity maximization for network graph & correlation matrix
-> <li> add missing graph parametres
+> <li> add 'give new threshold' option under runtime / network graph
 > <li> compair data
 > </ul>
 > 

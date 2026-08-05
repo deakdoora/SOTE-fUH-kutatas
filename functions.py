@@ -1,7 +1,5 @@
 # IMPORTS °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 
-from collections import Counter
-from collections import defaultdict
 from collections import namedtuple
 import csv
 import datetime
@@ -10,11 +8,8 @@ import infomap
 import matplotlib.pyplot as plt
 import networkx as nx
 import networkx.algorithms.community as nxac
-from nilearn.connectome import ConnectivityMeasure
 import numpy as np
 import pandas as pd
-from pathlib import Path
-import plotly.express as px
 import random
 from scipy import signal
 import seaborn as sns
@@ -1003,9 +998,6 @@ def save_infomap(imap, graph, file):
                 file.write(str(node_name))         
         file.write('\n')
     file.write('\n')
-
-    #node_ID = list(network_graph.nodes)[int(node)]
-    #node_name = network_graph.nodes[node_ID].get("name", str(node_ID))
     
     return
 
@@ -1076,7 +1068,7 @@ def show_all_spectral_coherence_analysis(data, sca):
     plt.ylim(0, 1)
     plt.grid()
     plt.show()
-def show_graph(data, graph):
+def show_graph(data, graph, thr):
     '''
     Receives: data (grouped original variables)
               graph (network graph)
@@ -1087,7 +1079,7 @@ def show_graph(data, graph):
     edges = graph.edges(data = True)
     edge_widths = [abs(data['weight'])*3 for _, _, data in edges]
 
-    plt.title('Network Graph of Brain Regions of subject ' + data.subject + ' with ' + data.setting + ' setting')
+    plt.title('Network Graph of Brain Regions of subject ' + data.subject + ' with ' + data.setting + ' setting and a threshold of ' + str(thr))
     nx.draw(graph, nodes, with_labels = True, node_color = 'skyblue', node_size = 2000, width = edge_widths)
     plt.show()
 def show_heatmap(heatmap, title, data):
@@ -1226,7 +1218,7 @@ def show_infomap(data, thr, graph, imap):
     comm_ids = [node.module_id for node in imap.nodes()]
     comm_struct = pd.DataFrame({ 'node':node_ids, 'comm':comm_ids })
 
-    plt.title('Network Graph of Brain Regions of subject ' + data.subject + ' with ' + data.setting + ' setting and a threshold of ' + str(thr))
+    plt.title('Infomap of Brain Regions of subject ' + data.subject + ' with ' + data.setting + ' setting and a threshold of ' + str(thr))
     nx.draw(graph, nodes, with_labels = True, node_color = comm_struct['comm']-1, cmap=plt.cm.tab20, node_size = 2000, width = edge_widths)
     plt.show()
 
