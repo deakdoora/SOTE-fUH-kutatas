@@ -7,7 +7,6 @@
 > https://pmc.ncbi.nlm.nih.gov/articles/PMC6136126/#sec3
 >
 > <ul>
-> <li> add 'give new threshold' option under runtime / network graph
 > <li> compair data
 > </ul>
 > 
@@ -188,6 +187,8 @@ When the degree distribution follows a power law. Means the presence of hubs = v
 #### **INFOMAP**
 
 ---
+
+https://python-graph-gallery.com/324-map-a-color-to-network-nodes/
 
 Infomap is based on the idea that a random walker is more likely to remain in a community than to cross to an other. It aims to minimize codelengths and uses the map equation, fine-tuning and coarse-tuning.
 

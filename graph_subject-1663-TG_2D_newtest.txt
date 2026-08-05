@@ -1,0 +1,16 @@
+GRAPH
+
+Hippocampal formation (L) -- Hippocampal formation (R) (weight=0.7242266370369027)
+Hippocampal formation (L) -- Thalamus (L) (weight=0.9194430221540263)
+Hippocampal formation (R) -- Thalamus (L) (weight=0.6640519070285413)
+Olfactory areas (L) -- Hippocampal formation (L) (weight=0.6296437724638243)
+Olfactory areas (L) -- Hippocampal formation (R) (weight=0.6270875685326073)
+Olfactory areas (L) -- Thalamus (L) (weight=0.6299170865714696)
+
+Adjacency matrix:
+                           Olfactory areas (L)  Hippocampal formation (L)  Hippocampal formation (R)  Thalamus (L)
+Olfactory areas (L)                   1.000000                  -0.103730                  -0.239012     -0.131922
+Hippocampal formation (L)            -0.103730                   1.000000                  -0.346917     -0.815828
+Hippocampal formation (R)            -0.239012                  -0.346917                   1.000000     -0.136920
+Thalamus (L)                         -0.131922                  -0.815828                  -0.136920      1.000000
+
