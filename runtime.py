@@ -56,7 +56,7 @@ def runtime():
         setting = str(input())
 
         # Load data & form correlation matrix & create network graph
-        labels, timestamp, data_matrix = func.load_data('sub-' + subject + '/*_sub*-fus' + setting + '.txt')
+        labels, timestamp, data_matrix = func.load_data('../SOTE-fUH-data/sub-' + subject + '/*_sub*-fus' + setting + '.txt')
         data = func.group_var(subject, setting, labels, timestamp, data_matrix)
         corr_matrix = func.correlation_matrix(data)
 
@@ -662,7 +662,7 @@ def analysis(subject, setting, thr, unique_filename_part): # complete analysis o
     print('\n< Output File opened >')
 
     # LOAD DATA
-    labels, timestamp, data_matrix = func.load_data('sub-' + subject + '/*_sub*-fus' + setting + '.txt')
+    labels, timestamp, data_matrix = func.load_data('../SOTE-fUH-data/sub-' + subject + '/*_sub*-fus' + setting + '.txt')
     data = func.group_var(subject, setting, labels, timestamp, data_matrix)
     print('< Data loaded >')
 
@@ -779,5 +779,5 @@ def analysis(subject, setting, thr, unique_filename_part): # complete analysis o
     file.close()
     print('< Output File closed >\n')
 
-runtime()
-#analysis('fUS-2383-WT', '3D_vol', 0.4, 'test')
+#runtime()
+analysis('2581-TG', '3D_vol', 0.4, 'restructure-test')
