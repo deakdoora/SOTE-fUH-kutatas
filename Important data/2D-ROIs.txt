@@ -1,0 +1,39 @@
+2383-WT:
+Primary somatosensory area, lower limb (R) hiányzik
+Striatum (R) hiányzik
+Pallidum (L) és (R) hiányzik
+
+2386-TG:
+Primary somatosensory area, lower limb (L) és (R) hiányzik
+Pallidum (L) és (R) hiányzik
+
+(2387-WT):
+Hippocampal formation (L) és (R) megvan
+
+(2581-TG):
+Hippocampal formation (L) és (R) megvan
+
+(2584-WT):
+Olfactory areas (L) és (R) megvan
+Hippocampal formation (L) és (R) megvan
+Cortical subplate (L) és (R) megvan
+Thalamus (L) és (R) megvan
+
+(2585-WT):
+Hippocampal formation (L) és (R) megvan
+Thalamus (L) megvan
+
+(2603):
+Hippocampal formation (L) és (R) megvan
+
+(2604):
+Olfactory areas (L) és (R) megvan
+Hippocampal formation (L) és (R) megvan
+Cortical subplate (L) megvan
+Thalamus (L) és (R) megvan
+
+(2605-TG):
+Olfactory areas (L) megvan
+Hippocampal formation (L) és (R) megvan
+Cortical subplate (L) megvan
+Thalamus (L) és (R) megvan

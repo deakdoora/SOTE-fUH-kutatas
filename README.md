@@ -3,8 +3,6 @@
 
 > TO DO LIST
 > -
-> 
-> https://pmc.ncbi.nlm.nih.gov/articles/PMC6136126/#sec3
 >
 > <ul>
 > <li> compair data
@@ -22,7 +20,8 @@
 > -
 > 
 > <ul>
-> <li> (spike) 2581, 3D_vol
+> <li> (spike) 2581, 3D_vol, 0.4 thr
+> <li> (9 comm) 2605-TG, 3D_sbsi-slice, 0.4 thr
 > <li> K-means does not accept NaN data
 > </ul>
 
@@ -44,7 +43,7 @@
 THEORY
 -
 
-#### **K-MEANS CLUSTERING**
+#### **K-MEANS CLUSTERING [9]**
 
 ---
 
@@ -60,11 +59,11 @@ Spectral coherence analysis is a frequency-domain method used to evaluate the co
 
 ---
 
-#### **NETWORK GRAPH PARAMETERS**
+#### **NETWORK GRAPH PARAMETERS [11]**
 
 ---
 
-#### ADJECENCY MATRIX
+#### ADJECENCY MATRIX [11]
 
 Contains the weights of edges between graph nodes arranged in matrix form.
 
@@ -80,7 +79,7 @@ Total number of neurons in the network, thus represents the size of the network.
 
 Total number of connections between the nodes, indicates how well connected / dense the network is.
 
-**Density**
+**Density [4]**
 
 Ratio of existing edges to all possible edges, shows how close the network is to being fully connected.
 
@@ -88,31 +87,31 @@ Ratio of existing edges to all possible edges, shows how close the network is to
 
 #### NODE-LEVEL METRICS
 
-**Degree**
+**Degree [2] [11]**
 
 Number of connections a node has, reflects local importance / activity.
 
-**Degree distribution**
+**Degree distribution [2]**
 
 Probability distribution of node degrees. Helps identify random networks and scale-free networks, which have few highly connected neurons.
 
-**Clustering coefficient**
+**Clustering coefficient [1] [6]**
 
 Measures how connected a node’s neighbors are. A high value means the nodes form clusters and indicates local cohesiveness.
 
-**Degree centrality**
+**Degree centrality [7]**
 
 Centralities quantify the importance of nodes. Degree centrality is based on the number of connections of the node.
 
-**Betweenness centrality**
+**Betweenness centrality [6] [7]**
 
 Quantifies how often a node lies on shortest paths, it represents control over information flow.
 
-**Closeness centrality**
+**Closeness centrality [7]**
 
 Shows the average distance to all other nodes and thus measures how quickly a node can reach others.
 
-**Eigenvector centrality**
+**Eigenvector centrality [7]**
 
 Its principle is that a node's importance depends and is based on its neighbors’ importance.
 
@@ -122,15 +121,15 @@ Its principle is that a node's importance depends and is based on its neighbors�
 
 In functional connectivity graphs, such as those examined in this study, path-based metrics aren't as relevant, since edges are based on statistical rather than physical connections.
 
-**Shortest path length**
+**Shortest path length [15]**
 
 Minimum number of edges information has to pass through between two nodes. Represents the efficiency of communication between them.
 
-**Average shortest path length**
+**Average shortest path length [15]**
 
 Average of the shortest paths between all node pairs. Indicates how compact or spread out the network is.
 
-**Diameter**
+**Diameter [6] [13]**
 
 Longest shortest path length in the network. Shows the maximum distance between any two nodes.
 
@@ -138,19 +137,19 @@ Longest shortest path length in the network. Shows the maximum distance between 
 
 #### GLOBAL NETWORK PROPERTIES
 
-**Connected components**
+**Connected components [3]**
 
 Subgraphs where all nodes are reachable, but none other. Indicates connectivity vs fragmentation.
 
-**Giant component**
+**Giant component [3]**
 
 The largest connected component / island. It is important in real-world networks (e.g. internet, social networks).
 
-**Modularity**
+**Modularity [11]**
 
 Measures the strength of division into communities. A high modularity indicates strong community-like structure.
 
-**Assortativity**
+**Assortativity [12]**
 
 Measures the preference for nodes to connect to similar nodes, therefore shows a network mixing patterns.
 
@@ -158,15 +157,15 @@ Measures the preference for nodes to connect to similar nodes, therefore shows a
 
 #### FLOW & ROBUSTNESS
 
-**Network efficiency**
+**Network efficiency [5]**
 
 How efficiently information is exchanged. Shown with computation based on inverse shortest path lengths, thus in functional connectivity graphs, it is not so relevant.
 
-**Robustness / Resilience**
+**Robustness / Resilience [6]**
 
 How the network behaves under node removals or edge failures. Important for biological systems and infrastructure networks.
 
-**Percolation threshold**
+**Percolation threshold [14]**
 
 The critical point at which a network changes from being mostly connected to being fragmented. Used in studying network stability and phase transitions.
 
@@ -184,11 +183,9 @@ When the degree distribution follows a power law. Means the presence of hubs = v
 
 ---
 
-#### **INFOMAP**
+#### **INFOMAP [8] [10]**
 
 ---
-
-https://python-graph-gallery.com/324-map-a-color-to-network-nodes/
 
 Infomap is based on the idea that a random walker is more likely to remain in a community than to cross to an other. It aims to minimize codelengths and uses the map equation, fine-tuning and coarse-tuning.
 

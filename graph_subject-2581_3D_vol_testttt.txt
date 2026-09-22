@@ -1,0 +1,98 @@
+GRAPH
+
+Cortical subplate (R) -- Hippocampal formation (L) (weight=0.6371942951768397)
+Cortical subplate (R) -- Hypothalamus (R) (weight=0.5010378654730919)
+Cortical subplate (R) -- Thalamus (L) (weight=0.6947014823034331)
+Cortical subplate (R) -- Thalamus (R) (weight=0.6454600976368211)
+Hippocampal formation (L) -- Hypothalamus (L) (weight=0.6884065388648954)
+Hippocampal formation (L) -- Hypothalamus (R) (weight=0.8868596744109533)
+Hippocampal formation (L) -- Striatum (R) (weight=0.5815721730470743)
+Hippocampal formation (L) -- Thalamus (L) (weight=0.9536695126487462)
+Hippocampal formation (L) -- Thalamus (R) (weight=0.9592330772266683)
+Hippocampal formation (R) -- Cortical subplate (R) (weight=0.7199499574681129)
+Hippocampal formation (R) -- Hippocampal formation (L) (weight=0.957098367995497)
+Hippocampal formation (R) -- Hypothalamus (L) (weight=0.6979747147490447)
+Hippocampal formation (R) -- Hypothalamus (R) (weight=0.8901097854497064)
+Hippocampal formation (R) -- Primary somatosensory area, lower limb (R) (weight=0.6904971825239173)
+Hippocampal formation (R) -- Striatum (R) (weight=0.6148045910818696)
+Hippocampal formation (R) -- Supplemental somatosensory area (L) (weight=0.8597128112234154)
+Hippocampal formation (R) -- Thalamus (L) (weight=0.969774364808533)
+Hippocampal formation (R) -- Thalamus (R) (weight=0.9629858923696641)
+Hypothalamus (R) -- Hypothalamus (L) (weight=0.6680020002073257)
+Hypothalamus (R) -- Striatum (R) (weight=0.6038866111082541)
+Olfactory areas (R) -- Cortical subplate (R) (weight=0.9401807672338951)
+Olfactory areas (R) -- Hippocampal formation (L) (weight=0.6566099300594843)
+Olfactory areas (R) -- Hippocampal formation (R) (weight=0.7663074572364751)
+Olfactory areas (R) -- Hypothalamus (R) (weight=0.5528622336818637)
+Olfactory areas (R) -- Supplemental somatosensory area (L) (weight=0.5206562497016293)
+Olfactory areas (R) -- Thalamus (L) (weight=0.7388978875180017)
+Olfactory areas (R) -- Thalamus (R) (weight=0.6787642849013397)
+Primary somatosensory area, barrel field (R) -- Cortical subplate (R) (weight=0.9041070760380416)
+Primary somatosensory area, barrel field (R) -- Hippocampal formation (R) (weight=0.5005498485156805)
+Primary somatosensory area, barrel field (R) -- Olfactory areas (R) (weight=0.8675441420423861)
+Primary somatosensory area, barrel field (R) -- Supplemental somatosensory area (R) (weight=0.8186627232075959)
+Primary somatosensory area, lower limb (R) -- Cortical subplate (L) (weight=0.5046640331972039)
+Primary somatosensory area, lower limb (R) -- Hippocampal formation (L) (weight=0.6549166890048079)
+Primary somatosensory area, lower limb (R) -- Hypothalamus (R) (weight=0.689363210984353)
+Primary somatosensory area, lower limb (R) -- Supplemental somatosensory area (L) (weight=0.6402535500493132)
+Primary somatosensory area, lower limb (R) -- Thalamus (L) (weight=0.6694138028321097)
+Primary somatosensory area, lower limb (R) -- Thalamus (R) (weight=0.6769527200758046)
+Striatum (R) -- Hypothalamus (L) (weight=0.5185522711869432)
+Supplemental somatosensory area (L) -- Hippocampal formation (L) (weight=0.8713694607516855)
+Supplemental somatosensory area (L) -- Hypothalamus (L) (weight=0.6865291847118676)
+Supplemental somatosensory area (L) -- Hypothalamus (R) (weight=0.8571448883860802)
+Supplemental somatosensory area (L) -- Striatum (R) (weight=0.5772953349606466)
+Supplemental somatosensory area (L) -- Thalamus (L) (weight=0.8685088891613538)
+Supplemental somatosensory area (L) -- Thalamus (R) (weight=0.8873537542194995)
+Supplemental somatosensory area (R) -- Cortical subplate (R) (weight=0.8586330979970858)
+Supplemental somatosensory area (R) -- Hippocampal formation (L) (weight=0.6785508153272574)
+Supplemental somatosensory area (R) -- Hippocampal formation (R) (weight=0.7604897202387391)
+Supplemental somatosensory area (R) -- Hypothalamus (R) (weight=0.5730712520665225)
+Supplemental somatosensory area (R) -- Olfactory areas (R) (weight=0.8640693294809906)
+Supplemental somatosensory area (R) -- Supplemental somatosensory area (L) (weight=0.5711460734090055)
+Supplemental somatosensory area (R) -- Thalamus (L) (weight=0.758445098341387)
+Supplemental somatosensory area (R) -- Thalamus (R) (weight=0.7231746451665193)
+Thalamus (L) -- Hypothalamus (L) (weight=0.6813261001683405)
+Thalamus (L) -- Hypothalamus (R) (weight=0.8781543682457205)
+Thalamus (L) -- Striatum (R) (weight=0.5899178901451247)
+Thalamus (L) -- Thalamus (R) (weight=0.954178169128043)
+Thalamus (R) -- Hypothalamus (L) (weight=0.6891711158247034)
+Thalamus (R) -- Hypothalamus (R) (weight=0.9028379068641097)
+Thalamus (R) -- Striatum (R) (weight=0.6073011639057794)
+
+Adjacency matrix:
+                                              Primary somatosensory area, barrel field (R)  Supplemental somatosensory area (R)  Olfactory areas (R)  Hippocampal formation (R)  Cortical subplate (R)  Primary somatosensory area, lower limb (R)  Supplemental somatosensory area (L)  Hippocampal formation (L)  Cortical subplate (L)  Thalamus (L)  Thalamus (R)  Hypothalamus (R)  Striatum (R)  Hypothalamus (L)
+Primary somatosensory area, barrel field (R)                                      1.000000                             0.246418             0.263626                  -0.088171               0.300991                                   -0.398358                            -0.152783                   0.173176              -0.170371      0.254212      0.188921          0.048871     -0.404046         -0.401154
+Supplemental somatosensory area (R)                                               0.246418                             1.000000             0.594157                   0.222121               0.534457                                    0.358695                             0.012925                   0.139990              -0.362148      0.101045      0.098639          0.132153      0.332431          0.357692
+Olfactory areas (R)                                                               0.263626                             0.594157             1.000000                   0.185161               0.485266                                    0.297497                            -0.005789                   0.118308              -0.355395      0.080899      0.100755          0.103384      0.272094          0.295837
+Hippocampal formation (R)                                                        -0.088171                             0.222121             0.185161                   1.000000               0.135265                                    0.040476                             0.320181                   0.300205               0.018036      0.292349      0.298959          0.339628      0.291634          0.268921
+Cortical subplate (R)                                                             0.300991                             0.534457             0.485266                   0.135265               1.000000                                    0.146265                             0.354762                   0.011737              -0.307341      0.008922      0.009204          0.021274      0.123093          0.136546
+Primary somatosensory area, lower limb (R)                                       -0.398358                             0.358695             0.297497                   0.040476               0.146265                                    1.000000                             0.350805                   0.231595              -0.274969      0.171440      0.198936          0.238474      0.802522          0.827122
+Supplemental somatosensory area (L)                                              -0.152783                             0.012925            -0.005789                   0.320181               0.354762                                    0.350805                             1.000000                   0.444265               0.091278      0.426816      0.431258          0.477251      0.562949          0.515514
+Hippocampal formation (L)                                                         0.173176                             0.139990             0.118308                   0.300205               0.011737                                    0.231595                             0.444265                   1.000000               0.037257      0.446639      0.443403          0.486917      0.453326          0.408175
+Cortical subplate (L)                                                            -0.170371                            -0.362148            -0.355395                   0.018036              -0.307341                                   -0.274969                             0.091278                   0.037257               1.000000      0.035238      0.045283          0.099867     -0.276628         -0.275174
+Thalamus (L)                                                                      0.254212                             0.101045             0.080899                   0.292349               0.008922                                    0.171440                             0.426816                   0.446639               0.035238      1.000000      0.453042          0.488637      0.391218          0.361893
+Thalamus (R)                                                                      0.188921                             0.098639             0.100755                   0.298959               0.009204                                    0.198936                             0.431258                   0.443403               0.045283      0.453042      1.000000          0.472317      0.414314          0.394848
+Hypothalamus (R)                                                                  0.048871                             0.132153             0.103384                   0.339628               0.021274                                    0.238474                             0.477251                   0.486917               0.099867      0.488637      0.472317          1.000000      0.470047          0.463580
+Striatum (R)                                                                     -0.404046                             0.332431             0.272094                   0.291634               0.123093                                    0.802522                             0.562949                   0.453326              -0.276628      0.391218      0.414314          0.470047      1.000000          0.801148
+Hypothalamus (L)                                                                 -0.401154                             0.357692             0.295837                   0.268921               0.136546                                    0.827122                             0.515514                   0.408175              -0.275174      0.361893      0.394848          0.463580      0.801148          1.000000
+
+Number of islands: 1
+[{'Cortical subplate (L)', 'Cortical subplate (R)', 'Primary somatosensory area, barrel field (R)', 'Olfactory areas (R)', 'Primary somatosensory area, lower limb (R)', 'Supplemental somatosensory area (L)', 'Thalamus (R)', 'Thalamus (L)', 'Hypothalamus (L)', 'Hippocampal formation (L)', 'Striatum (R)', 'Supplemental somatosensory area (R)', 'Hippocampal formation (R)', 'Hypothalamus (R)'}]
+
+Node	Degree centrality	Betweenness centrality	Closeness centrality	Eigenvector centrality
+Primary somatosensory area, barrel field (R)	0.3076923076923077	0.0	0.5652173913043478	0.11930198234873693
+Supplemental somatosensory area (R)	0.6923076923076923	0.018925518925518924	0.7222222222222222	0.2728575680941287
+Olfactory areas (R)	0.6923076923076923	0.018925518925518924	0.7222222222222222	0.2728575680941287
+Hippocampal formation (R)	0.9230769230769231	0.10610500610500612	0.9285714285714286	0.3367802851377072
+Cortical subplate (R)	0.6153846153846154	0.01282051282051282	0.6842105263157895	0.24393629610667317
+Primary somatosensory area, lower limb (R)	0.5384615384615385	0.15384615384615385	0.6842105263157895	0.20781862537454115
+Supplemental somatosensory area (L)	0.7692307692307693	0.025641025641025637	0.8125	0.3019934142846824
+Hippocampal formation (L)	0.8461538461538463	0.037728937728937734	0.8666666666666667	0.3253548411308545
+Cortical subplate (L)	0.07692307692307693	0.0	0.41935483870967744	0.022010225359621598
+Thalamus (L)	0.8461538461538463	0.037728937728937734	0.8666666666666667	0.3253548411308545
+Thalamus (R)	0.8461538461538463	0.037728937728937734	0.8666666666666667	0.3253548411308545
+Hypothalamus (R)	0.8461538461538463	0.037728937728937734	0.8666666666666667	0.3253548411308545
+Striatum (R)	0.5384615384615385	0.0	0.65	0.22982875269001957
+Hypothalamus (L)	0.5384615384615385	0.0	0.65	0.22982875269001957
+

@@ -5,7 +5,7 @@ import functions as func
 # TEST INTERFACE
 
 '''
-# '1663-TG' / 'fUS-2383-WT'
+# '2605-TG' / 'fUS-2383-WT'
 subject = '1663-TG'
 setting = '3D_sbsi-slice'
 thr = 0.4
@@ -659,23 +659,23 @@ def analysis(subject, setting, thr, unique_filename_part): # complete analysis o
     # OPEN FILE
     output_filename = 'subject-' + str(subject) + '_' + setting + '_' + unique_filename_part + '.txt'
     file = func.open_analysis_file(subject, setting, output_filename)
-    print('< Output File opened >\n')
+    print('\n< Output File opened >')
 
     # LOAD DATA
     labels, timestamp, data_matrix = func.load_data('sub-' + subject + '/*_sub*-fus' + setting + '.txt')
     data = func.group_var(subject, setting, labels, timestamp, data_matrix)
-    print('< Data loaded >\n')
+    print('< Data loaded >')
 
     # CBV SIGNALS IN TIME
     if 1 in sections:
         func.save_time_signals(data, file)
-        print('< CBV Signals in Time saved >\n')
+        print('< CBV Signals in Time saved >')
 
     # CORRELATION MATRIX
     corr_matrix = func.correlation_matrix(data)
     if 2 in sections:
         func.save_corr_matrix(corr_matrix, file)
-        print('< Correlation Matrix saved >\n')
+        print('< Correlation Matrix saved >')
     
     # K-MEANS CLUSTERING
     #k_means_clusters = k_means_clustering(corr_matrix, labels)
@@ -685,19 +685,19 @@ def analysis(subject, setting, thr, unique_filename_part): # complete analysis o
     if 3 in sections:
         sca = func.spectral_coherence_analysis(data, sampling_freq)
         func.save_spectral_coherence_analysis(sca, file)
-        print('< Spectral Coherence Analysis saved >\n')
+        print('< Spectral Coherence Analysis saved >')
     
     # NETWORK GRAPH
     network_graph = func.graph(corr_matrix, thr)
     if 4 in sections:
         func.save_graph(network_graph, file)
-        print('< Network Graph saved >\n')
+        print('< Network Graph saved >')
 
     # Adjacency matrix
     if 5 in sections:
         adj_matrix = func.adjacency_matrix(network_graph)
         func.save_heatmap('Adjacency matrix', adj_matrix, file)
-        print('< Adjacency Matrix saved >\n')
+        print('< Adjacency Matrix saved >')
 
     # Basic structural parameters
     if 6 in sections:
@@ -705,7 +705,7 @@ def analysis(subject, setting, thr, unique_filename_part): # complete analysis o
         func.save_one_liner('Number of nodes', func.graph_nodes(network_graph), file)
         func.save_one_liner('Number of edges', func.graph_edges(network_graph), file)
         func.save_one_liner('Graph density', func.graph_density(network_graph), file)
-        print('< Basic Structural Parameters saved >\n')
+        print('< Basic Structural Parameters saved >')
     
     # Node level metrics
     if 7 in sections:
@@ -721,7 +721,7 @@ def analysis(subject, setting, thr, unique_filename_part): # complete analysis o
         node, cc = func.closeness_centrality(network_graph)
         node, ec = func.eigenvector_centrality(network_graph)
         func.save_five_dim('Node', 'Degree centrality', 'Betweenness centrality', 'Closeness centrality', 'Eigenvector centrality', node, dc, bc, cc, ec, file)
-        print('< Node Level Metrics saved >\n')
+        print('< Node Level Metrics saved >')
 
     # Path based metrics
     if 8 in sections:
@@ -740,7 +740,7 @@ def analysis(subject, setting, thr, unique_filename_part): # complete analysis o
         func.save_one_liner('Diameter', d, file)
         wd = func.weighted_diameter(network_graph)
         func.save_one_liner('Weighted diameter', wd, file)
-        print('< Path Based Metrics saved >\n')
+        print('< Path Based Metrics saved >')
 
     # Global network properties
     if 9 in sections:
@@ -756,7 +756,7 @@ def analysis(subject, setting, thr, unique_filename_part): # complete analysis o
         func.save_one_liner('Weighted modularity', wmod, file)
         a = func.assortativity(network_graph)
         func.save_one_liner('Assortativity', a, file)
-        print('< Global Network Properties saved >\n')
+        print('< Global Network Properties saved >')
 
     # Flow and robustness
     if 10 in sections:
@@ -767,17 +767,17 @@ def analysis(subject, setting, thr, unique_filename_part): # complete analysis o
         func.save_one_liner('Weighted network efficiency', wne, file)
         func.robustness_to_random_failure(network_graph, file)
         func.robustness_to_targeted_attack(network_graph, file)
-        print('< Flow and Robustness section saved >\n')
+        print('< Flow and Robustness section saved >')
 
     # INFOMAP
     if 11 in sections:
         imap = func.my_infomap(network_graph, 20, 123)
         func.save_infomap(imap, network_graph, file)
-        print('< Infomap saved >\n')
+        print('< Infomap saved >')
 
     # CLOSE FILE
     file.close()
     print('< Output File closed >\n')
 
-#runtime()
+runtime()
 #analysis('fUS-2383-WT', '3D_vol', 0.4, 'test')
